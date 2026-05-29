@@ -9,18 +9,19 @@ export class SyncService {
   private auth = inject(AuthService);
 
   async submitScore(score: number, mode: GameMode, elapsedSeconds: number) {
+    const db = this.auth.getClient();
     const userId = this.auth.user()?.id;
-    if (!userId) return;
+    if (!db || !userId) return;
     try {
-      await this.auth.getClient()
-        .from('scores')
-        .insert({ user_id: userId, score, mode, elapsed_seconds: elapsedSeconds });
+      await db.from('scores').insert({ user_id: userId, score, mode, elapsed_seconds: elapsedSeconds });
     } catch { /* non-blocking */ }
   }
 
   async fetchChallengeRanking(code: string): Promise<RankingEntry[]> {
+    const db = this.auth.getClient();
+    if (!db) return [];
     try {
-      const { data } = await this.auth.getClient()
+      const { data } = await db
         .from('challenge_scores')
         .select('username, score')
         .eq('challenge_code', code)

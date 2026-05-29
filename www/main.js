@@ -9,13 +9,14 @@ import {
   provideIonicAngular,
   provideRouter,
   setClassMetadata,
+  withHashLocation,
   withPreloading,
   ɵsetClassDebugInfo,
   ɵɵdefineComponent,
   ɵɵelement,
   ɵɵelementEnd,
   ɵɵelementStart
-} from "./chunk-S6JIF2OI.js";
+} from "./chunk-VDRMO2DQ.js";
 import "./chunk-7R2BI4JM.js";
 import "./chunk-ZANXXOCD.js";
 import "./chunk-4NMFU3W6.js";
@@ -36,27 +37,27 @@ var routes = [
   { path: "", redirectTo: "home", pathMatch: "full" },
   {
     path: "home",
-    loadComponent: () => import("./home.page-ITP3YKEX.js").then((m) => m.HomePageComponent)
+    loadComponent: () => import("./home.page-SCZ72NXR.js").then((m) => m.HomePageComponent)
   },
   {
     path: "game",
-    loadComponent: () => import("./game.page-4C7KUBC7.js").then((m) => m.GamePageComponent)
+    loadComponent: () => import("./game.page-MEGFY6MG.js").then((m) => m.GamePageComponent)
   },
   {
     path: "settings",
-    loadComponent: () => import("./settings.page-NDGBSUDF.js").then((m) => m.SettingsPageComponent)
+    loadComponent: () => import("./settings.page-6EDS6NG5.js").then((m) => m.SettingsPageComponent)
   },
   {
     path: "challenge",
-    loadComponent: () => import("./challenge.page-HHE6FCXM.js").then((m) => m.ChallengePageComponent)
+    loadComponent: () => import("./challenge.page-PBCFANBR.js").then((m) => m.ChallengePageComponent)
   },
   {
     path: "leaderboard",
-    loadComponent: () => import("./leaderboard.page-4KTN7BOP.js").then((m) => m.LeaderboardPageComponent)
+    loadComponent: () => import("./leaderboard.page-B73OJH2O.js").then((m) => m.LeaderboardPageComponent)
   },
   {
     path: "auth",
-    loadComponent: () => import("./auth.page-4NOR5723.js").then((m) => m.AuthPageComponent)
+    loadComponent: () => import("./auth.page-GRPVFEQK.js").then((m) => m.AuthPageComponent)
   }
 ];
 
@@ -91,7 +92,7 @@ bootstrapApplication(AppComponent, {
   providers: [
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
     provideIonicAngular(),
-    provideRouter(routes, withPreloading(PreloadAllModules))
+    provideRouter(routes, withPreloading(PreloadAllModules), withHashLocation())
   ]
 });
 //# sourceMappingURL=main.js.map
