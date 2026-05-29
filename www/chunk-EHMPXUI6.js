@@ -4,7 +4,7 @@ import {
   setClassMetadata,
   signal,
   ɵɵdefineInjectable
-} from "./chunk-VDRMO2DQ.js";
+} from "./chunk-J2YUU2QC.js";
 
 // src/app/services/game-state.ts
 var _GameStateService = class _GameStateService {
@@ -66,4 +66,4 @@ var GameStateService = _GameStateService;
 export {
   GameStateService
 };
-//# sourceMappingURL=chunk-DCU74AHR.js.map
+//# sourceMappingURL=chunk-EHMPXUI6.js.map

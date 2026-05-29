@@ -1,8 +1,10 @@
 import { Component, inject, signal, computed } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
-import { AlertController, IonContent, IonHeader, IonToolbar, IonTitle, IonButtons,
-  IonBackButton, IonList, IonListHeader, IonLabel, IonItem, IonRange, IonToggle,
+import { addIcons } from 'ionicons';
+import { arrowBackOutline } from 'ionicons/icons';
+import { AlertController, NavController, IonContent, IonHeader, IonToolbar, IonTitle, IonButtons,
+  IonIcon, IonList, IonListHeader, IonLabel, IonItem, IonRange, IonToggle,
   IonButton, IonInput, IonSelect, IonSelectOption } from '@ionic/angular/standalone';
 import { SettingsService } from '../../services/settings';
 import { SaveProgressService } from '../../services/save-progress';
@@ -13,7 +15,7 @@ import { SKINS_CATALOG } from '../../services/skins-catalog';
   templateUrl: './settings.page.html',
   styleUrls: ['./settings.page.scss'],
   standalone: true,
-  imports: [CommonModule, IonContent, IonHeader, IonToolbar, IonTitle, IonButtons, IonBackButton,
+  imports: [CommonModule, IonContent, IonHeader, IonToolbar, IonTitle, IonButtons, IonIcon,
     IonList, IonListHeader, IonLabel, IonItem, IonRange, IonToggle, IonButton, IonInput,
     IonSelect, IonSelectOption],
 })
@@ -22,6 +24,10 @@ export class SettingsPageComponent {
   readonly save = inject(SaveProgressService);
   private readonly alertCtrl = inject(AlertController);
   private readonly router = inject(Router);
+  private readonly nav = inject(NavController);
+
+  constructor() { addIcons({ arrowBackOutline }); }
+  goBack() { this.nav.back(); }
 
   readonly skinsCatalog = SKINS_CATALOG;
   readonly showPinForm = signal(false);

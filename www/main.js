@@ -16,7 +16,7 @@ import {
   ɵɵelement,
   ɵɵelementEnd,
   ɵɵelementStart
-} from "./chunk-VDRMO2DQ.js";
+} from "./chunk-J2YUU2QC.js";
 import "./chunk-7R2BI4JM.js";
 import "./chunk-ZANXXOCD.js";
 import "./chunk-4NMFU3W6.js";
@@ -37,27 +37,27 @@ var routes = [
   { path: "", redirectTo: "home", pathMatch: "full" },
   {
     path: "home",
-    loadComponent: () => import("./home.page-SCZ72NXR.js").then((m) => m.HomePageComponent)
+    loadComponent: () => import("./home.page-54QDVMXG.js").then((m) => m.HomePageComponent)
   },
   {
     path: "game",
-    loadComponent: () => import("./game.page-MEGFY6MG.js").then((m) => m.GamePageComponent)
+    loadComponent: () => import("./game.page-FRY324B4.js").then((m) => m.GamePageComponent)
   },
   {
     path: "settings",
-    loadComponent: () => import("./settings.page-6EDS6NG5.js").then((m) => m.SettingsPageComponent)
+    loadComponent: () => import("./settings.page-LC5G5UN5.js").then((m) => m.SettingsPageComponent)
   },
   {
     path: "challenge",
-    loadComponent: () => import("./challenge.page-PBCFANBR.js").then((m) => m.ChallengePageComponent)
+    loadComponent: () => import("./challenge.page-67SV6GTK.js").then((m) => m.ChallengePageComponent)
   },
   {
     path: "leaderboard",
-    loadComponent: () => import("./leaderboard.page-B73OJH2O.js").then((m) => m.LeaderboardPageComponent)
+    loadComponent: () => import("./leaderboard.page-4N5R2CKA.js").then((m) => m.LeaderboardPageComponent)
   },
   {
     path: "auth",
-    loadComponent: () => import("./auth.page-GRPVFEQK.js").then((m) => m.AuthPageComponent)
+    loadComponent: () => import("./auth.page-O4TS2JGI.js").then((m) => m.AuthPageComponent)
   }
 ];
 

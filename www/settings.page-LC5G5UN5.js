@@ -3,19 +3,23 @@ import {
 } from "./chunk-ZF7BTS2H.js";
 import {
   SettingsService
-} from "./chunk-P4ZHY7RL.js";
+} from "./chunk-ER5ZGTPV.js";
 import {
   SaveProgressService
-} from "./chunk-TNBBNTNJ.js";
+} from "./chunk-EY4MWF2Q.js";
+import {
+  addIcons,
+  arrowBackOutline
+} from "./chunk-BTWVIJVU.js";
 import {
   AlertController,
   CommonModule,
   Component,
-  IonBackButton,
   IonButton,
   IonButtons,
   IonContent,
   IonHeader,
+  IonIcon,
   IonInput,
   IonItem,
   IonLabel,
@@ -27,6 +31,7 @@ import {
   IonTitle,
   IonToggle,
   IonToolbar,
+  NavController,
   Router,
   computed,
   inject,
@@ -53,7 +58,7 @@ import {
   ɵɵtext,
   ɵɵtextInterpolate,
   ɵɵtextInterpolate1
-} from "./chunk-VDRMO2DQ.js";
+} from "./chunk-J2YUU2QC.js";
 import "./chunk-7R2BI4JM.js";
 import "./chunk-ZANXXOCD.js";
 import "./chunk-4NMFU3W6.js";
@@ -74,11 +79,11 @@ import {
 // src/app/pages/settings/settings.page.ts
 var _forTrack0 = ($index, $item) => $item.id;
 var _forTrack1 = ($index, $item) => $item.hsl;
-function SettingsPageComponent_Conditional_46_Conditional_3_Template(rf, ctx) {
+function SettingsPageComponent_Conditional_47_Conditional_3_Template(rf, ctx) {
   if (rf & 1) {
     const _r3 = \u0275\u0275getCurrentView();
-    \u0275\u0275elementStart(0, "ion-button", 20);
-    \u0275\u0275listener("click", function SettingsPageComponent_Conditional_46_Conditional_3_Template_ion_button_click_0_listener() {
+    \u0275\u0275elementStart(0, "ion-button", 21);
+    \u0275\u0275listener("click", function SettingsPageComponent_Conditional_47_Conditional_3_Template_ion_button_click_0_listener() {
       \u0275\u0275restoreView(_r3);
       const ctx_r1 = \u0275\u0275nextContext(2);
       return \u0275\u0275resetView(ctx_r1.onClearPin());
@@ -87,18 +92,18 @@ function SettingsPageComponent_Conditional_46_Conditional_3_Template(rf, ctx) {
     \u0275\u0275elementEnd();
   }
 }
-function SettingsPageComponent_Conditional_46_Template(rf, ctx) {
+function SettingsPageComponent_Conditional_47_Template(rf, ctx) {
   if (rf & 1) {
     const _r1 = \u0275\u0275getCurrentView();
-    \u0275\u0275elementStart(0, "ion-item")(1, "ion-button", 18);
-    \u0275\u0275listener("click", function SettingsPageComponent_Conditional_46_Template_ion_button_click_1_listener() {
+    \u0275\u0275elementStart(0, "ion-item")(1, "ion-button", 19);
+    \u0275\u0275listener("click", function SettingsPageComponent_Conditional_47_Template_ion_button_click_1_listener() {
       \u0275\u0275restoreView(_r1);
       const ctx_r1 = \u0275\u0275nextContext();
       return \u0275\u0275resetView(ctx_r1.onShowPinForm());
     });
     \u0275\u0275text(2);
     \u0275\u0275elementEnd();
-    \u0275\u0275conditionalCreate(3, SettingsPageComponent_Conditional_46_Conditional_3_Template, 2, 0, "ion-button", 19);
+    \u0275\u0275conditionalCreate(3, SettingsPageComponent_Conditional_47_Conditional_3_Template, 2, 0, "ion-button", 20);
     \u0275\u0275elementEnd();
   }
   if (rf & 2) {
@@ -109,9 +114,9 @@ function SettingsPageComponent_Conditional_46_Template(rf, ctx) {
     \u0275\u0275conditional(ctx_r1.hasPin() ? 3 : -1);
   }
 }
-function SettingsPageComponent_Conditional_47_Conditional_3_Template(rf, ctx) {
+function SettingsPageComponent_Conditional_48_Conditional_3_Template(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275elementStart(0, "p", 23);
+    \u0275\u0275elementStart(0, "p", 24);
     \u0275\u0275text(1);
     \u0275\u0275elementEnd();
   }
@@ -121,27 +126,27 @@ function SettingsPageComponent_Conditional_47_Conditional_3_Template(rf, ctx) {
     \u0275\u0275textInterpolate(ctx_r1.pinError());
   }
 }
-function SettingsPageComponent_Conditional_47_Template(rf, ctx) {
+function SettingsPageComponent_Conditional_48_Template(rf, ctx) {
   if (rf & 1) {
     const _r4 = \u0275\u0275getCurrentView();
-    \u0275\u0275elementStart(0, "ion-item", 11)(1, "div", 21)(2, "ion-input", 22);
-    \u0275\u0275listener("ionInput", function SettingsPageComponent_Conditional_47_Template_ion_input_ionInput_2_listener($event) {
+    \u0275\u0275elementStart(0, "ion-item", 12)(1, "div", 22)(2, "ion-input", 23);
+    \u0275\u0275listener("ionInput", function SettingsPageComponent_Conditional_48_Template_ion_input_ionInput_2_listener($event) {
       \u0275\u0275restoreView(_r4);
       const ctx_r1 = \u0275\u0275nextContext();
       return \u0275\u0275resetView(ctx_r1.pinInput.set($event.target.value));
     });
     \u0275\u0275elementEnd();
-    \u0275\u0275conditionalCreate(3, SettingsPageComponent_Conditional_47_Conditional_3_Template, 2, 1, "p", 23);
-    \u0275\u0275elementStart(4, "div", 24)(5, "ion-button", 25);
-    \u0275\u0275listener("click", function SettingsPageComponent_Conditional_47_Template_ion_button_click_5_listener() {
+    \u0275\u0275conditionalCreate(3, SettingsPageComponent_Conditional_48_Conditional_3_Template, 2, 1, "p", 24);
+    \u0275\u0275elementStart(4, "div", 25)(5, "ion-button", 26);
+    \u0275\u0275listener("click", function SettingsPageComponent_Conditional_48_Template_ion_button_click_5_listener() {
       \u0275\u0275restoreView(_r4);
       const ctx_r1 = \u0275\u0275nextContext();
       return \u0275\u0275resetView(ctx_r1.onSavePin());
     });
     \u0275\u0275text(6, "Guardar");
     \u0275\u0275elementEnd();
-    \u0275\u0275elementStart(7, "ion-button", 26);
-    \u0275\u0275listener("click", function SettingsPageComponent_Conditional_47_Template_ion_button_click_7_listener() {
+    \u0275\u0275elementStart(7, "ion-button", 27);
+    \u0275\u0275listener("click", function SettingsPageComponent_Conditional_48_Template_ion_button_click_7_listener() {
       \u0275\u0275restoreView(_r4);
       const ctx_r1 = \u0275\u0275nextContext();
       return \u0275\u0275resetView(ctx_r1.onCancelPin());
@@ -157,18 +162,18 @@ function SettingsPageComponent_Conditional_47_Template(rf, ctx) {
     \u0275\u0275conditional(ctx_r1.pinError() ? 3 : -1);
   }
 }
-function SettingsPageComponent_For_60_For_3_Template(rf, ctx) {
+function SettingsPageComponent_For_61_For_3_Template(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275element(0, "div", 37);
+    \u0275\u0275element(0, "div", 38);
   }
   if (rf & 2) {
     const c_r5 = ctx.$implicit;
     \u0275\u0275styleProp("background", c_r5.hsl);
   }
 }
-function SettingsPageComponent_For_60_Conditional_6_Template(rf, ctx) {
+function SettingsPageComponent_For_61_Conditional_6_Template(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275elementStart(0, "span", 31);
+    \u0275\u0275elementStart(0, "span", 32);
     \u0275\u0275text(1);
     \u0275\u0275elementEnd();
   }
@@ -178,25 +183,25 @@ function SettingsPageComponent_For_60_Conditional_6_Template(rf, ctx) {
     \u0275\u0275textInterpolate1("", skin_r6.starCost, " \u2B50");
   }
 }
-function SettingsPageComponent_For_60_Conditional_7_Template(rf, ctx) {
+function SettingsPageComponent_For_61_Conditional_7_Template(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275elementStart(0, "span", 32);
+    \u0275\u0275elementStart(0, "span", 33);
     \u0275\u0275text(1, "Gratis");
     \u0275\u0275elementEnd();
   }
 }
-function SettingsPageComponent_For_60_Conditional_8_Template(rf, ctx) {
+function SettingsPageComponent_For_61_Conditional_8_Template(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275elementStart(0, "ion-button", 33);
+    \u0275\u0275elementStart(0, "ion-button", 34);
     \u0275\u0275text(1, "Activa \u2713");
     \u0275\u0275elementEnd();
   }
 }
-function SettingsPageComponent_For_60_Conditional_9_Template(rf, ctx) {
+function SettingsPageComponent_For_61_Conditional_9_Template(rf, ctx) {
   if (rf & 1) {
     const _r7 = \u0275\u0275getCurrentView();
-    \u0275\u0275elementStart(0, "ion-button", 38);
-    \u0275\u0275listener("click", function SettingsPageComponent_For_60_Conditional_9_Template_ion_button_click_0_listener() {
+    \u0275\u0275elementStart(0, "ion-button", 39);
+    \u0275\u0275listener("click", function SettingsPageComponent_For_61_Conditional_9_Template_ion_button_click_0_listener() {
       \u0275\u0275restoreView(_r7);
       const skin_r6 = \u0275\u0275nextContext().$implicit;
       const ctx_r1 = \u0275\u0275nextContext();
@@ -206,11 +211,11 @@ function SettingsPageComponent_For_60_Conditional_9_Template(rf, ctx) {
     \u0275\u0275elementEnd();
   }
 }
-function SettingsPageComponent_For_60_Conditional_10_Template(rf, ctx) {
+function SettingsPageComponent_For_61_Conditional_10_Template(rf, ctx) {
   if (rf & 1) {
     const _r8 = \u0275\u0275getCurrentView();
-    \u0275\u0275elementStart(0, "ion-button", 25);
-    \u0275\u0275listener("click", function SettingsPageComponent_For_60_Conditional_10_Template_ion_button_click_0_listener() {
+    \u0275\u0275elementStart(0, "ion-button", 26);
+    \u0275\u0275listener("click", function SettingsPageComponent_For_61_Conditional_10_Template_ion_button_click_0_listener() {
       \u0275\u0275restoreView(_r8);
       const skin_r6 = \u0275\u0275nextContext().$implicit;
       const ctx_r1 = \u0275\u0275nextContext();
@@ -220,9 +225,9 @@ function SettingsPageComponent_For_60_Conditional_10_Template(rf, ctx) {
     \u0275\u0275elementEnd();
   }
 }
-function SettingsPageComponent_For_60_Conditional_11_Template(rf, ctx) {
+function SettingsPageComponent_For_61_Conditional_11_Template(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275elementStart(0, "ion-button", 36);
+    \u0275\u0275elementStart(0, "ion-button", 37);
     \u0275\u0275text(1);
     \u0275\u0275elementEnd();
   }
@@ -232,16 +237,16 @@ function SettingsPageComponent_For_60_Conditional_11_Template(rf, ctx) {
     \u0275\u0275textInterpolate1(" \u{1F512} ", skin_r6.starCost, " \u2B50 ");
   }
 }
-function SettingsPageComponent_For_60_Template(rf, ctx) {
+function SettingsPageComponent_For_61_Template(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275elementStart(0, "div", 27)(1, "div", 28);
-    \u0275\u0275repeaterCreate(2, SettingsPageComponent_For_60_For_3_Template, 1, 2, "div", 29, _forTrack1);
+    \u0275\u0275elementStart(0, "div", 28)(1, "div", 29);
+    \u0275\u0275repeaterCreate(2, SettingsPageComponent_For_61_For_3_Template, 1, 2, "div", 30, _forTrack1);
     \u0275\u0275elementEnd();
-    \u0275\u0275elementStart(4, "span", 30);
+    \u0275\u0275elementStart(4, "span", 31);
     \u0275\u0275text(5);
     \u0275\u0275elementEnd();
-    \u0275\u0275conditionalCreate(6, SettingsPageComponent_For_60_Conditional_6_Template, 2, 1, "span", 31)(7, SettingsPageComponent_For_60_Conditional_7_Template, 2, 0, "span", 32);
-    \u0275\u0275conditionalCreate(8, SettingsPageComponent_For_60_Conditional_8_Template, 2, 0, "ion-button", 33)(9, SettingsPageComponent_For_60_Conditional_9_Template, 2, 0, "ion-button", 34)(10, SettingsPageComponent_For_60_Conditional_10_Template, 2, 0, "ion-button", 35)(11, SettingsPageComponent_For_60_Conditional_11_Template, 2, 1, "ion-button", 36);
+    \u0275\u0275conditionalCreate(6, SettingsPageComponent_For_61_Conditional_6_Template, 2, 1, "span", 32)(7, SettingsPageComponent_For_61_Conditional_7_Template, 2, 0, "span", 33);
+    \u0275\u0275conditionalCreate(8, SettingsPageComponent_For_61_Conditional_8_Template, 2, 0, "ion-button", 34)(9, SettingsPageComponent_For_61_Conditional_9_Template, 2, 0, "ion-button", 35)(10, SettingsPageComponent_For_61_Conditional_10_Template, 2, 0, "ion-button", 36)(11, SettingsPageComponent_For_61_Conditional_11_Template, 2, 1, "ion-button", 37);
     \u0275\u0275elementEnd();
   }
   if (rf & 2) {
@@ -264,6 +269,7 @@ var _SettingsPageComponent = class _SettingsPageComponent {
     this.save = inject(SaveProgressService);
     this.alertCtrl = inject(AlertController);
     this.router = inject(Router);
+    this.nav = inject(NavController);
     this.skinsCatalog = SKINS_CATALOG;
     this.showPinForm = signal(false, ...ngDevMode ? [{ debugName: "showPinForm" }] : []);
     this.pinInput = signal("", ...ngDevMode ? [{ debugName: "pinInput" }] : []);
@@ -272,6 +278,10 @@ var _SettingsPageComponent = class _SettingsPageComponent {
     this.activeSkinId = computed(() => this.save.progress().activeSkin, ...ngDevMode ? [{ debugName: "activeSkinId" }] : []);
     this.unlockedSkins = computed(() => this.save.progress().unlockedSkins, ...ngDevMode ? [{ debugName: "unlockedSkins" }] : []);
     this.availableStars = computed(() => this.save.progress().completedStarsCount, ...ngDevMode ? [{ debugName: "availableStars" }] : []);
+    addIcons({ arrowBackOutline });
+  }
+  goBack() {
+    this.nav.back();
   }
   onMusicVolumeChange(e) {
     this.settings.setMusicVolume(e.detail.value);
@@ -332,95 +342,98 @@ var _SettingsPageComponent = class _SettingsPageComponent {
 _SettingsPageComponent.\u0275fac = function SettingsPageComponent_Factory(__ngFactoryType__) {
   return new (__ngFactoryType__ || _SettingsPageComponent)();
 };
-_SettingsPageComponent.\u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _SettingsPageComponent, selectors: [["app-settings-page"]], decls: 68, vars: 13, consts: [["slot", "start"], ["defaultHref", "/home"], [1, "settings-content"], [1, "settings-section"], [1, "settings-section__header"], ["slot", "end", 1, "settings-range", 3, "ionChange", "min", "max", "step", "value"], ["slot", "end", 3, "ionChange", "checked"], ["slot", "end", 3, "ionChange", "value"], ["value", "easy"], ["value", "medium"], ["value", "hard"], [1, "pin-form"], [1, "skins-stars-item"], [1, "skins-grid"], [1, "skin-card", 3, "skin-card--active"], [1, "settings-section", "settings-section--danger"], [1, "settings-section__header", "settings-section__header--danger"], ["expand", "block", "fill", "outline", "color", "danger", 1, "danger-btn", 3, "click"], ["fill", "outline", "size", "small", 3, "click"], ["fill", "clear", "color", "danger", "size", "small", 1, "pin-clear-btn"], ["fill", "clear", "color", "danger", "size", "small", 1, "pin-clear-btn", 3, "click"], [1, "pin-form__body"], ["type", "password", "inputmode", "numeric", "placeholder", "4 d\xEDgitos", "maxlength", "4", 1, "pin-form__input", 3, "ionInput", "value"], [1, "pin-form__error"], [1, "pin-form__actions"], ["size", "small", 3, "click"], ["size", "small", "fill", "outline", "color", "medium", 3, "click"], [1, "skin-card"], [1, "skin-card__palette"], [1, "skin-card__swatch", 3, "background"], [1, "skin-card__name"], [1, "skin-card__cost"], [1, "skin-card__cost", "skin-card__cost--free"], ["size", "small", "fill", "solid", "color", "success", "disabled", ""], ["size", "small", "fill", "outline"], ["size", "small"], ["size", "small", "fill", "outline", "color", "medium", "disabled", ""], [1, "skin-card__swatch"], ["size", "small", "fill", "outline", 3, "click"]], template: function SettingsPageComponent_Template(rf, ctx) {
+_SettingsPageComponent.\u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _SettingsPageComponent, selectors: [["app-settings-page"]], decls: 69, vars: 13, consts: [["slot", "start"], [3, "click"], ["slot", "icon-only", "name", "arrow-back-outline"], [1, "settings-content"], [1, "settings-section"], [1, "settings-section__header"], ["slot", "end", 1, "settings-range", 3, "ionChange", "min", "max", "step", "value"], ["slot", "end", 3, "ionChange", "checked"], ["slot", "end", 3, "ionChange", "value"], ["value", "easy"], ["value", "medium"], ["value", "hard"], [1, "pin-form"], [1, "skins-stars-item"], [1, "skins-grid"], [1, "skin-card", 3, "skin-card--active"], [1, "settings-section", "settings-section--danger"], [1, "settings-section__header", "settings-section__header--danger"], ["expand", "block", "fill", "outline", "color", "danger", 1, "danger-btn", 3, "click"], ["fill", "outline", "size", "small", 3, "click"], ["fill", "clear", "color", "danger", "size", "small", 1, "pin-clear-btn"], ["fill", "clear", "color", "danger", "size", "small", 1, "pin-clear-btn", 3, "click"], [1, "pin-form__body"], ["type", "password", "inputmode", "numeric", "placeholder", "4 d\xEDgitos", "maxlength", "4", 1, "pin-form__input", 3, "ionInput", "value"], [1, "pin-form__error"], [1, "pin-form__actions"], ["size", "small", 3, "click"], ["size", "small", "fill", "outline", "color", "medium", 3, "click"], [1, "skin-card"], [1, "skin-card__palette"], [1, "skin-card__swatch", 3, "background"], [1, "skin-card__name"], [1, "skin-card__cost"], [1, "skin-card__cost", "skin-card__cost--free"], ["size", "small", "fill", "solid", "color", "success", "disabled", ""], ["size", "small", "fill", "outline"], ["size", "small"], ["size", "small", "fill", "outline", "color", "medium", "disabled", ""], [1, "skin-card__swatch"], ["size", "small", "fill", "outline", 3, "click"]], template: function SettingsPageComponent_Template(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275elementStart(0, "ion-header")(1, "ion-toolbar")(2, "ion-buttons", 0);
-    \u0275\u0275element(3, "ion-back-button", 1);
-    \u0275\u0275elementEnd();
-    \u0275\u0275elementStart(4, "ion-title");
-    \u0275\u0275text(5, "Configuraci\xF3n");
-    \u0275\u0275elementEnd()()();
-    \u0275\u0275elementStart(6, "ion-content", 2)(7, "ion-list", 3)(8, "ion-list-header", 4)(9, "ion-label");
-    \u0275\u0275text(10, "\u{1F3B5} Audio");
+    \u0275\u0275elementStart(0, "ion-header")(1, "ion-toolbar")(2, "ion-buttons", 0)(3, "ion-button", 1);
+    \u0275\u0275listener("click", function SettingsPageComponent_Template_ion_button_click_3_listener() {
+      return ctx.goBack();
+    });
+    \u0275\u0275element(4, "ion-icon", 2);
     \u0275\u0275elementEnd()();
-    \u0275\u0275elementStart(11, "ion-item")(12, "ion-label");
-    \u0275\u0275text(13, "M\xFAsica");
+    \u0275\u0275elementStart(5, "ion-title");
+    \u0275\u0275text(6, "Configuraci\xF3n");
+    \u0275\u0275elementEnd()()();
+    \u0275\u0275elementStart(7, "ion-content", 3)(8, "ion-list", 4)(9, "ion-list-header", 5)(10, "ion-label");
+    \u0275\u0275text(11, "\u{1F3B5} Audio");
+    \u0275\u0275elementEnd()();
+    \u0275\u0275elementStart(12, "ion-item")(13, "ion-label");
+    \u0275\u0275text(14, "M\xFAsica");
     \u0275\u0275elementEnd();
-    \u0275\u0275elementStart(14, "ion-range", 5);
-    \u0275\u0275listener("ionChange", function SettingsPageComponent_Template_ion_range_ionChange_14_listener($event) {
+    \u0275\u0275elementStart(15, "ion-range", 6);
+    \u0275\u0275listener("ionChange", function SettingsPageComponent_Template_ion_range_ionChange_15_listener($event) {
       return ctx.onMusicVolumeChange($event);
     });
     \u0275\u0275elementEnd()();
-    \u0275\u0275elementStart(15, "ion-item")(16, "ion-label");
-    \u0275\u0275text(17, "Efectos de sonido");
+    \u0275\u0275elementStart(16, "ion-item")(17, "ion-label");
+    \u0275\u0275text(18, "Efectos de sonido");
     \u0275\u0275elementEnd();
-    \u0275\u0275elementStart(18, "ion-range", 5);
-    \u0275\u0275listener("ionChange", function SettingsPageComponent_Template_ion_range_ionChange_18_listener($event) {
+    \u0275\u0275elementStart(19, "ion-range", 6);
+    \u0275\u0275listener("ionChange", function SettingsPageComponent_Template_ion_range_ionChange_19_listener($event) {
       return ctx.onSfxVolumeChange($event);
     });
     \u0275\u0275elementEnd()()();
-    \u0275\u0275elementStart(19, "ion-list", 3)(20, "ion-list-header", 4)(21, "ion-label");
-    \u0275\u0275text(22, "\u{1F3AE} Gameplay");
+    \u0275\u0275elementStart(20, "ion-list", 4)(21, "ion-list-header", 5)(22, "ion-label");
+    \u0275\u0275text(23, "\u{1F3AE} Gameplay");
     \u0275\u0275elementEnd()();
-    \u0275\u0275elementStart(23, "ion-item")(24, "ion-label");
-    \u0275\u0275text(25, "Caritas sonrientes en piezas");
+    \u0275\u0275elementStart(24, "ion-item")(25, "ion-label");
+    \u0275\u0275text(26, "Caritas sonrientes en piezas");
     \u0275\u0275elementEnd();
-    \u0275\u0275elementStart(26, "ion-toggle", 6);
-    \u0275\u0275listener("ionChange", function SettingsPageComponent_Template_ion_toggle_ionChange_26_listener() {
+    \u0275\u0275elementStart(27, "ion-toggle", 7);
+    \u0275\u0275listener("ionChange", function SettingsPageComponent_Template_ion_toggle_ionChange_27_listener() {
       return ctx.onToggleSmilingFaces();
     });
     \u0275\u0275elementEnd()();
-    \u0275\u0275elementStart(27, "ion-item")(28, "ion-label");
-    \u0275\u0275text(29, "Dificultad (Cl\xE1sico)");
+    \u0275\u0275elementStart(28, "ion-item")(29, "ion-label");
+    \u0275\u0275text(30, "Dificultad (Cl\xE1sico)");
     \u0275\u0275elementEnd();
-    \u0275\u0275elementStart(30, "ion-select", 7);
-    \u0275\u0275listener("ionChange", function SettingsPageComponent_Template_ion_select_ionChange_30_listener($event) {
+    \u0275\u0275elementStart(31, "ion-select", 8);
+    \u0275\u0275listener("ionChange", function SettingsPageComponent_Template_ion_select_ionChange_31_listener($event) {
       return ctx.onDifficultyChange($event);
     });
-    \u0275\u0275elementStart(31, "ion-select-option", 8);
-    \u0275\u0275text(32, "F\xE1cil");
+    \u0275\u0275elementStart(32, "ion-select-option", 9);
+    \u0275\u0275text(33, "F\xE1cil");
     \u0275\u0275elementEnd();
-    \u0275\u0275elementStart(33, "ion-select-option", 9);
-    \u0275\u0275text(34, "Media");
+    \u0275\u0275elementStart(34, "ion-select-option", 10);
+    \u0275\u0275text(35, "Media");
     \u0275\u0275elementEnd();
-    \u0275\u0275elementStart(35, "ion-select-option", 10);
-    \u0275\u0275text(36, "Dif\xEDcil");
+    \u0275\u0275elementStart(36, "ion-select-option", 11);
+    \u0275\u0275text(37, "Dif\xEDcil");
     \u0275\u0275elementEnd()()()();
-    \u0275\u0275elementStart(37, "ion-list", 3)(38, "ion-list-header", 4)(39, "ion-label");
-    \u0275\u0275text(40, "\u{1F512} Control Parental");
+    \u0275\u0275elementStart(38, "ion-list", 4)(39, "ion-list-header", 5)(40, "ion-label");
+    \u0275\u0275text(41, "\u{1F512} Control Parental");
     \u0275\u0275elementEnd()();
-    \u0275\u0275elementStart(41, "ion-item")(42, "ion-label");
-    \u0275\u0275text(43, "PIN activo: ");
-    \u0275\u0275elementStart(44, "strong");
-    \u0275\u0275text(45);
+    \u0275\u0275elementStart(42, "ion-item")(43, "ion-label");
+    \u0275\u0275text(44, "PIN activo: ");
+    \u0275\u0275elementStart(45, "strong");
+    \u0275\u0275text(46);
     \u0275\u0275elementEnd()()();
-    \u0275\u0275conditionalCreate(46, SettingsPageComponent_Conditional_46_Template, 4, 2, "ion-item")(47, SettingsPageComponent_Conditional_47_Template, 9, 2, "ion-item", 11);
+    \u0275\u0275conditionalCreate(47, SettingsPageComponent_Conditional_47_Template, 4, 2, "ion-item")(48, SettingsPageComponent_Conditional_48_Template, 9, 2, "ion-item", 12);
     \u0275\u0275elementEnd();
-    \u0275\u0275elementStart(48, "ion-list", 3)(49, "ion-list-header", 4)(50, "ion-label");
-    \u0275\u0275text(51, "\u{1F3A8} Apariencia");
+    \u0275\u0275elementStart(49, "ion-list", 4)(50, "ion-list-header", 5)(51, "ion-label");
+    \u0275\u0275text(52, "\u{1F3A8} Apariencia");
     \u0275\u0275elementEnd()();
-    \u0275\u0275elementStart(52, "ion-item", 12)(53, "ion-label");
-    \u0275\u0275text(54, "\u2B50 ");
-    \u0275\u0275elementStart(55, "strong");
-    \u0275\u0275text(56);
+    \u0275\u0275elementStart(53, "ion-item", 13)(54, "ion-label");
+    \u0275\u0275text(55, "\u2B50 ");
+    \u0275\u0275elementStart(56, "strong");
+    \u0275\u0275text(57);
     \u0275\u0275elementEnd();
-    \u0275\u0275text(57, " estrellas disponibles");
+    \u0275\u0275text(58, " estrellas disponibles");
     \u0275\u0275elementEnd()();
-    \u0275\u0275elementStart(58, "div", 13);
-    \u0275\u0275repeaterCreate(59, SettingsPageComponent_For_60_Template, 12, 5, "div", 14, _forTrack0);
+    \u0275\u0275elementStart(59, "div", 14);
+    \u0275\u0275repeaterCreate(60, SettingsPageComponent_For_61_Template, 12, 5, "div", 15, _forTrack0);
     \u0275\u0275elementEnd()();
-    \u0275\u0275elementStart(61, "ion-list", 15)(62, "ion-list-header", 16)(63, "ion-label");
-    \u0275\u0275text(64, "\u26A0\uFE0F Zona de Peligro");
+    \u0275\u0275elementStart(62, "ion-list", 16)(63, "ion-list-header", 17)(64, "ion-label");
+    \u0275\u0275text(65, "\u26A0\uFE0F Zona de Peligro");
     \u0275\u0275elementEnd()();
-    \u0275\u0275elementStart(65, "ion-item")(66, "ion-button", 17);
-    \u0275\u0275listener("click", function SettingsPageComponent_Template_ion_button_click_66_listener() {
+    \u0275\u0275elementStart(66, "ion-item")(67, "ion-button", 18);
+    \u0275\u0275listener("click", function SettingsPageComponent_Template_ion_button_click_67_listener() {
       return ctx.onResetRecord();
     });
-    \u0275\u0275text(67, " Restablecer R\xE9cords ");
+    \u0275\u0275text(68, " Restablecer R\xE9cords ");
     \u0275\u0275elementEnd()()()();
   }
   if (rf & 2) {
-    \u0275\u0275advance(14);
+    \u0275\u0275advance(15);
     \u0275\u0275property("min", 0)("max", 1)("step", 0.05)("value", ctx.settings.settings().musicVolume);
     \u0275\u0275advance(4);
     \u0275\u0275property("min", 0)("max", 1)("step", 0.05)("value", ctx.settings.settings().sfxVolume);
@@ -431,7 +444,7 @@ _SettingsPageComponent.\u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({
     \u0275\u0275advance(15);
     \u0275\u0275textInterpolate(ctx.hasPin() ? "S\xCD" : "NO");
     \u0275\u0275advance();
-    \u0275\u0275conditional(!ctx.showPinForm() ? 46 : 47);
+    \u0275\u0275conditional(!ctx.showPinForm() ? 47 : 48);
     \u0275\u0275advance(10);
     \u0275\u0275textInterpolate(ctx.availableStars());
     \u0275\u0275advance(3);
@@ -444,7 +457,7 @@ _SettingsPageComponent.\u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({
   IonToolbar,
   IonTitle,
   IonButtons,
-  IonBackButton,
+  IonIcon,
   IonList,
   IonListHeader,
   IonLabel,
@@ -467,7 +480,7 @@ var SettingsPageComponent = _SettingsPageComponent;
       IonToolbar,
       IonTitle,
       IonButtons,
-      IonBackButton,
+      IonIcon,
       IonList,
       IonListHeader,
       IonLabel,
@@ -480,7 +493,9 @@ var SettingsPageComponent = _SettingsPageComponent;
       IonSelectOption
     ], template: `<ion-header>
   <ion-toolbar>
-    <ion-buttons slot="start"><ion-back-button defaultHref="/home"></ion-back-button></ion-buttons>
+    <ion-buttons slot="start">
+      <ion-button (click)="goBack()"><ion-icon slot="icon-only" name="arrow-back-outline"></ion-icon></ion-button>
+    </ion-buttons>
     <ion-title>Configuraci\xF3n</ion-title>
   </ion-toolbar>
 </ion-header>
@@ -605,12 +620,12 @@ var SettingsPageComponent = _SettingsPageComponent;
 
 </ion-content>
 `, styles: ["/* src/app/pages/settings/settings.page.scss */\n.settings-content {\n  --background:var(--color-background,#0d1117);\n  --padding-bottom:calc(var(--ion-safe-area-bottom,env(safe-area-inset-bottom,0px)) + 2.5rem);\n}\n.settings-section {\n  background: transparent;\n  margin-bottom: 1.5rem;\n}\n.settings-section__header ion-label {\n  font-size: 0.75rem !important;\n  font-weight: 700;\n  letter-spacing: 0.1em;\n  color: var(--color-text-secondary, #5973a6) !important;\n  text-transform: uppercase;\n}\n.settings-section--danger {\n  margin-top: 1rem;\n}\n.settings-section__header--danger ion-label {\n  color: #eb5547 !important;\n}\n.settings-range {\n  max-width: 180px;\n}\n.pin-clear-btn {\n  margin-inline-start: 0.5rem;\n}\n.pin-form {\n  --inner-padding-top:.75rem;\n  --inner-padding-bottom:.75rem;\n}\n.pin-form__body {\n  display: flex;\n  flex-direction: column;\n  gap: 0.5rem;\n  width: 100%;\n}\n.pin-form__input {\n  --background:hsl(220,20%,18%);\n  --border-radius:.5rem;\n  --padding-start:.75rem;\n  border: 1px solid hsl(220, 15%, 30%);\n  border-radius: 0.5rem;\n}\n.pin-form__error {\n  margin: 0;\n  font-size: 0.75rem;\n  color: #eb5547;\n}\n.pin-form__actions {\n  display: flex;\n  gap: 0.5rem;\n}\n.skins-stars-item {\n  --background:transparent;\n}\n.skins-grid {\n  display: grid;\n  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));\n  gap: 0.75rem;\n  padding: 0.75rem 1rem 1rem;\n}\n.skin-card {\n  display: flex;\n  flex-direction: column;\n  align-items: center;\n  gap: 0.4rem;\n  padding: 0.85rem 0.6rem;\n  background: #1d212b;\n  border: 1px solid hsl(220, 15%, 25%);\n  border-radius: 1rem;\n  transition: border-color 0.2s;\n}\n.skin-card--active {\n  border-color: var(--ion-color-primary, #5ed5ed);\n  background: #252b37;\n}\n.skin-card__palette {\n  display: flex;\n  gap: 4px;\n}\n.skin-card__swatch {\n  width: 18px;\n  height: 18px;\n  border-radius: 4px;\n  flex-shrink: 0;\n}\n.skin-card__name {\n  font-size: 0.8rem;\n  font-weight: 700;\n  color: var(--color-text-primary, #d6ebff);\n}\n.skin-card__cost {\n  font-size: 0.7rem;\n  color: #ebc247;\n}\n.skin-card__cost--free {\n  color: #47d18c;\n}\n.danger-btn {\n  width: 100%;\n}\n/*# sourceMappingURL=settings.page.css.map */\n"] }]
-  }], null, null);
+  }], () => [], null);
 })();
 (() => {
-  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(SettingsPageComponent, { className: "SettingsPageComponent", filePath: "src/app/pages/settings/settings.page.ts", lineNumber: 20 });
+  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(SettingsPageComponent, { className: "SettingsPageComponent", filePath: "src/app/pages/settings/settings.page.ts", lineNumber: 22 });
 })();
 export {
   SettingsPageComponent
 };
-//# sourceMappingURL=settings.page-6EDS6NG5.js.map
+//# sourceMappingURL=settings.page-LC5G5UN5.js.map

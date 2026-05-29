@@ -64608,9 +64608,9 @@ export {
   provideRouter,
   withPreloading,
   withHashLocation,
+  NavController,
   IonicRouteStrategy,
   IonRouterOutlet2 as IonRouterOutlet,
-  IonBackButton3 as IonBackButton,
   IonApp,
   IonButton,
   IonButtons,
@@ -64818,4 +64818,4 @@ export {
    * (C) Ionic http://ionicframework.com - MIT License
    *)
 */
-//# sourceMappingURL=chunk-VDRMO2DQ.js.map
+//# sourceMappingURL=chunk-J2YUU2QC.js.map

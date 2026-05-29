@@ -1,8 +1,9 @@
 import { Component, inject, signal, computed } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { Router } from '@angular/router';
-import { IonContent, IonHeader, IonToolbar, IonTitle, IonButtons, IonBackButton,
-  IonButton, IonInput } from '@ionic/angular/standalone';
+import { addIcons } from 'ionicons';
+import { arrowBackOutline } from 'ionicons/icons';
+import { NavController, IonContent, IonHeader, IonToolbar, IonTitle, IonButtons,
+  IonIcon, IonButton, IonInput } from '@ionic/angular/standalone';
 import { ChallengeCodecService } from '../../services/challenge-codec';
 import { SyncService, RankingEntry } from '../../services/sync';
 import { SaveProgressService } from '../../services/save-progress';
@@ -16,14 +17,14 @@ const CODE_RE = /^BMS-[a-z0-9]+-[a-z0-9]+-[a-zA-Z0-9+/]+=*$/;
   styleUrls: ['./challenge.page.scss'],
   standalone: true,
   imports: [CommonModule, IonContent, IonHeader, IonToolbar, IonTitle, IonButtons,
-    IonBackButton, IonButton, IonInput],
+    IonIcon, IonButton, IonInput],
 })
 export class ChallengePageComponent {
   private readonly codec = inject(ChallengeCodecService);
   private readonly sync = inject(SyncService);
   readonly save = inject(SaveProgressService);
   readonly gameState = inject(GameStateService);
-  private readonly router = inject(Router);
+  private readonly nav = inject(NavController);
 
   readonly codeInput = signal('');
   readonly validationErr = signal<string | null>(null);
@@ -35,6 +36,10 @@ export class ChallengePageComponent {
   readonly copied = signal(false);
 
   readonly canGenerate = computed(() => this.save.progress().highScores['classic'] > 0);
+
+  constructor() { addIcons({ arrowBackOutline }); }
+
+  goBack() { this.nav.back(); }
 
   onCodeInput(v: string) { this.codeInput.set(v); this.decoded.set(null); this.validationErr.set(null); }
 
@@ -54,15 +59,14 @@ export class ChallengePageComponent {
   onPlayChallenge() {
     const d = this.decoded();
     if (!d) return;
-    this.router.navigate(['/game'], { state: { challengeSeed: d.seed, targetScore: d.targetScore } });
+    this.nav.navigateForward('/game', { state: { challengeSeed: d.seed, targetScore: d.targetScore } });
   }
 
   async onLoadRanking() {
     const code = this.codeInput().trim();
     if (!code) return;
     this.rankingLoading.set(true);
-    const entries = await this.sync.fetchChallengeRanking(code);
-    this.ranking.set(entries);
+    this.ranking.set(await this.sync.fetchChallengeRanking(code));
     this.rankingLoading.set(false);
   }
 

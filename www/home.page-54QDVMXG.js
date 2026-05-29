@@ -1,19 +1,21 @@
 import {
-  ChildModeService,
+  ChildModeService
+} from "./chunk-WP7LD4FI.js";
+import {
+  GameStateService
+} from "./chunk-EHMPXUI6.js";
+import {
+  AuthService
+} from "./chunk-TUC447SG.js";
+import {
+  SaveProgressService
+} from "./chunk-EY4MWF2Q.js";
+import {
   addIcons,
   personCircleOutline,
   settingsOutline,
   trophyOutline
-} from "./chunk-ZMWEGD7V.js";
-import {
-  GameStateService
-} from "./chunk-DCU74AHR.js";
-import {
-  AuthService
-} from "./chunk-GH4SA4BM.js";
-import {
-  SaveProgressService
-} from "./chunk-TNBBNTNJ.js";
+} from "./chunk-BTWVIJVU.js";
 import {
   AlertController,
   CommonModule,
@@ -41,7 +43,7 @@ import {
   ɵɵtext,
   ɵɵtextInterpolate,
   ɵɵtextInterpolate1
-} from "./chunk-VDRMO2DQ.js";
+} from "./chunk-J2YUU2QC.js";
 import "./chunk-7R2BI4JM.js";
 import "./chunk-ZANXXOCD.js";
 import "./chunk-4NMFU3W6.js";
@@ -504,4 +506,4 @@ var HomePageComponent = _HomePageComponent;
 export {
   HomePageComponent
 };
-//# sourceMappingURL=home.page-SCZ72NXR.js.map
+//# sourceMappingURL=home.page-54QDVMXG.js.map

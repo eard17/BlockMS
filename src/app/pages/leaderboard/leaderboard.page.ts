@@ -1,9 +1,10 @@
 import { Component, inject, signal, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { IonContent, IonHeader, IonToolbar, IonTitle, IonButtons,
-  IonBackButton, IonButton } from '@ionic/angular/standalone';
+import { addIcons } from 'ionicons';
+import { arrowBackOutline } from 'ionicons/icons';
+import { NavController, IonContent, IonHeader, IonToolbar, IonTitle,
+  IonButtons, IonIcon, IonButton } from '@ionic/angular/standalone';
 import { SyncService, RankingEntry } from '../../services/sync';
-import { GameStateService } from '../../services/game-state';
 
 @Component({
   selector: 'app-leaderboard-page',
@@ -11,29 +12,32 @@ import { GameStateService } from '../../services/game-state';
   styleUrls: ['./leaderboard.page.scss'],
   standalone: true,
   imports: [CommonModule, IonContent, IonHeader, IonToolbar, IonTitle,
-    IonButtons, IonBackButton, IonButton],
+    IonButtons, IonIcon, IonButton],
 })
 export class LeaderboardPageComponent implements OnInit {
   private readonly sync = inject(SyncService);
-  readonly gameState = inject(GameStateService);
+  private readonly nav = inject(NavController);
 
   readonly entries = signal<RankingEntry[]>([]);
   readonly loading = signal(true);
   readonly selectedMode = signal<string>('classic');
 
   readonly modes = [
-    { key: 'classic', label: 'Clásico' },
-    { key: 'child-1', label: 'Exploradores' },
-    { key: 'child-2', label: 'Constructores' },
-    { key: 'child-3', label: 'Familiar' },
+    { key: 'classic',  label: 'Clásico' },
+    { key: 'child-1',  label: 'Exploradores' },
+    { key: 'child-2',  label: 'Constructores' },
+    { key: 'child-3',  label: 'Familiar' },
   ];
+
+  constructor() { addIcons({ arrowBackOutline }); }
 
   ngOnInit() { this.load(); }
 
+  goBack() { this.nav.back(); }
+
   async load() {
     this.loading.set(true);
-    const data = await this.sync.fetchChallengeRanking(`global-${this.selectedMode()}`);
-    this.entries.set(data);
+    this.entries.set(await this.sync.fetchChallengeRanking(`global-${this.selectedMode()}`));
     this.loading.set(false);
   }
 

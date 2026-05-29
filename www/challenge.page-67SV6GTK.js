@@ -1,26 +1,30 @@
 import {
   SyncService
-} from "./chunk-E6SPTQM2.js";
+} from "./chunk-2FTXAHAI.js";
 import {
   GameStateService
-} from "./chunk-DCU74AHR.js";
-import "./chunk-GH4SA4BM.js";
+} from "./chunk-EHMPXUI6.js";
+import "./chunk-TUC447SG.js";
 import {
   SaveProgressService
-} from "./chunk-TNBBNTNJ.js";
+} from "./chunk-EY4MWF2Q.js";
+import {
+  addIcons,
+  arrowBackOutline
+} from "./chunk-BTWVIJVU.js";
 import {
   CommonModule,
   Component,
   Injectable,
-  IonBackButton,
   IonButton,
   IonButtons,
   IonContent,
   IonHeader,
+  IonIcon,
   IonInput,
   IonTitle,
   IonToolbar,
-  Router,
+  NavController,
   computed,
   inject,
   setClassMetadata,
@@ -45,7 +49,7 @@ import {
   ɵɵtext,
   ɵɵtextInterpolate,
   ɵɵtextInterpolate1
-} from "./chunk-VDRMO2DQ.js";
+} from "./chunk-J2YUU2QC.js";
 import "./chunk-7R2BI4JM.js";
 import "./chunk-ZANXXOCD.js";
 import "./chunk-4NMFU3W6.js";
@@ -100,9 +104,9 @@ var ChallengeCodecService = _ChallengeCodecService;
 
 // src/app/pages/challenge/challenge.page.ts
 var _forTrack0 = ($index, $item) => $item.username;
-function ChallengePageComponent_Conditional_16_Template(rf, ctx) {
+function ChallengePageComponent_Conditional_17_Template(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275elementStart(0, "p", 9);
+    \u0275\u0275elementStart(0, "p", 10);
     \u0275\u0275text(1);
     \u0275\u0275elementEnd();
   }
@@ -112,23 +116,23 @@ function ChallengePageComponent_Conditional_16_Template(rf, ctx) {
     \u0275\u0275textInterpolate(ctx_r0.validationErr());
   }
 }
-function ChallengePageComponent_Conditional_17_Template(rf, ctx) {
+function ChallengePageComponent_Conditional_18_Template(rf, ctx) {
   if (rf & 1) {
     const _r2 = \u0275\u0275getCurrentView();
-    \u0275\u0275elementStart(0, "div", 10)(1, "div", 14)(2, "span", 15);
+    \u0275\u0275elementStart(0, "div", 11)(1, "div", 15)(2, "span", 16);
     \u0275\u0275text(3, "Creador");
     \u0275\u0275elementEnd();
-    \u0275\u0275elementStart(4, "span", 16);
+    \u0275\u0275elementStart(4, "span", 17);
     \u0275\u0275text(5);
     \u0275\u0275elementEnd()();
-    \u0275\u0275elementStart(6, "div", 14)(7, "span", 15);
+    \u0275\u0275elementStart(6, "div", 15)(7, "span", 16);
     \u0275\u0275text(8, "Puntuaci\xF3n objetivo");
     \u0275\u0275elementEnd();
-    \u0275\u0275elementStart(9, "span", 17);
+    \u0275\u0275elementStart(9, "span", 18);
     \u0275\u0275text(10);
     \u0275\u0275elementEnd()();
-    \u0275\u0275elementStart(11, "ion-button", 18);
-    \u0275\u0275listener("click", function ChallengePageComponent_Conditional_17_Template_ion_button_click_11_listener() {
+    \u0275\u0275elementStart(11, "ion-button", 19);
+    \u0275\u0275listener("click", function ChallengePageComponent_Conditional_18_Template_ion_button_click_11_listener() {
       \u0275\u0275restoreView(_r2);
       const ctx_r0 = \u0275\u0275nextContext();
       return \u0275\u0275resetView(ctx_r0.onPlayChallenge());
@@ -144,33 +148,33 @@ function ChallengePageComponent_Conditional_17_Template(rf, ctx) {
     \u0275\u0275textInterpolate1(" ", d_r3.targetScore.toLocaleString(), " ");
   }
 }
-function ChallengePageComponent_Conditional_18_Conditional_8_For_2_Template(rf, ctx) {
+function ChallengePageComponent_Conditional_19_Conditional_8_For_2_Template(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275elementStart(0, "li", 21)(1, "span", 22);
+    \u0275\u0275elementStart(0, "li", 22)(1, "span", 23);
     \u0275\u0275text(2);
     \u0275\u0275elementEnd();
-    \u0275\u0275elementStart(3, "span", 23);
+    \u0275\u0275elementStart(3, "span", 24);
     \u0275\u0275text(4);
     \u0275\u0275elementEnd();
-    \u0275\u0275elementStart(5, "span", 24);
+    \u0275\u0275elementStart(5, "span", 25);
     \u0275\u0275text(6);
     \u0275\u0275elementEnd()();
   }
   if (rf & 2) {
     const entry_r5 = ctx.$implicit;
-    const \u0275$index_72_r6 = ctx.$index;
+    const \u0275$index_74_r6 = ctx.$index;
     \u0275\u0275advance(2);
-    \u0275\u0275textInterpolate(\u0275$index_72_r6 + 1);
+    \u0275\u0275textInterpolate(\u0275$index_74_r6 + 1);
     \u0275\u0275advance(2);
     \u0275\u0275textInterpolate(entry_r5.username);
     \u0275\u0275advance(2);
     \u0275\u0275textInterpolate(entry_r5.score.toLocaleString());
   }
 }
-function ChallengePageComponent_Conditional_18_Conditional_8_Template(rf, ctx) {
+function ChallengePageComponent_Conditional_19_Conditional_8_Template(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275elementStart(0, "ol", 20);
-    \u0275\u0275repeaterCreate(1, ChallengePageComponent_Conditional_18_Conditional_8_For_2_Template, 7, 3, "li", 21, _forTrack0);
+    \u0275\u0275elementStart(0, "ol", 21);
+    \u0275\u0275repeaterCreate(1, ChallengePageComponent_Conditional_19_Conditional_8_For_2_Template, 7, 3, "li", 22, _forTrack0);
     \u0275\u0275elementEnd();
   }
   if (rf & 2) {
@@ -179,25 +183,25 @@ function ChallengePageComponent_Conditional_18_Conditional_8_Template(rf, ctx) {
     \u0275\u0275repeater(ctx_r0.ranking());
   }
 }
-function ChallengePageComponent_Conditional_18_Template(rf, ctx) {
+function ChallengePageComponent_Conditional_19_Template(rf, ctx) {
   if (rf & 1) {
     const _r4 = \u0275\u0275getCurrentView();
-    \u0275\u0275element(0, "div", 11);
-    \u0275\u0275elementStart(1, "section", 3)(2, "h2", 4);
+    \u0275\u0275element(0, "div", 12);
+    \u0275\u0275elementStart(1, "section", 4)(2, "h2", 5);
     \u0275\u0275text(3, "\u{1F310} Ranking Online");
     \u0275\u0275elementEnd();
-    \u0275\u0275elementStart(4, "p", 5);
+    \u0275\u0275elementStart(4, "p", 6);
     \u0275\u0275text(5, "Participantes que jugaron este reto.");
     \u0275\u0275elementEnd();
-    \u0275\u0275elementStart(6, "ion-button", 19);
-    \u0275\u0275listener("click", function ChallengePageComponent_Conditional_18_Template_ion_button_click_6_listener() {
+    \u0275\u0275elementStart(6, "ion-button", 20);
+    \u0275\u0275listener("click", function ChallengePageComponent_Conditional_19_Template_ion_button_click_6_listener() {
       \u0275\u0275restoreView(_r4);
       const ctx_r0 = \u0275\u0275nextContext();
       return \u0275\u0275resetView(ctx_r0.onLoadRanking());
     });
     \u0275\u0275text(7);
     \u0275\u0275elementEnd();
-    \u0275\u0275conditionalCreate(8, ChallengePageComponent_Conditional_18_Conditional_8_Template, 3, 0, "ol", 20);
+    \u0275\u0275conditionalCreate(8, ChallengePageComponent_Conditional_19_Conditional_8_Template, 3, 0, "ol", 21);
     \u0275\u0275elementEnd();
   }
   if (rf & 2) {
@@ -208,14 +212,14 @@ function ChallengePageComponent_Conditional_18_Template(rf, ctx) {
     \u0275\u0275conditional(ctx_r0.ranking().length > 0 ? 8 : -1);
   }
 }
-function ChallengePageComponent_Conditional_23_Conditional_16_Template(rf, ctx) {
+function ChallengePageComponent_Conditional_24_Conditional_16_Template(rf, ctx) {
   if (rf & 1) {
     const _r8 = \u0275\u0275getCurrentView();
-    \u0275\u0275elementStart(0, "div", 31)(1, "code", 32);
+    \u0275\u0275elementStart(0, "div", 32)(1, "code", 33);
     \u0275\u0275text(2);
     \u0275\u0275elementEnd();
-    \u0275\u0275elementStart(3, "ion-button", 33);
-    \u0275\u0275listener("click", function ChallengePageComponent_Conditional_23_Conditional_16_Template_ion_button_click_3_listener() {
+    \u0275\u0275elementStart(3, "ion-button", 34);
+    \u0275\u0275listener("click", function ChallengePageComponent_Conditional_24_Conditional_16_Template_ion_button_click_3_listener() {
       \u0275\u0275restoreView(_r8);
       const ctx_r0 = \u0275\u0275nextContext(2);
       return \u0275\u0275resetView(ctx_r0.onCopy());
@@ -233,40 +237,40 @@ function ChallengePageComponent_Conditional_23_Conditional_16_Template(rf, ctx) 
     \u0275\u0275textInterpolate(ctx_r0.copied() ? "\u2713 Copiado" : "\u{1F4CB} Copiar");
   }
 }
-function ChallengePageComponent_Conditional_23_Template(rf, ctx) {
+function ChallengePageComponent_Conditional_24_Template(rf, ctx) {
   if (rf & 1) {
     const _r7 = \u0275\u0275getCurrentView();
-    \u0275\u0275elementStart(0, "div", 12)(1, "p", 5);
+    \u0275\u0275elementStart(0, "div", 13)(1, "p", 6);
     \u0275\u0275text(2, "Comparte tu r\xE9cord y reta a otros jugadores.");
     \u0275\u0275elementEnd();
-    \u0275\u0275elementStart(3, "div", 25)(4, "span", 26);
+    \u0275\u0275elementStart(3, "div", 26)(4, "span", 27);
     \u0275\u0275text(5, "Semilla de sesi\xF3n");
     \u0275\u0275elementEnd();
-    \u0275\u0275elementStart(6, "span", 27);
+    \u0275\u0275elementStart(6, "span", 28);
     \u0275\u0275text(7);
     \u0275\u0275elementEnd()();
-    \u0275\u0275elementStart(8, "div", 25)(9, "span", 26);
+    \u0275\u0275elementStart(8, "div", 26)(9, "span", 27);
     \u0275\u0275text(10, "Tu r\xE9cord");
     \u0275\u0275elementEnd();
-    \u0275\u0275elementStart(11, "span", 28);
+    \u0275\u0275elementStart(11, "span", 29);
     \u0275\u0275text(12);
     \u0275\u0275elementEnd()();
-    \u0275\u0275elementStart(13, "ion-input", 29);
-    \u0275\u0275listener("ionInput", function ChallengePageComponent_Conditional_23_Template_ion_input_ionInput_13_listener($event) {
+    \u0275\u0275elementStart(13, "ion-input", 30);
+    \u0275\u0275listener("ionInput", function ChallengePageComponent_Conditional_24_Template_ion_input_ionInput_13_listener($event) {
       \u0275\u0275restoreView(_r7);
       const ctx_r0 = \u0275\u0275nextContext();
       return \u0275\u0275resetView(ctx_r0.onCreatorNameInput($event.target.value));
     });
     \u0275\u0275elementEnd();
-    \u0275\u0275elementStart(14, "ion-button", 30);
-    \u0275\u0275listener("click", function ChallengePageComponent_Conditional_23_Template_ion_button_click_14_listener() {
+    \u0275\u0275elementStart(14, "ion-button", 31);
+    \u0275\u0275listener("click", function ChallengePageComponent_Conditional_24_Template_ion_button_click_14_listener() {
       \u0275\u0275restoreView(_r7);
       const ctx_r0 = \u0275\u0275nextContext();
       return \u0275\u0275resetView(ctx_r0.onGenerateCode());
     });
     \u0275\u0275text(15, "Generar C\xF3digo BMS");
     \u0275\u0275elementEnd();
-    \u0275\u0275conditionalCreate(16, ChallengePageComponent_Conditional_23_Conditional_16_Template, 5, 4, "div", 31);
+    \u0275\u0275conditionalCreate(16, ChallengePageComponent_Conditional_24_Conditional_16_Template, 5, 4, "div", 32);
     \u0275\u0275elementEnd();
   }
   if (rf & 2) {
@@ -281,9 +285,9 @@ function ChallengePageComponent_Conditional_23_Template(rf, ctx) {
     \u0275\u0275conditional(ctx_r0.generatedCode() ? 16 : -1);
   }
 }
-function ChallengePageComponent_Conditional_24_Template(rf, ctx) {
+function ChallengePageComponent_Conditional_25_Template(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275elementStart(0, "p", 13);
+    \u0275\u0275elementStart(0, "p", 14);
     \u0275\u0275text(1, " Juega una partida en Modo Cl\xE1sico para generar tu primer reto. ");
     \u0275\u0275elementEnd();
   }
@@ -295,7 +299,7 @@ var _ChallengePageComponent = class _ChallengePageComponent {
     this.sync = inject(SyncService);
     this.save = inject(SaveProgressService);
     this.gameState = inject(GameStateService);
-    this.router = inject(Router);
+    this.nav = inject(NavController);
     this.codeInput = signal("", ...ngDevMode ? [{ debugName: "codeInput" }] : []);
     this.validationErr = signal(null, ...ngDevMode ? [{ debugName: "validationErr" }] : []);
     this.decoded = signal(null, ...ngDevMode ? [{ debugName: "decoded" }] : []);
@@ -305,6 +309,10 @@ var _ChallengePageComponent = class _ChallengePageComponent {
     this.generatedCode = signal(null, ...ngDevMode ? [{ debugName: "generatedCode" }] : []);
     this.copied = signal(false, ...ngDevMode ? [{ debugName: "copied" }] : []);
     this.canGenerate = computed(() => this.save.progress().highScores["classic"] > 0, ...ngDevMode ? [{ debugName: "canGenerate" }] : []);
+    addIcons({ arrowBackOutline });
+  }
+  goBack() {
+    this.nav.back();
   }
   onCodeInput(v) {
     this.codeInput.set(v);
@@ -335,7 +343,7 @@ var _ChallengePageComponent = class _ChallengePageComponent {
     const d = this.decoded();
     if (!d)
       return;
-    this.router.navigate(["/game"], { state: { challengeSeed: d.seed, targetScore: d.targetScore } });
+    this.nav.navigateForward("/game", { state: { challengeSeed: d.seed, targetScore: d.targetScore } });
   }
   onLoadRanking() {
     return __async(this, null, function* () {
@@ -343,8 +351,7 @@ var _ChallengePageComponent = class _ChallengePageComponent {
       if (!code)
         return;
       this.rankingLoading.set(true);
-      const entries = yield this.sync.fetchChallengeRanking(code);
-      this.ranking.set(entries);
+      this.ranking.set(yield this.sync.fetchChallengeRanking(code));
       this.rankingLoading.set(false);
     });
   }
@@ -373,54 +380,57 @@ var _ChallengePageComponent = class _ChallengePageComponent {
 _ChallengePageComponent.\u0275fac = function ChallengePageComponent_Factory(__ngFactoryType__) {
   return new (__ngFactoryType__ || _ChallengePageComponent)();
 };
-_ChallengePageComponent.\u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _ChallengePageComponent, selectors: [["app-challenge-page"]], decls: 25, vars: 5, consts: [["slot", "start"], ["defaultHref", "/home"], [1, "challenge-content"], [1, "challenge-section"], [1, "challenge-section__title"], [1, "challenge-section__desc"], [1, "challenge-input-group"], ["placeholder", "BMS-abc123-7ps-SohnSm9z", "autocomplete", "off", "autocapitalize", "off", 1, "challenge-input", 3, "ionInput", "value"], ["expand", "block", 3, "click"], [1, "challenge-error"], ["role", "status", 1, "challenge-decoded-card"], [1, "challenge-divider"], [1, "challenge-generate"], [1, "challenge-section__desc", "challenge-section__desc--muted"], [1, "challenge-decoded-card__row"], [1, "challenge-decoded-card__label"], [1, "challenge-decoded-card__value"], [1, "challenge-decoded-card__value", "challenge-decoded-card__value--score"], ["expand", "block", "color", "primary", 1, "challenge-decoded-card__play-btn", 3, "click"], ["expand", "block", "fill", "outline", "size", "small", 3, "click"], [1, "challenge-ranking"], [1, "challenge-ranking__row"], [1, "challenge-ranking__pos"], [1, "challenge-ranking__name"], [1, "challenge-ranking__score"], [1, "challenge-generate__meta"], [1, "challenge-generate__label"], [1, "challenge-generate__value", "challenge-generate__value--seed"], [1, "challenge-generate__value"], ["placeholder", "Tu nombre (m\xE1x. 8 caracteres)", "maxlength", "8", "autocomplete", "off", 1, "challenge-input", 3, "ionInput", "value"], ["expand", "block", "fill", "outline", 3, "click"], [1, "challenge-code-card"], [1, "challenge-code-card__code"], ["size", "small", 3, "click", "fill", "color"]], template: function ChallengePageComponent_Template(rf, ctx) {
+_ChallengePageComponent.\u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _ChallengePageComponent, selectors: [["app-challenge-page"]], decls: 26, vars: 5, consts: [["slot", "start"], [3, "click"], ["slot", "icon-only", "name", "arrow-back-outline"], [1, "challenge-content"], [1, "challenge-section"], [1, "challenge-section__title"], [1, "challenge-section__desc"], [1, "challenge-input-group"], ["placeholder", "BMS-abc123-7ps-SohnSm9z", "autocomplete", "off", "autocapitalize", "off", 1, "challenge-input", 3, "ionInput", "value"], ["expand", "block", 3, "click"], [1, "challenge-error"], ["role", "status", 1, "challenge-decoded-card"], [1, "challenge-divider"], [1, "challenge-generate"], [1, "challenge-section__desc", "challenge-section__desc--muted"], [1, "challenge-decoded-card__row"], [1, "challenge-decoded-card__label"], [1, "challenge-decoded-card__value"], [1, "challenge-decoded-card__value", "challenge-decoded-card__value--score"], ["expand", "block", "color", "primary", 1, "challenge-decoded-card__play-btn", 3, "click"], ["expand", "block", "fill", "outline", "size", "small", 3, "click"], [1, "challenge-ranking"], [1, "challenge-ranking__row"], [1, "challenge-ranking__pos"], [1, "challenge-ranking__name"], [1, "challenge-ranking__score"], [1, "challenge-generate__meta"], [1, "challenge-generate__label"], [1, "challenge-generate__value", "challenge-generate__value--seed"], [1, "challenge-generate__value"], ["placeholder", "Tu nombre (m\xE1x. 8 caracteres)", "maxlength", "8", "autocomplete", "off", 1, "challenge-input", 3, "ionInput", "value"], ["expand", "block", "fill", "outline", 3, "click"], [1, "challenge-code-card"], [1, "challenge-code-card__code"], ["size", "small", 3, "click", "fill", "color"]], template: function ChallengePageComponent_Template(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275elementStart(0, "ion-header")(1, "ion-toolbar")(2, "ion-buttons", 0);
-    \u0275\u0275element(3, "ion-back-button", 1);
-    \u0275\u0275elementEnd();
-    \u0275\u0275elementStart(4, "ion-title");
-    \u0275\u0275text(5, "Modo Duelo");
+    \u0275\u0275elementStart(0, "ion-header")(1, "ion-toolbar")(2, "ion-buttons", 0)(3, "ion-button", 1);
+    \u0275\u0275listener("click", function ChallengePageComponent_Template_ion_button_click_3_listener() {
+      return ctx.goBack();
+    });
+    \u0275\u0275element(4, "ion-icon", 2);
+    \u0275\u0275elementEnd()();
+    \u0275\u0275elementStart(5, "ion-title");
+    \u0275\u0275text(6, "Modo Duelo");
     \u0275\u0275elementEnd()()();
-    \u0275\u0275elementStart(6, "ion-content", 2)(7, "section", 3)(8, "h2", 4);
-    \u0275\u0275text(9, "\u2694\uFE0F Jugar un Reto");
+    \u0275\u0275elementStart(7, "ion-content", 3)(8, "section", 4)(9, "h2", 5);
+    \u0275\u0275text(10, "\u2694\uFE0F Jugar un Reto");
     \u0275\u0275elementEnd();
-    \u0275\u0275elementStart(10, "p", 5);
-    \u0275\u0275text(11, "Ingresa el c\xF3digo BMS que recibiste.");
+    \u0275\u0275elementStart(11, "p", 6);
+    \u0275\u0275text(12, "Ingresa el c\xF3digo BMS que recibiste.");
     \u0275\u0275elementEnd();
-    \u0275\u0275elementStart(12, "div", 6)(13, "ion-input", 7);
-    \u0275\u0275listener("ionInput", function ChallengePageComponent_Template_ion_input_ionInput_13_listener($event) {
+    \u0275\u0275elementStart(13, "div", 7)(14, "ion-input", 8);
+    \u0275\u0275listener("ionInput", function ChallengePageComponent_Template_ion_input_ionInput_14_listener($event) {
       return ctx.onCodeInput($event.target.value);
     });
     \u0275\u0275elementEnd();
-    \u0275\u0275elementStart(14, "ion-button", 8);
-    \u0275\u0275listener("click", function ChallengePageComponent_Template_ion_button_click_14_listener() {
+    \u0275\u0275elementStart(15, "ion-button", 9);
+    \u0275\u0275listener("click", function ChallengePageComponent_Template_ion_button_click_15_listener() {
       return ctx.onValidateCode();
     });
-    \u0275\u0275text(15, "Verificar C\xF3digo");
+    \u0275\u0275text(16, "Verificar C\xF3digo");
     \u0275\u0275elementEnd()();
-    \u0275\u0275conditionalCreate(16, ChallengePageComponent_Conditional_16_Template, 2, 1, "p", 9);
-    \u0275\u0275conditionalCreate(17, ChallengePageComponent_Conditional_17_Template, 13, 2, "div", 10);
+    \u0275\u0275conditionalCreate(17, ChallengePageComponent_Conditional_17_Template, 2, 1, "p", 10);
+    \u0275\u0275conditionalCreate(18, ChallengePageComponent_Conditional_18_Template, 13, 2, "div", 11);
     \u0275\u0275elementEnd();
-    \u0275\u0275conditionalCreate(18, ChallengePageComponent_Conditional_18_Template, 9, 2);
-    \u0275\u0275element(19, "div", 11);
-    \u0275\u0275elementStart(20, "section", 3)(21, "h2", 4);
-    \u0275\u0275text(22, "\u{1F3C6} Generar Tu Reto");
+    \u0275\u0275conditionalCreate(19, ChallengePageComponent_Conditional_19_Template, 9, 2);
+    \u0275\u0275element(20, "div", 12);
+    \u0275\u0275elementStart(21, "section", 4)(22, "h2", 5);
+    \u0275\u0275text(23, "\u{1F3C6} Generar Tu Reto");
     \u0275\u0275elementEnd();
-    \u0275\u0275conditionalCreate(23, ChallengePageComponent_Conditional_23_Template, 17, 4, "div", 12)(24, ChallengePageComponent_Conditional_24_Template, 2, 0, "p", 13);
+    \u0275\u0275conditionalCreate(24, ChallengePageComponent_Conditional_24_Template, 17, 4, "div", 13)(25, ChallengePageComponent_Conditional_25_Template, 2, 0, "p", 14);
     \u0275\u0275elementEnd()();
   }
   if (rf & 2) {
     let tmp_2_0;
-    \u0275\u0275advance(13);
+    \u0275\u0275advance(14);
     \u0275\u0275property("value", ctx.codeInput());
     \u0275\u0275advance(3);
-    \u0275\u0275conditional(ctx.validationErr() ? 16 : -1);
+    \u0275\u0275conditional(ctx.validationErr() ? 17 : -1);
     \u0275\u0275advance();
-    \u0275\u0275conditional((tmp_2_0 = ctx.decoded()) ? 17 : -1, tmp_2_0);
+    \u0275\u0275conditional((tmp_2_0 = ctx.decoded()) ? 18 : -1, tmp_2_0);
     \u0275\u0275advance();
-    \u0275\u0275conditional(ctx.decoded() ? 18 : -1);
+    \u0275\u0275conditional(ctx.decoded() ? 19 : -1);
     \u0275\u0275advance(5);
-    \u0275\u0275conditional(ctx.canGenerate() ? 23 : 24);
+    \u0275\u0275conditional(ctx.canGenerate() ? 24 : 25);
   }
 }, dependencies: [
   CommonModule,
@@ -429,7 +439,7 @@ _ChallengePageComponent.\u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent(
   IonToolbar,
   IonTitle,
   IonButtons,
-  IonBackButton,
+  IonIcon,
   IonButton,
   IonInput
 ], styles: ["\n\n.challenge-content[_ngcontent-%COMP%] {\n  --background:var(--color-background,#0d1117);\n  --padding-start:1.25rem;\n  --padding-end:1.25rem;\n  --padding-top:1.25rem;\n  --padding-bottom:2rem;\n}\n.challenge-section[_ngcontent-%COMP%] {\n  margin-bottom: 1.25rem;\n}\n.challenge-section__title[_ngcontent-%COMP%] {\n  margin: 0 0 0.35rem;\n  font-size: 1.1rem;\n  font-weight: 800;\n  color: #d6ebff;\n}\n.challenge-section__desc[_ngcontent-%COMP%] {\n  margin: 0 0 0.85rem;\n  font-size: 0.82rem;\n  color: #8899bb;\n}\n.challenge-section__desc--muted[_ngcontent-%COMP%] {\n  color: #576175;\n  font-style: italic;\n}\n.challenge-divider[_ngcontent-%COMP%] {\n  height: 1px;\n  background: #303541;\n  margin: 1.5rem 0;\n}\n.challenge-input-group[_ngcontent-%COMP%] {\n  display: flex;\n  flex-direction: column;\n  gap: 0.6rem;\n  margin-bottom: 0.75rem;\n}\n.challenge-input[_ngcontent-%COMP%] {\n  --background:hsl(220,20%,14%);\n  --border-radius:.75rem;\n  --padding-start:1rem;\n  --color:#d6ebff;\n  border: 1px solid hsl(220, 15%, 28%);\n  border-radius: 0.75rem;\n  font-size: 0.85rem;\n}\n.challenge-error[_ngcontent-%COMP%] {\n  margin: 0;\n  font-size: 0.78rem;\n  color: #eb5547;\n}\n.challenge-decoded-card[_ngcontent-%COMP%] {\n  display: flex;\n  flex-direction: column;\n  gap: 0.5rem;\n  padding: 1rem;\n  background: #1b1f28;\n  border: 1px solid hsla(150, 60%, 45%, 0.3);\n  border-radius: 1rem;\n  margin-top: 0.75rem;\n}\n.challenge-decoded-card__row[_ngcontent-%COMP%] {\n  display: flex;\n  justify-content: space-between;\n  align-items: center;\n}\n.challenge-decoded-card__label[_ngcontent-%COMP%] {\n  font-size: 0.72rem;\n  color: #8899bb;\n  text-transform: uppercase;\n  letter-spacing: 0.08em;\n}\n.challenge-decoded-card__value[_ngcontent-%COMP%] {\n  font-size: 0.95rem;\n  font-weight: 700;\n  color: #d6ebff;\n}\n.challenge-decoded-card__value--score[_ngcontent-%COMP%] {\n  color: #52e099;\n  font-size: 1.1rem;\n}\n.challenge-decoded-card__play-btn[_ngcontent-%COMP%] {\n  margin-top: 0.25rem;\n}\n.challenge-ranking[_ngcontent-%COMP%] {\n  list-style: none;\n  margin: 0.6rem 0 0;\n  padding: 0;\n  display: flex;\n  flex-direction: column;\n  gap: 0.3rem;\n}\n.challenge-ranking__row[_ngcontent-%COMP%] {\n  display: flex;\n  align-items: center;\n  gap: 0.6rem;\n  padding: 0.5rem 0.75rem;\n  background: #1b1f28;\n  border: 1px solid hsl(220, 15%, 22%);\n  border-radius: 0.6rem;\n}\n.challenge-ranking__pos[_ngcontent-%COMP%] {\n  font-size: 0.75rem;\n  font-weight: 700;\n  color: #56698f;\n  min-width: 1.2rem;\n}\n.challenge-ranking__name[_ngcontent-%COMP%] {\n  flex: 1;\n  font-size: 0.88rem;\n  font-weight: 600;\n  color: #d6ebff;\n  overflow: hidden;\n  text-overflow: ellipsis;\n  white-space: nowrap;\n}\n.challenge-ranking__score[_ngcontent-%COMP%] {\n  font-size: 0.9rem;\n  font-weight: 800;\n  color: #52e099;\n}\n.challenge-generate[_ngcontent-%COMP%] {\n  display: flex;\n  flex-direction: column;\n  gap: 0.7rem;\n}\n.challenge-generate__meta[_ngcontent-%COMP%] {\n  display: flex;\n  justify-content: space-between;\n  align-items: center;\n  padding: 0.4rem 0;\n  border-bottom: 1px solid hsl(220, 15%, 20%);\n}\n.challenge-generate__label[_ngcontent-%COMP%] {\n  font-size: 0.72rem;\n  color: #8899bb;\n  text-transform: uppercase;\n  letter-spacing: 0.08em;\n}\n.challenge-generate__value[_ngcontent-%COMP%] {\n  font-size: 0.9rem;\n  font-weight: 600;\n  color: #d6ebff;\n}\n.challenge-generate__value--seed[_ngcontent-%COMP%] {\n  font-family: monospace;\n  color: #67cfe4;\n}\n.challenge-code-card[_ngcontent-%COMP%] {\n  display: flex;\n  align-items: center;\n  justify-content: space-between;\n  gap: 0.75rem;\n  padding: 0.75rem 1rem;\n  background: #181d25;\n  border: 1px solid hsla(45, 80%, 55%, 0.25);\n  border-radius: 0.75rem;\n}\n.challenge-code-card__code[_ngcontent-%COMP%] {\n  font-family: monospace;\n  font-size: clamp(0.65rem, 2vw, 0.75rem);\n  color: #edc95e;\n  word-break: break-all;\n  flex: 1;\n  min-width: 0;\n}\n/*# sourceMappingURL=challenge.page.css.map */"] });
@@ -444,12 +454,14 @@ var ChallengePageComponent = _ChallengePageComponent;
       IonToolbar,
       IonTitle,
       IonButtons,
-      IonBackButton,
+      IonIcon,
       IonButton,
       IonInput
     ], template: `<ion-header>
   <ion-toolbar>
-    <ion-buttons slot="start"><ion-back-button defaultHref="/home"></ion-back-button></ion-buttons>
+    <ion-buttons slot="start">
+      <ion-button (click)="goBack()"><ion-icon slot="icon-only" name="arrow-back-outline"></ion-icon></ion-button>
+    </ion-buttons>
     <ion-title>Modo Duelo</ion-title>
   </ion-toolbar>
 </ion-header>
@@ -546,12 +558,12 @@ var ChallengePageComponent = _ChallengePageComponent;
 
 </ion-content>
 `, styles: ["/* src/app/pages/challenge/challenge.page.scss */\n.challenge-content {\n  --background:var(--color-background,#0d1117);\n  --padding-start:1.25rem;\n  --padding-end:1.25rem;\n  --padding-top:1.25rem;\n  --padding-bottom:2rem;\n}\n.challenge-section {\n  margin-bottom: 1.25rem;\n}\n.challenge-section__title {\n  margin: 0 0 0.35rem;\n  font-size: 1.1rem;\n  font-weight: 800;\n  color: #d6ebff;\n}\n.challenge-section__desc {\n  margin: 0 0 0.85rem;\n  font-size: 0.82rem;\n  color: #8899bb;\n}\n.challenge-section__desc--muted {\n  color: #576175;\n  font-style: italic;\n}\n.challenge-divider {\n  height: 1px;\n  background: #303541;\n  margin: 1.5rem 0;\n}\n.challenge-input-group {\n  display: flex;\n  flex-direction: column;\n  gap: 0.6rem;\n  margin-bottom: 0.75rem;\n}\n.challenge-input {\n  --background:hsl(220,20%,14%);\n  --border-radius:.75rem;\n  --padding-start:1rem;\n  --color:#d6ebff;\n  border: 1px solid hsl(220, 15%, 28%);\n  border-radius: 0.75rem;\n  font-size: 0.85rem;\n}\n.challenge-error {\n  margin: 0;\n  font-size: 0.78rem;\n  color: #eb5547;\n}\n.challenge-decoded-card {\n  display: flex;\n  flex-direction: column;\n  gap: 0.5rem;\n  padding: 1rem;\n  background: #1b1f28;\n  border: 1px solid hsla(150, 60%, 45%, 0.3);\n  border-radius: 1rem;\n  margin-top: 0.75rem;\n}\n.challenge-decoded-card__row {\n  display: flex;\n  justify-content: space-between;\n  align-items: center;\n}\n.challenge-decoded-card__label {\n  font-size: 0.72rem;\n  color: #8899bb;\n  text-transform: uppercase;\n  letter-spacing: 0.08em;\n}\n.challenge-decoded-card__value {\n  font-size: 0.95rem;\n  font-weight: 700;\n  color: #d6ebff;\n}\n.challenge-decoded-card__value--score {\n  color: #52e099;\n  font-size: 1.1rem;\n}\n.challenge-decoded-card__play-btn {\n  margin-top: 0.25rem;\n}\n.challenge-ranking {\n  list-style: none;\n  margin: 0.6rem 0 0;\n  padding: 0;\n  display: flex;\n  flex-direction: column;\n  gap: 0.3rem;\n}\n.challenge-ranking__row {\n  display: flex;\n  align-items: center;\n  gap: 0.6rem;\n  padding: 0.5rem 0.75rem;\n  background: #1b1f28;\n  border: 1px solid hsl(220, 15%, 22%);\n  border-radius: 0.6rem;\n}\n.challenge-ranking__pos {\n  font-size: 0.75rem;\n  font-weight: 700;\n  color: #56698f;\n  min-width: 1.2rem;\n}\n.challenge-ranking__name {\n  flex: 1;\n  font-size: 0.88rem;\n  font-weight: 600;\n  color: #d6ebff;\n  overflow: hidden;\n  text-overflow: ellipsis;\n  white-space: nowrap;\n}\n.challenge-ranking__score {\n  font-size: 0.9rem;\n  font-weight: 800;\n  color: #52e099;\n}\n.challenge-generate {\n  display: flex;\n  flex-direction: column;\n  gap: 0.7rem;\n}\n.challenge-generate__meta {\n  display: flex;\n  justify-content: space-between;\n  align-items: center;\n  padding: 0.4rem 0;\n  border-bottom: 1px solid hsl(220, 15%, 20%);\n}\n.challenge-generate__label {\n  font-size: 0.72rem;\n  color: #8899bb;\n  text-transform: uppercase;\n  letter-spacing: 0.08em;\n}\n.challenge-generate__value {\n  font-size: 0.9rem;\n  font-weight: 600;\n  color: #d6ebff;\n}\n.challenge-generate__value--seed {\n  font-family: monospace;\n  color: #67cfe4;\n}\n.challenge-code-card {\n  display: flex;\n  align-items: center;\n  justify-content: space-between;\n  gap: 0.75rem;\n  padding: 0.75rem 1rem;\n  background: #181d25;\n  border: 1px solid hsla(45, 80%, 55%, 0.25);\n  border-radius: 0.75rem;\n}\n.challenge-code-card__code {\n  font-family: monospace;\n  font-size: clamp(0.65rem, 2vw, 0.75rem);\n  color: #edc95e;\n  word-break: break-all;\n  flex: 1;\n  min-width: 0;\n}\n/*# sourceMappingURL=challenge.page.css.map */\n"] }]
-  }], null, null);
+  }], () => [], null);
 })();
 (() => {
-  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(ChallengePageComponent, { className: "ChallengePageComponent", filePath: "src/app/pages/challenge/challenge.page.ts", lineNumber: 21 });
+  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(ChallengePageComponent, { className: "ChallengePageComponent", filePath: "src/app/pages/challenge/challenge.page.ts", lineNumber: 22 });
 })();
 export {
   ChallengePageComponent
 };
-//# sourceMappingURL=challenge.page-PBCFANBR.js.map
+//# sourceMappingURL=challenge.page-67SV6GTK.js.map

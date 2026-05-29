@@ -3,7 +3,7 @@ import {
   setClassMetadata,
   signal,
   ɵɵdefineInjectable
-} from "./chunk-VDRMO2DQ.js";
+} from "./chunk-J2YUU2QC.js";
 import {
   __spreadValues
 } from "./chunk-5K356HEJ.js";
@@ -74,4 +74,4 @@ var SettingsService = _SettingsService;
 export {
   SettingsService
 };
-//# sourceMappingURL=chunk-P4ZHY7RL.js.map
+//# sourceMappingURL=chunk-ER5ZGTPV.js.map
