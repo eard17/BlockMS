@@ -1,10 +1,10 @@
 import {
   SyncService
-} from "./chunk-UX7DNNKA.js";
+} from "./chunk-TVPQJG2C.js";
 import {
   GameStateService
 } from "./chunk-EHMPXUI6.js";
-import "./chunk-BCXYNPLC.js";
+import "./chunk-GI5KRBG6.js";
 import {
   SaveProgressService
 } from "./chunk-EY4MWF2Q.js";
@@ -566,4 +566,4 @@ var ChallengePageComponent = _ChallengePageComponent;
 export {
   ChallengePageComponent
 };
-//# sourceMappingURL=challenge.page-VZ3DZDI2.js.map
+//# sourceMappingURL=challenge.page-M5J32T6B.js.map

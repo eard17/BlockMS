@@ -6,11 +6,11 @@ import {
 } from "./chunk-ER5ZGTPV.js";
 import {
   SyncService
-} from "./chunk-UX7DNNKA.js";
+} from "./chunk-TVPQJG2C.js";
 import {
   GameStateService
 } from "./chunk-EHMPXUI6.js";
-import "./chunk-BCXYNPLC.js";
+import "./chunk-GI5KRBG6.js";
 import {
   SaveProgressService
 } from "./chunk-EY4MWF2Q.js";
@@ -751,4 +751,4 @@ var GamePageComponent = _GamePageComponent;
 export {
   GamePageComponent
 };
-//# sourceMappingURL=game.page-5YEPYQ3V.js.map
+//# sourceMappingURL=game.page-J2QRCWDL.js.map

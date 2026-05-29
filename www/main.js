@@ -41,11 +41,11 @@ var routes = [
   { path: "", redirectTo: "home", pathMatch: "full" },
   {
     path: "home",
-    loadComponent: () => import("./home.page-OFSH5CK4.js").then((m) => m.HomePageComponent)
+    loadComponent: () => import("./home.page-U7RJECNJ.js").then((m) => m.HomePageComponent)
   },
   {
     path: "game",
-    loadComponent: () => import("./game.page-5YEPYQ3V.js").then((m) => m.GamePageComponent)
+    loadComponent: () => import("./game.page-J2QRCWDL.js").then((m) => m.GamePageComponent)
   },
   {
     path: "settings",
@@ -53,15 +53,15 @@ var routes = [
   },
   {
     path: "challenge",
-    loadComponent: () => import("./challenge.page-VZ3DZDI2.js").then((m) => m.ChallengePageComponent)
+    loadComponent: () => import("./challenge.page-M5J32T6B.js").then((m) => m.ChallengePageComponent)
   },
   {
     path: "leaderboard",
-    loadComponent: () => import("./leaderboard.page-EPPWOQAU.js").then((m) => m.LeaderboardPageComponent)
+    loadComponent: () => import("./leaderboard.page-WFLCPJLQ.js").then((m) => m.LeaderboardPageComponent)
   },
   {
     path: "auth",
-    loadComponent: () => import("./auth.page-XOZ4WH3W.js").then((m) => m.AuthPageComponent)
+    loadComponent: () => import("./auth.page-C36ELZXQ.js").then((m) => m.AuthPageComponent)
   }
 ];
 

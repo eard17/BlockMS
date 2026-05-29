@@ -21196,7 +21196,8 @@ var _AuthService = class _AuthService {
     this.displayName = computed(() => this._user()?.user_metadata?.["full_name"] ?? this._user()?.email ?? "", ...ngDevMode ? [{ debugName: "displayName" }] : []);
     this.avatarUrl = computed(() => this._user()?.user_metadata?.["avatar_url"] ?? null, ...ngDevMode ? [{ debugName: "avatarUrl" }] : []);
     this.user = this._user.asReadonly();
-    if (environment.supabaseUrl && environment.supabaseKey) {
+    const isValidUrl = environment.supabaseUrl?.startsWith("https://");
+    if (isValidUrl && environment.supabaseKey) {
       this.supabase = createClient(environment.supabaseUrl, environment.supabaseKey);
       this.supabase.auth.getSession().then(({ data }) => {
         this._user.set(data.session?.user ?? null);
@@ -21236,4 +21237,4 @@ var AuthService = _AuthService;
 export {
   AuthService
 };
-//# sourceMappingURL=chunk-BCXYNPLC.js.map
+//# sourceMappingURL=chunk-GI5KRBG6.js.map

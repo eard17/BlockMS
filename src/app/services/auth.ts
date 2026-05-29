@@ -14,7 +14,8 @@ export class AuthService {
   readonly user = this._user.asReadonly();
 
   constructor() {
-    if (environment.supabaseUrl && environment.supabaseKey) {
+    const isValidUrl = environment.supabaseUrl?.startsWith('https://');
+    if (isValidUrl && environment.supabaseKey) {
       this.supabase = createClient(environment.supabaseUrl, environment.supabaseKey);
       this.supabase.auth.getSession().then(({ data }) => {
         this._user.set(data.session?.user ?? null);
