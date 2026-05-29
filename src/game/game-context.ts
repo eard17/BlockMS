@@ -1,4 +1,5 @@
 import { GameStateService } from '../app/services/game-state';
+import { SavedGameState } from '../app/services/save-progress';
 
 export interface PhaserGameConfig {
   boardDimension?: number;
@@ -9,6 +10,7 @@ export interface PhaserGameConfig {
   musicVolume?: number;
   sfxVolume?: number;
   difficulty?: 'easy' | 'medium' | 'hard';
+  savedState?: SavedGameState;
 }
 
 // Module-level singleton — avoids Phaser scene init() timing race

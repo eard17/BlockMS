@@ -7,6 +7,7 @@ import { ScoreCalculator } from '../systems/score-calculator';
 import { GameStateService } from '../../app/services/game-state';
 import { SKINS_CATALOG } from '../../app/services/skins-catalog';
 import { ctxGameState, ctxConfig, PhaserGameConfig } from '../game-context';
+import { SavedGameState } from '../../app/services/save-progress';
 
 const CELL_GAP   = 2;
 const TRAY_SCALE = 0.55;
@@ -62,7 +63,11 @@ export class GameScene extends Phaser.Scene {
     this.trayGfx  = this.add.graphics();
 
     this.drawBoard();
-    this.fillTray();
+    if (this.config.savedState) {
+      this.restoreFromSaved(this.config.savedState);
+    } else {
+      this.fillTray();
+    }
     this.drawTray();
     this.setupInput();
     this.setupEvents();
@@ -334,6 +339,48 @@ export class GameScene extends Phaser.Scene {
       this.drawBoard();
       this.drawTray();
     });
+  }
+
+  // ── Save / Restore ────────────────────────────────────────────────────────
+
+  /** Serialize current board + tray for persistence. */
+  serializeState(): SavedGameState {
+    const grid = this.board.getGrid().map(row =>
+      row.map(cell => ({ filled: cell.filled, color: cell.color, id: cell.id })),
+    );
+    const tray = this.tray.map(p => p ? p.map(row => [...row]) : null);
+    return {
+      mode: this.gameState.mode(),
+      grid,
+      tray,
+      score:   this.gameState.score(),
+      combo:   this.gameState.comboCount(),
+      elapsed: this.elapsed,
+      timestamp: Date.now(),
+    };
+  }
+
+  private restoreFromSaved(state: SavedGameState) {
+    // Restore board cells
+    const grid = this.board.getGrid();
+    for (let r = 0; r < grid.length; r++) {
+      const savedRow = state.grid[r];
+      if (!savedRow) continue;
+      for (let c = 0; c < grid[r]!.length; c++) {
+        const saved = savedRow[c];
+        const cell  = grid[r]![c];
+        if (!saved || !cell) continue;
+        cell.filled = saved.filled;
+        cell.color  = saved.color;
+        cell.id     = saved.id;
+      }
+    }
+    // Restore tray pieces
+    this.tray = state.tray as (typeof this.tray[0])[];
+    // Restore elapsed time
+    this.elapsed = state.elapsed;
+    // Redraw board with restored state
+    this.drawBoard();
   }
 
   // ── Helpers ───────────────────────────────────────────────────────────────

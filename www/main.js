@@ -41,19 +41,19 @@ var routes = [
   { path: "", redirectTo: "home", pathMatch: "full" },
   {
     path: "home",
-    loadComponent: () => import("./home.page-U7RJECNJ.js").then((m) => m.HomePageComponent)
+    loadComponent: () => import("./home.page-4LKC6LHE.js").then((m) => m.HomePageComponent)
   },
   {
     path: "game",
-    loadComponent: () => import("./game.page-J2QRCWDL.js").then((m) => m.GamePageComponent)
+    loadComponent: () => import("./game.page-ZRGBBMWE.js").then((m) => m.GamePageComponent)
   },
   {
     path: "settings",
-    loadComponent: () => import("./settings.page-Z7IX64DD.js").then((m) => m.SettingsPageComponent)
+    loadComponent: () => import("./settings.page-CCS2RVMX.js").then((m) => m.SettingsPageComponent)
   },
   {
     path: "challenge",
-    loadComponent: () => import("./challenge.page-M5J32T6B.js").then((m) => m.ChallengePageComponent)
+    loadComponent: () => import("./challenge.page-O5TNS7XJ.js").then((m) => m.ChallengePageComponent)
   },
   {
     path: "leaderboard",

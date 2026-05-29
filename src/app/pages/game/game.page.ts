@@ -74,9 +74,26 @@ export class GamePageComponent implements AfterViewInit, OnDestroy {
     this.childMode.stopSession();
   }
 
+  private getActiveScene(): any {
+    return this.phaserGame?.scene?.getScene('GameScene') ?? null;
+  }
+
   private async initPhaserGame() {
     const { createPhaserGame } = await import('../../../game/index');
-    const s = this.settings.settings();
+    const s    = this.settings.settings();
+    const mode = this.gameState.mode();
+
+    // Restore saved game if available for this mode
+    const savedState = this.save.hasSavedGame(mode)
+      ? this.save.progress().savedGame
+      : undefined;
+
+    if (savedState) {
+      // Restore score and combo from saved state
+      this.gameState.addScore(savedState.score);
+      this.save.clearGameState();
+    }
+
     const config = {
       ...(this.childMode.isChildMode()
         ? { boardDimension: this.childMode.boardDimension(), pieceSet: this.childMode.pieceSet() }
@@ -87,6 +104,7 @@ export class GamePageComponent implements AfterViewInit, OnDestroy {
       musicVolume: s.musicVolume,
       sfxVolume: s.sfxVolume,
       difficulty: s.difficulty,
+      savedState,
     };
     this.phaserGame = createPhaserGame(this.phaserContainer.nativeElement, this.gameState, config);
 
@@ -112,10 +130,24 @@ export class GamePageComponent implements AfterViewInit, OnDestroy {
     if (this.childMode.isChildMode()) { this.showGate.set(true); return; }
     const alert = await this.alertCtrl.create({
       header: 'Salir del juego',
-      message: '¿Deseas salir? Perderás el progreso de la partida actual.',
+      message: '¿Qué deseas hacer?',
       buttons: [
         { text: 'Cancelar', role: 'cancel' },
-        { text: 'Salir', handler: () => this.onReturnToMenu() },
+        {
+          text: '💾 Guardar y salir',
+          handler: () => {
+            const scene = this.getActiveScene();
+            if (scene?.serializeState) {
+              this.save.saveGameState(scene.serializeState());
+            }
+            this.onReturnToMenu();
+          },
+        },
+        {
+          text: 'Salir sin guardar',
+          role: 'destructive',
+          handler: () => this.onReturnToMenu(),
+        },
       ],
     });
     await alert.present();

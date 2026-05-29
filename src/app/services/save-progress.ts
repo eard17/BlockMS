@@ -1,12 +1,25 @@
 import { Injectable, signal } from '@angular/core';
 import { GameMode } from './game-state';
 
+export interface SerializedCell { filled: boolean; color: string; id: string | null; }
+
+export interface SavedGameState {
+  mode: string;
+  grid: SerializedCell[][];
+  tray: (number[][] | null)[];
+  score: number;
+  combo: number;
+  elapsed: number;
+  timestamp: number;
+}
+
 export interface SaveData {
   highScore: number;
   highScores: Record<string, number>;
   completedStarsCount: number;
   unlockedSkins: string[];
   activeSkin: string;
+  savedGame?: SavedGameState;
 }
 
 const STORAGE_KEY = 'bms_save_v1';
@@ -63,6 +76,20 @@ export class SaveProgressService {
 
   resetHighScores() {
     this.save({ ...this._progress(), highScore: 0, highScores: { ...DEFAULT_HIGH_SCORES } });
+  }
+
+  saveGameState(state: SavedGameState) {
+    this.save({ ...this._progress(), savedGame: state });
+  }
+
+  clearGameState() {
+    const d = { ...this._progress() };
+    delete d.savedGame;
+    this.save(d);
+  }
+
+  hasSavedGame(mode: string): boolean {
+    return this._progress().savedGame?.mode === mode;
   }
 
   save(data: SaveData) {
