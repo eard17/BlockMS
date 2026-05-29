@@ -1,4 +1,7 @@
 import {
+  ThemeService
+} from "./chunk-TAHALNNJ.js";
+import {
   Component,
   IonApp,
   IonRouterOutlet,
@@ -6,6 +9,7 @@ import {
   PreloadAllModules,
   RouteReuseStrategy,
   bootstrapApplication,
+  inject,
   provideIonicAngular,
   provideRouter,
   setClassMetadata,
@@ -37,33 +41,34 @@ var routes = [
   { path: "", redirectTo: "home", pathMatch: "full" },
   {
     path: "home",
-    loadComponent: () => import("./home.page-54QDVMXG.js").then((m) => m.HomePageComponent)
+    loadComponent: () => import("./home.page-OFSH5CK4.js").then((m) => m.HomePageComponent)
   },
   {
     path: "game",
-    loadComponent: () => import("./game.page-K5OVMT4F.js").then((m) => m.GamePageComponent)
+    loadComponent: () => import("./game.page-5YEPYQ3V.js").then((m) => m.GamePageComponent)
   },
   {
     path: "settings",
-    loadComponent: () => import("./settings.page-LC5G5UN5.js").then((m) => m.SettingsPageComponent)
+    loadComponent: () => import("./settings.page-Z7IX64DD.js").then((m) => m.SettingsPageComponent)
   },
   {
     path: "challenge",
-    loadComponent: () => import("./challenge.page-67SV6GTK.js").then((m) => m.ChallengePageComponent)
+    loadComponent: () => import("./challenge.page-VZ3DZDI2.js").then((m) => m.ChallengePageComponent)
   },
   {
     path: "leaderboard",
-    loadComponent: () => import("./leaderboard.page-4N5R2CKA.js").then((m) => m.LeaderboardPageComponent)
+    loadComponent: () => import("./leaderboard.page-EPPWOQAU.js").then((m) => m.LeaderboardPageComponent)
   },
   {
     path: "auth",
-    loadComponent: () => import("./auth.page-O4TS2JGI.js").then((m) => m.AuthPageComponent)
+    loadComponent: () => import("./auth.page-XOZ4WH3W.js").then((m) => m.AuthPageComponent)
   }
 ];
 
 // src/app/app.component.ts
 var _AppComponent = class _AppComponent {
   constructor() {
+    this.theme = inject(ThemeService);
   }
 };
 _AppComponent.\u0275fac = function AppComponent_Factory(__ngFactoryType__) {
@@ -81,10 +86,10 @@ var AppComponent = _AppComponent;
   (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(AppComponent, [{
     type: Component,
     args: [{ selector: "app-root", imports: [IonApp, IonRouterOutlet], template: "<ion-app>\n  <ion-router-outlet></ion-router-outlet>\n</ion-app>\n" }]
-  }], () => [], null);
+  }], null, null);
 })();
 (() => {
-  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(AppComponent, { className: "AppComponent", filePath: "src/app/app.component.ts", lineNumber: 9 });
+  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(AppComponent, { className: "AppComponent", filePath: "src/app/app.component.ts", lineNumber: 10 });
 })();
 
 // src/main.ts

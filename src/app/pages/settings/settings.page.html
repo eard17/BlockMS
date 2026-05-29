@@ -9,6 +9,23 @@
 
 <ion-content class="settings-content">
 
+  <!-- Tema -->
+  <ion-list class="settings-section">
+    <ion-list-header class="settings-section__header"><ion-label>🎨 Tema</ion-label></ion-list-header>
+    <div class="theme-selector">
+      @for (opt of themeOptions; track opt.value) {
+        <button class="theme-btn" [class.theme-btn--active]="theme.preference() === opt.value"
+          (click)="setTheme(opt.value)">
+          <span class="theme-btn__icon">{{ opt.icon }}</span>
+          <span class="theme-btn__label">{{ opt.label }}</span>
+          @if (theme.preference() === opt.value) {
+            <span class="theme-btn__check">✓</span>
+          }
+        </button>
+      }
+    </div>
+  </ion-list>
+
   <!-- Audio -->
   <ion-list class="settings-section">
     <ion-list-header class="settings-section__header"><ion-label>🎵 Audio</ion-label></ion-list-header>

@@ -1,6 +1,6 @@
 import {
   AuthService
-} from "./chunk-TUC447SG.js";
+} from "./chunk-BCXYNPLC.js";
 import {
   addIcons,
   arrowBackOutline
@@ -167,4 +167,4 @@ var AuthPageComponent = _AuthPageComponent;
 export {
   AuthPageComponent
 };
-//# sourceMappingURL=auth.page-O4TS2JGI.js.map
+//# sourceMappingURL=auth.page-XOZ4WH3W.js.map

@@ -1,2 +1,103 @@
-// For information on how to create your own theme, please refer to:
-// https://ionicframework.com/docs/theming/
+// ─── App color tokens ────────────────────────────────────────────────────────
+// Dark theme (default — applied when [data-theme="dark"] or no attribute)
+:root {
+  --color-background:      #0d1117;
+  --color-surface:         #121f2b;
+  --color-surface-2:       #1b2535;
+  --color-surface-3:       #222c3d;
+  --color-border:          hsla(210, 40%, 30%, 0.22);
+  --color-text-primary:    #d6ebff;
+  --color-text-secondary:  #6a81af;
+  --color-text-muted:      #405070;
+  --color-primary:         #5ed5ed;
+  --color-primary-dim:     hsla(190, 80%, 65%, 0.18);
+  --color-success:         #42d78c;
+  --color-danger:          #f05142;
+  --color-warning:         #f4ca25;
+  --card-shadow:           none;
+
+  // Ionic overrides — dark
+  --ion-background-color:         var(--color-background);
+  --ion-background-color-rgb:     13,17,23;
+  --ion-text-color:               var(--color-text-primary);
+  --ion-text-color-rgb:           214,235,255;
+  --ion-color-step-50:            #0f1620;
+  --ion-color-step-100:           #141d29;
+  --ion-color-step-150:           #192433;
+  --ion-color-step-200:           #1e2b3d;
+  --ion-color-step-250:           #233246;
+  --ion-color-step-300:           #283950;
+  --ion-color-step-350:           #2d4059;
+  --ion-color-step-400:           #324763;
+  --ion-color-step-450:           #374e6d;
+  --ion-color-step-500:           #3c5576;
+  --ion-color-step-550:           #415c80;
+  --ion-color-step-600:           #466389;
+  --ion-color-step-650:           #4b6a93;
+  --ion-color-step-700:           #50719d;
+  --ion-color-step-750:           #5578a6;
+  --ion-color-step-800:           #5a7fb0;
+  --ion-color-step-850:           #5f86ba;
+  --ion-color-step-900:           #648dc3;
+  --ion-color-step-950:           #6994cd;
+  --ion-toolbar-background:       var(--color-surface);
+  --ion-toolbar-border-color:     var(--color-border);
+  --ion-item-background:          transparent;
+  --ion-card-background:          var(--color-surface-2);
+}
+
+// ─── Light theme ─────────────────────────────────────────────────────────────
+:root[data-theme="light"] {
+  --color-background:      #f0f4fa;
+  --color-surface:         #ffffff;
+  --color-surface-2:       #edf1f8;
+  --color-surface-3:       #e2e9f4;
+  --color-border:          hsla(210, 30%, 65%, 0.25);
+  --color-text-primary:    #1a2840;
+  --color-text-secondary:  #4a5e82;
+  --color-text-muted:      #8498b8;
+  --color-primary:         #2fb3cf;
+  --color-primary-dim:     hsla(190, 70%, 50%, 0.12);
+  --color-success:         #2aad6e;
+  --color-danger:          #d93a2b;
+  --color-warning:         #c8a000;
+  --card-shadow:           0 2px 12px hsla(210, 30%, 40%, 0.10);
+
+  // Ionic overrides — light
+  --ion-background-color:         var(--color-background);
+  --ion-background-color-rgb:     240,244,250;
+  --ion-text-color:               var(--color-text-primary);
+  --ion-text-color-rgb:           26,40,64;
+  --ion-color-step-50:            #ecf0f7;
+  --ion-color-step-100:           #e4eaf3;
+  --ion-color-step-150:           #dce4ef;
+  --ion-color-step-200:           #d4deeb;
+  --ion-color-step-250:           #ccd8e7;
+  --ion-color-step-300:           #c4d2e3;
+  --ion-color-step-350:           #bcccdf;
+  --ion-color-step-400:           #b4c6db;
+  --ion-color-step-450:           #acc0d7;
+  --ion-color-step-500:           #a4bad3;
+  --ion-color-step-550:           #9cb4cf;
+  --ion-color-step-600:           #94aecb;
+  --ion-color-step-650:           #8ca8c7;
+  --ion-color-step-700:           #84a2c3;
+  --ion-color-step-750:           #7c9cbf;
+  --ion-color-step-800:           #7496bb;
+  --ion-color-step-850:           #6c90b7;
+  --ion-color-step-900:           #648ab3;
+  --ion-color-step-950:           #5c84af;
+  --ion-toolbar-background:       var(--color-surface);
+  --ion-toolbar-border-color:     var(--color-border);
+  --ion-item-background:          transparent;
+  --ion-card-background:          var(--color-surface-2);
+}
+
+// ─── Ionic primary color ──────────────────────────────────────────────────────
+:root {
+  --ion-color-primary:            #5ed5ed;
+  --ion-color-primary-rgb:        94,213,237;
+  --ion-color-primary-contrast:   #000000;
+  --ion-color-primary-shade:      #53bbcf;
+  --ion-color-primary-tint:       #6ed9ef;
+}

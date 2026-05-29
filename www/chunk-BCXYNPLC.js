@@ -21183,8 +21183,8 @@ if (shouldShowDeprecationWarning()) console.warn("\u26A0\uFE0F  Node.js 18 and b
 // src/environments/environment.ts
 var environment = {
   production: false,
-  supabaseUrl: "",
-  supabaseKey: ""
+  supabaseUrl: "tech.mstechnology.blockms://auth-callback",
+  supabaseKey: "sb_publishable_3jhHIu_xVp5DCFIbd3hLKQ_AFW-eBpw"
 };
 
 // src/app/services/auth.ts
@@ -21236,4 +21236,4 @@ var AuthService = _AuthService;
 export {
   AuthService
 };
-//# sourceMappingURL=chunk-TUC447SG.js.map
+//# sourceMappingURL=chunk-BCXYNPLC.js.map

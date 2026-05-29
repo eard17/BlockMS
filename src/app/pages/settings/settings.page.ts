@@ -9,6 +9,7 @@ import { AlertController, NavController, IonContent, IonHeader, IonToolbar, IonT
 import { SettingsService } from '../../services/settings';
 import { SaveProgressService } from '../../services/save-progress';
 import { SKINS_CATALOG } from '../../services/skins-catalog';
+import { ThemeService, ThemePreference } from '../../services/theme';
 
 @Component({
   selector: 'app-settings-page',
@@ -22,12 +23,20 @@ import { SKINS_CATALOG } from '../../services/skins-catalog';
 export class SettingsPageComponent {
   readonly settings = inject(SettingsService);
   readonly save = inject(SaveProgressService);
+  readonly theme = inject(ThemeService);
   private readonly alertCtrl = inject(AlertController);
   private readonly router = inject(Router);
   private readonly nav = inject(NavController);
 
+  readonly themeOptions: { value: ThemePreference; label: string; icon: string }[] = [
+    { value: 'system', label: 'Sistema (automático)', icon: '🖥️' },
+    { value: 'dark',   label: 'Oscuro',               icon: '🌙' },
+    { value: 'light',  label: 'Claro',                icon: '☀️' },
+  ];
+
   constructor() { addIcons({ arrowBackOutline }); }
   goBack() { this.nav.back(); }
+  setTheme(p: ThemePreference) { this.theme.set(p); }
 
   readonly skinsCatalog = SKINS_CATALOG;
   readonly showPinForm = signal(false);

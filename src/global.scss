@@ -34,4 +34,16 @@
 
 /* @import "@ionic/angular/css/palettes/dark.always.css"; */
 /* @import "@ionic/angular/css/palettes/dark.class.css"; */
-@import '@ionic/angular/css/palettes/dark.system.css';
+/* Theme handled via ThemeService + [data-theme] attribute on <html> */
+
+// Override page backgrounds to use CSS vars
+ion-content  { --background: var(--color-background); }
+ion-toolbar  { --background: var(--color-surface); color: var(--color-text-primary); }
+ion-list     { background: transparent; }
+ion-item     { --background: transparent; --color: var(--color-text-primary); }
+ion-label    { color: var(--color-text-primary) !important; }
+ion-list-header ion-label { color: var(--color-text-secondary) !important; }
+
+// Modal-style dialogs inside game page
+.overlay-dialog { background: rgba(0,0,0,.55); }
+:root[data-theme="light"] .overlay-dialog { background: rgba(100,130,180,.35); }

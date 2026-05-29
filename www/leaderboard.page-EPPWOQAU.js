@@ -1,7 +1,7 @@
 import {
   SyncService
-} from "./chunk-2FTXAHAI.js";
-import "./chunk-TUC447SG.js";
+} from "./chunk-UX7DNNKA.js";
+import "./chunk-BCXYNPLC.js";
 import {
   addIcons,
   arrowBackOutline
@@ -226,4 +226,4 @@ var LeaderboardPageComponent = _LeaderboardPageComponent;
 export {
   LeaderboardPageComponent
 };
-//# sourceMappingURL=leaderboard.page-4N5R2CKA.js.map
+//# sourceMappingURL=leaderboard.page-EPPWOQAU.js.map

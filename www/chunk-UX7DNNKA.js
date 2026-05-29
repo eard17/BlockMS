@@ -1,6 +1,6 @@
 import {
   AuthService
-} from "./chunk-TUC447SG.js";
+} from "./chunk-BCXYNPLC.js";
 import {
   Injectable,
   inject,
@@ -57,4 +57,4 @@ var SyncService = _SyncService;
 export {
   SyncService
 };
-//# sourceMappingURL=chunk-2FTXAHAI.js.map
+//# sourceMappingURL=chunk-UX7DNNKA.js.map
