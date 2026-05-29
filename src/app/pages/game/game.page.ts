@@ -127,6 +127,7 @@ export class GamePageComponent implements AfterViewInit, OnDestroy {
   onGateDismissed() { this.showGate.set(false); }
 
   async onBackClick() {
+    if (this.isGameOver()) { this.onReturnToMenu(); return; }
     if (this.childMode.isChildMode()) { this.showGate.set(true); return; }
     const alert = await this.alertCtrl.create({
       header: 'Salir del juego',
@@ -143,11 +144,11 @@ export class GamePageComponent implements AfterViewInit, OnDestroy {
             this.onReturnToMenu();
           },
         },
-        {
-          text: 'Salir sin guardar',
-          role: 'destructive',
-          handler: () => this.onReturnToMenu(),
-        },
+        // {
+        //   text: 'Salir sin guardar',
+        //   role: 'destructive',
+        //   handler: () => this.onReturnToMenu(),
+        // },
       ],
     });
     await alert.present();
