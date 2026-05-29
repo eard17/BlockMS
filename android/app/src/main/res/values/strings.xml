@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">Block MS</string>
+    <string name="title_activity_main">Block MS</string>
+    <string name="package_name">tech.mstechnology.blockms</string>
+    <string name="custom_url_scheme">tech.mstechnology.blockms</string>
+</resources>
