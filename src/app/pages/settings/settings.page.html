@@ -1,0 +1,126 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start"><ion-back-button defaultHref="/home"></ion-back-button></ion-buttons>
+    <ion-title>Configuración</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="settings-content">
+
+  <!-- Audio -->
+  <ion-list class="settings-section">
+    <ion-list-header class="settings-section__header"><ion-label>🎵 Audio</ion-label></ion-list-header>
+    <ion-item>
+      <ion-label>Música</ion-label>
+      <ion-range slot="end" class="settings-range" [min]="0" [max]="1" [step]="0.05"
+        [value]="settings.settings().musicVolume" (ionChange)="onMusicVolumeChange($event)"></ion-range>
+    </ion-item>
+    <ion-item>
+      <ion-label>Efectos de sonido</ion-label>
+      <ion-range slot="end" class="settings-range" [min]="0" [max]="1" [step]="0.05"
+        [value]="settings.settings().sfxVolume" (ionChange)="onSfxVolumeChange($event)"></ion-range>
+    </ion-item>
+  </ion-list>
+
+  <!-- Gameplay -->
+  <ion-list class="settings-section">
+    <ion-list-header class="settings-section__header"><ion-label>🎮 Gameplay</ion-label></ion-list-header>
+    <ion-item>
+      <ion-label>Caritas sonrientes en piezas</ion-label>
+      <ion-toggle slot="end" [checked]="settings.settings().smilingFacesEnabled"
+        (ionChange)="onToggleSmilingFaces()"></ion-toggle>
+    </ion-item>
+    <ion-item>
+      <ion-label>Dificultad (Clásico)</ion-label>
+      <ion-select slot="end" [value]="settings.settings().difficulty" (ionChange)="onDifficultyChange($event)">
+        <ion-select-option value="easy">Fácil</ion-select-option>
+        <ion-select-option value="medium">Media</ion-select-option>
+        <ion-select-option value="hard">Difícil</ion-select-option>
+      </ion-select>
+    </ion-item>
+  </ion-list>
+
+  <!-- Parental control -->
+  <ion-list class="settings-section">
+    <ion-list-header class="settings-section__header"><ion-label>🔒 Control Parental</ion-label></ion-list-header>
+    <ion-item>
+      <ion-label>PIN activo: <strong>{{ hasPin() ? 'SÍ' : 'NO' }}</strong></ion-label>
+    </ion-item>
+    @if (!showPinForm()) {
+      <ion-item>
+        <ion-button fill="outline" size="small" (click)="onShowPinForm()">
+          {{ hasPin() ? 'Cambiar PIN' : 'Establecer PIN' }}
+        </ion-button>
+        @if (hasPin()) {
+          <ion-button fill="clear" color="danger" size="small" class="pin-clear-btn" (click)="onClearPin()">
+            Eliminar PIN
+          </ion-button>
+        }
+      </ion-item>
+    } @else {
+      <ion-item class="pin-form">
+        <div class="pin-form__body">
+          <ion-input type="password" inputmode="numeric" placeholder="4 dígitos" maxlength="4"
+            class="pin-form__input" [value]="pinInput()"
+            (ionInput)="pinInput.set($any($event).target.value)"></ion-input>
+          @if (pinError()) {
+            <p class="pin-form__error">{{ pinError() }}</p>
+          }
+          <div class="pin-form__actions">
+            <ion-button size="small" (click)="onSavePin()">Guardar</ion-button>
+            <ion-button size="small" fill="outline" color="medium" (click)="onCancelPin()">Cancelar</ion-button>
+          </div>
+        </div>
+      </ion-item>
+    }
+  </ion-list>
+
+  <!-- Skins -->
+  <ion-list class="settings-section">
+    <ion-list-header class="settings-section__header"><ion-label>🎨 Apariencia</ion-label></ion-list-header>
+    <ion-item class="skins-stars-item">
+      <ion-label>⭐ <strong>{{ availableStars() }}</strong> estrellas disponibles</ion-label>
+    </ion-item>
+    <div class="skins-grid">
+      @for (skin of skinsCatalog; track skin.id) {
+        <div class="skin-card" [class.skin-card--active]="activeSkinId() === skin.id">
+          <div class="skin-card__palette">
+            @for (c of skin.colors; track c.hsl) {
+              <div class="skin-card__swatch" [style.background]="c.hsl"></div>
+            }
+          </div>
+          <span class="skin-card__name">{{ skin.name }}</span>
+          @if (skin.starCost > 0) {
+            <span class="skin-card__cost">{{ skin.starCost }} ⭐</span>
+          } @else {
+            <span class="skin-card__cost skin-card__cost--free">Gratis</span>
+          }
+          @if (activeSkinId() === skin.id) {
+            <ion-button size="small" fill="solid" color="success" disabled>Activa ✓</ion-button>
+          } @else if (unlockedSkins().includes(skin.id)) {
+            <ion-button size="small" fill="outline" (click)="onActivateSkin(skin.id)">Activar</ion-button>
+          } @else if (availableStars() >= skin.starCost) {
+            <ion-button size="small" (click)="onUnlockSkin(skin.id, skin.starCost)">Desbloquear</ion-button>
+          } @else {
+            <ion-button size="small" fill="outline" color="medium" disabled>
+              🔒 {{ skin.starCost }} ⭐
+            </ion-button>
+          }
+        </div>
+      }
+    </div>
+  </ion-list>
+
+  <!-- Danger zone -->
+  <ion-list class="settings-section settings-section--danger">
+    <ion-list-header class="settings-section__header settings-section__header--danger">
+      <ion-label>⚠️ Zona de Peligro</ion-label>
+    </ion-list-header>
+    <ion-item>
+      <ion-button expand="block" fill="outline" color="danger" class="danger-btn" (click)="onResetRecord()">
+        Restablecer Récords
+      </ion-button>
+    </ion-item>
+  </ion-list>
+
+</ion-content>

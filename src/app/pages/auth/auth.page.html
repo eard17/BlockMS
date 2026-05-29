@@ -1,0 +1,18 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start"><ion-back-button defaultHref="/home"></ion-back-button></ion-buttons>
+    <ion-title>Cuenta</ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content class="auth-content">
+  <div class="auth-card">
+    @if (auth.isAuthenticated()) {
+      <p class="auth-name">{{ auth.displayName() }}</p>
+      <ion-button expand="block" fill="outline" color="danger" (click)="signOut()">Cerrar sesión</ion-button>
+    } @else {
+      <h2 class="auth-title">Iniciar sesión</h2>
+      <p class="auth-sub">Guarda tus récords en la nube y participa en rankings globales.</p>
+      <ion-button expand="block" (click)="signIn()">Continuar con Google</ion-button>
+    }
+  </div>
+</ion-content>

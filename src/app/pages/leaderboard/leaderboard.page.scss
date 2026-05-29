@@ -1,0 +1,14 @@
+.lb-content { --background:#0d1117; --padding-start:1rem; --padding-end:1rem; --padding-top:1rem; }
+.lb-tabs { display:flex; gap:.5rem; margin-bottom:1rem; flex-wrap:wrap; }
+.lb-tab { padding:.4rem .9rem; background:#1b1f2d; border:1px solid #2a3040; border-radius:999px;
+  color:#8899bb; font-size:.8rem; cursor:pointer; font-family:inherit; }
+.lb-tab--active { background:#29303d; border-color:#5ed5ed; color:#5ed5ed; }
+.lb-list { list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:.4rem; }
+.lb-row { display:flex; align-items:center; gap:.75rem; padding:.6rem 1rem;
+  background:#1b1f28; border:1px solid #2a3040; border-radius:.75rem; }
+.lb-row--top { border-color:#f4c02566; background:#251f0d; }
+.lb-pos { font-size:.8rem; font-weight:700; color:#56698f; min-width:1.5rem; }
+.lb-name { flex:1; font-size:.9rem; font-weight:600; color:#d6ebff; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+.lb-score { font-size:.95rem; font-weight:800; color:#52e099; }
+.lb-empty { color:#5973a6; text-align:center; margin-top:2rem; }
+.lb-refresh { display:flex; justify-content:center; margin-top:1.5rem; }

@@ -1,0 +1,20 @@
+<div class="score-bar">
+  <button class="back-btn" (click)="backClicked.emit()" aria-label="Salir">
+    <ion-icon name="arrow-back-outline"></ion-icon>
+  </button>
+  <div class="score-section">
+    <span class="score-label">SCORE</span>
+    <span class="score-value">{{ gameState.score() }}</span>
+  </div>
+  @if (gameState.comboCount() > 0) {
+    <span class="combo">×{{ gameState.comboCount() }} COMBO</span>
+  }
+</div>
+@if (childMode.isChildMode()) {
+  <div class="timer-bar">
+    <span class="timer-display">{{ childMode.timeDisplay() }}</span>
+    <div class="timer-track">
+      <div class="timer-fill" [class]="timerClass()" [style.width.%]="timerPct()"></div>
+    </div>
+  </div>
+}

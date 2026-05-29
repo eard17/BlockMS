@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["src/app/pages/auth/auth.page.scss"],
+  "sourcesContent": [".auth-content { --background:#0d1117; }\n.auth-card { display:flex; flex-direction:column; gap:1rem; padding:2rem 1.5rem;\n  max-width:380px; margin:2rem auto; background:#1b1f2d; border:1px solid #2a3040; border-radius:1.5rem; }\n.auth-title { margin:0; font-size:1.4rem; font-weight:700; color:#d6ebff; }\n.auth-sub { margin:0; font-size:.9rem; color:#8899bb; }\n.auth-name { margin:0; font-size:1rem; font-weight:600; color:#d6ebff; }\n"],
+  "mappings": ";AAAA,CAAA;AAAgB,eAAA;;AAChB,CAAA;AAAa,WAAA;AAAc,kBAAA;AAAuB,OAAA;AAAU,WAAA,KAAA;AAC1D,aAAA;AAAiB,UAAA,KAAA;AAAkB,cAAA;AAAoB,UAAA,IAAA,MAAA;AAA0B,iBAAA;;AACnF,CAAA;AAAc,UAAA;AAAU,aAAA;AAAkB,eAAA;AAAiB,SAAA;;AAC3D,CAAA;AAAY,UAAA;AAAU,aAAA;AAAiB,SAAA;;AACvC,CAAA;AAAa,UAAA;AAAU,aAAA;AAAgB,eAAA;AAAiB,SAAA;;",
+  "names": []
+}

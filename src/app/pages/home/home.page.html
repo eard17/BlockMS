@@ -1,0 +1,132 @@
+<ion-content [fullscreen]="true">
+  <div class="home">
+
+    <!-- Auth bar -->
+    <div class="home__auth-bar">
+      @if (auth.isAuthenticated()) {
+        <div class="home__auth-user">
+          @if (auth.avatarUrl()) {
+            <img class="home__auth-avatar" [src]="auth.avatarUrl()!" [alt]="auth.displayName()" />
+          } @else {
+            <ion-icon name="person-circle-outline" class="home__auth-avatar-icon"></ion-icon>
+          }
+          <span class="home__auth-name">{{ auth.displayName() }}</span>
+        </div>
+      } @else {
+        <button class="home__auth-login-btn" (click)="goToAuth()">
+          <ion-icon name="person-circle-outline"></ion-icon>
+          Iniciar sesión
+        </button>
+      }
+    </div>
+
+    <!-- Header -->
+    <header class="home__header">
+      <div class="home__logo" aria-hidden="true">
+        <span class="home__logo-block home__logo-block--1"></span>
+        <span class="home__logo-block home__logo-block--2"></span>
+        <span class="home__logo-block home__logo-block--3"></span>
+        <span class="home__logo-block home__logo-block--4"></span>
+      </div>
+      <h1 class="home__title">Block<span class="home__title-accent"> MS</span></h1>
+      <p class="home__subtitle">Rompecabezas de bloques</p>
+    </header>
+
+    <!-- Global high score -->
+    <div class="home__score-card" aria-label="Récord personal modo clásico">
+      <ion-icon name="trophy-outline" class="home__score-icon" aria-hidden="true"></ion-icon>
+      <div>
+        <span class="home__score-label">Récord</span>
+        <span class="home__score-value">{{ save.progress().highScore.toLocaleString() }}</span>
+      </div>
+    </div>
+
+    <!-- Classic & Challenge -->
+    <section class="home__section" aria-label="Modos de juego">
+      <h2 class="home__section-title">Modo Clásico</h2>
+
+      <button class="home__mode-card home__mode-card--classic" (click)="playClassic()">
+        <span class="home__mode-icon" aria-hidden="true">🎮</span>
+        <div class="home__mode-info">
+          <div class="home__mode-header">
+            <span class="home__mode-name">Clásico</span>
+            @if (save.progress().highScores['classic'] > 0) {
+              <span class="home__mode-badge">🏆 {{ save.progress().highScores['classic'].toLocaleString() }}</span>
+            }
+          </div>
+          <span class="home__mode-desc">Tablero 8×8 · Sin límite de tiempo</span>
+        </div>
+        <span class="home__mode-arrow" aria-hidden="true">›</span>
+      </button>
+
+      <button class="home__mode-card home__mode-card--challenge" (click)="goToChallenge()">
+        <span class="home__mode-icon" aria-hidden="true">⚔️</span>
+        <div class="home__mode-info">
+          <div class="home__mode-header">
+            <span class="home__mode-name">Modo Duelo</span>
+          </div>
+          <span class="home__mode-desc">Comparte tu reto con un código BMS</span>
+        </div>
+        <span class="home__mode-arrow" aria-hidden="true">›</span>
+      </button>
+    </section>
+
+    <!-- Child modes -->
+    <section class="home__section">
+      <h2 class="home__section-title home__section-title--child">Modo Infantil</h2>
+
+      <button class="home__mode-card home__mode-card--child-1" (click)="playChild(1)">
+        <span class="home__mode-icon" aria-hidden="true">🌱</span>
+        <div class="home__mode-info">
+          <div class="home__mode-header">
+            <span class="home__mode-name">Nivel 1 — Exploradores</span>
+            @if (save.progress().highScores['child-1'] > 0) {
+              <span class="home__mode-badge">🏆 {{ save.progress().highScores['child-1'].toLocaleString() }}</span>
+            }
+          </div>
+          <span class="home__mode-desc">Tablero 5×5 · 5 minutos</span>
+        </div>
+        <span class="home__mode-arrow" aria-hidden="true">›</span>
+      </button>
+
+      <button class="home__mode-card home__mode-card--child-2" (click)="playChild(2)">
+        <span class="home__mode-icon" aria-hidden="true">🏗️</span>
+        <div class="home__mode-info">
+          <div class="home__mode-header">
+            <span class="home__mode-name">Nivel 2 — Constructores</span>
+            @if (save.progress().highScores['child-2'] > 0) {
+              <span class="home__mode-badge">🏆 {{ save.progress().highScores['child-2'].toLocaleString() }}</span>
+            }
+          </div>
+          <span class="home__mode-desc">Tablero 6×6 · 10 minutos</span>
+        </div>
+        <span class="home__mode-arrow" aria-hidden="true">›</span>
+      </button>
+
+      <button class="home__mode-card home__mode-card--child-3" (click)="playChild(3)">
+        <span class="home__mode-icon" aria-hidden="true">👨‍👩‍👧</span>
+        <div class="home__mode-info">
+          <div class="home__mode-header">
+            <span class="home__mode-name">Nivel 3 — Familiar</span>
+            @if (save.progress().highScores['child-3'] > 0) {
+              <span class="home__mode-badge">🏆 {{ save.progress().highScores['child-3'].toLocaleString() }}</span>
+            }
+          </div>
+          <span class="home__mode-desc">Tablero 8×8 · 15 minutos</span>
+        </div>
+        <span class="home__mode-arrow" aria-hidden="true">›</span>
+      </button>
+    </section>
+
+    <!-- Footer -->
+    <footer class="home__footer">
+      <button class="home__settings-btn" (click)="goToSettings()" aria-label="Ajustes">
+        <ion-icon name="settings-outline"></ion-icon> Ajustes
+      </button>
+      <button class="home__ranking-btn" (click)="goToLeaderboard()" aria-label="Ver ranking global">
+        <ion-icon name="trophy-outline"></ion-icon> Ranking
+      </button>
+    </footer>
+
+  </div>
+</ion-content>

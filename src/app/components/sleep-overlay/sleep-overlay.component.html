@@ -1,0 +1,22 @@
+<div class="sleep-overlay">
+  <div class="sleep-overlay__content">
+    <div class="sleep-overlay__pieces" aria-hidden="true">
+      <span class="piece piece--1">🟦</span>
+      <span class="piece piece--2">🟪</span>
+      <span class="piece piece--3">🟩</span>
+    </div>
+    <div class="sleep-overlay__stars" aria-hidden="true">
+      <span class="star star--1">✦</span>
+      <span class="star star--2">✦</span>
+      <span class="star star--3">✦</span>
+    </div>
+    <h1 class="sleep-overlay__title">¡Las piezas se van a dormir!</h1>
+    <p class="sleep-overlay__subtitle">Ha llegado la hora del descanso.<br>¡Hasta mañana, campeón!</p>
+    <div class="sleep-overlay__adult-section">
+      <ion-button fill="outline" color="light" size="small" class="sleep-overlay__btn"
+        (click)="openGate.emit()">
+        Soy un adulto
+      </ion-button>
+    </div>
+  </div>
+</div>

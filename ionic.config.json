@@ -1,0 +1,7 @@
+{
+  "name": "blockms",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular-standalone"
+}

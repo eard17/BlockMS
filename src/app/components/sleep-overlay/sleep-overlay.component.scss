@@ -1,0 +1,22 @@
+.sleep-overlay { position:absolute; inset:0; z-index:100; display:flex; align-items:center;
+  justify-content:center; background:linear-gradient(160deg,#0c1231,#1d1547,#09142a); }
+.sleep-overlay__content { display:flex; flex-direction:column; align-items:center; gap:1.25rem;
+  padding:2.5rem 2rem; background:#19194d8c; backdrop-filter:blur(12px);
+  border:1px solid hsla(240,80%,80%,.15); border-radius:2rem; max-width:340px; text-align:center; }
+.sleep-overlay__pieces { display:flex; gap:1rem; font-size:2.5rem; }
+.piece { animation:piece-float 3s ease-in-out infinite; }
+.piece--1 { animation-delay:0s; }
+.piece--2 { animation-delay:.6s; }
+.piece--3 { animation-delay:1.2s; }
+.sleep-overlay__stars { display:flex; gap:.75rem; color:#ffe; font-size:1.25rem; }
+.star { animation:star-twinkle 2s ease-in-out infinite; }
+.star--1 { animation-delay:0s; }
+.star--2 { animation-delay:.7s; }
+.star--3 { animation-delay:1.4s; }
+.sleep-overlay__title { margin:0; font-size:1.6rem; font-weight:700; color:#d6ebff; line-height:1.2; }
+.sleep-overlay__subtitle { margin:0; font-size:1rem; color:#99b2e6; line-height:1.5; }
+.sleep-overlay__adult-section { margin-top:.5rem; }
+.sleep-overlay__btn { opacity:.6; font-size:.8rem; }
+.sleep-overlay__btn:hover { opacity:1; }
+@keyframes piece-float { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-12px)} }
+@keyframes star-twinkle { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:.2;transform:scale(.6)} }

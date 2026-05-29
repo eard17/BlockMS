@@ -1,0 +1,23 @@
+<div class="parental-gate">
+  <div class="gate-card" [class.gate-card--wrong]="feedback() === 'wrong'">
+    <h2 class="gate-card__heading">Verificación de adulto</h2>
+    <p class="gate-card__instruction">Resuelve el problema para continuar:</p>
+    @if (challenge(); as c) {
+      <p class="gate-card__question">{{ c.questionText }} = ?</p>
+      <div class="gate-card__options">
+        @for (opt of c.options; track opt) {
+          <ion-button expand="block" fill="outline" color="primary" (click)="select(opt)">
+            {{ opt }}
+          </ion-button>
+        }
+      </div>
+      @if (feedback() === 'wrong') {
+        <p class="gate-card__error" role="alert">Respuesta incorrecta. Intenta de nuevo.</p>
+      }
+    }
+    <ion-button fill="clear" color="medium" size="small" class="gate-card__cancel"
+      (click)="dismissed.emit()">
+      Cancelar
+    </ion-button>
+  </div>
+</div>

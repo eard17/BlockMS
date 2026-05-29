@@ -1,0 +1,33 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start"><ion-back-button defaultHref="/home"></ion-back-button></ion-buttons>
+    <ion-title>Ranking Global</ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content class="lb-content">
+  <div class="lb-tabs">
+    @for (m of modes; track m.key) {
+      <button class="lb-tab" [class.lb-tab--active]="selectedMode() === m.key" (click)="selectMode(m.key)">
+        {{ m.label }}
+      </button>
+    }
+  </div>
+  @if (loading()) {
+    <p class="lb-empty">Cargando…</p>
+  } @else if (entries().length === 0) {
+    <p class="lb-empty">Sin datos aún.</p>
+  } @else {
+    <ol class="lb-list">
+      @for (e of entries(); track e.username; let i = $index) {
+        <li class="lb-row" [class.lb-row--top]="i < 3">
+          <span class="lb-pos">{{ i + 1 }}</span>
+          <span class="lb-name">{{ e.username }}</span>
+          <span class="lb-score">{{ e.score.toLocaleString() }}</span>
+        </li>
+      }
+    </ol>
+  }
+  <div class="lb-refresh">
+    <ion-button fill="outline" size="small" (click)="load()">Actualizar</ion-button>
+  </div>
+</ion-content>
