@@ -41,7 +41,7 @@ var routes = [
   },
   {
     path: "game",
-    loadComponent: () => import("./game.page-FRY324B4.js").then((m) => m.GamePageComponent)
+    loadComponent: () => import("./game.page-K5OVMT4F.js").then((m) => m.GamePageComponent)
   },
   {
     path: "settings",

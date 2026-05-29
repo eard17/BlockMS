@@ -1,42 +1,35 @@
 import Phaser from 'phaser';
 import { GameScene } from './scenes/game.scene';
 import { GameStateService } from '../app/services/game-state';
+import { PhaserGameConfig, setGameContext } from './game-context';
 
-export interface PhaserGameConfig {
-  boardDimension?: number;
-  pieceSet?: string;
-  seed?: string;
-  activeSkin?: string;
-  smilingFacesEnabled?: boolean;
-  musicVolume?: number;
-  sfxVolume?: number;
-  difficulty?: 'easy' | 'medium' | 'hard';
-}
+export type { PhaserGameConfig };
 
 export function createPhaserGame(
   container: HTMLElement,
   gameState: GameStateService,
   config: PhaserGameConfig,
 ): Phaser.Game {
-  const scene = new GameScene();
+  // Store in module context so GameScene.create() can read them without race
+  setGameContext(gameState, config);
+
+  const w = container.clientWidth  || window.innerWidth;
+  const h = container.clientHeight || window.innerHeight;
 
   const phaserConfig: Phaser.Types.Core.GameConfig = {
     type: Phaser.AUTO,
     parent: container,
-    width: container.clientWidth || window.innerWidth,
-    height: container.clientHeight || window.innerHeight,
+    width:  w,
+    height: h,
     backgroundColor: '#0d1117',
     scale: {
       mode: Phaser.Scale.RESIZE,
       autoCenter: Phaser.Scale.CENTER_BOTH,
     },
-    scene: scene,
+    // Disable default DOM input handling so touch flows to canvas
+    input: { activePointers: 3 },
+    scene: new GameScene(),
   };
 
-  const game = new Phaser.Game(phaserConfig);
-
-  // Inject gameState + config into scene via init data
-  game.scene.start('GameScene', { gameState, config });
-
-  return game;
+  return new Phaser.Game(phaserConfig);
 }
