@@ -6,7 +6,7 @@ export type ChildLevel = 1 | 2 | 3;
 export class ChildModeService {
   private static readonly SESSION_MS: Record<ChildLevel, number> = { 1: 300_000, 2: 600_000, 3: 900_000 };
   private static readonly BOARD_DIM: Record<ChildLevel, number> = { 1: 5, 2: 6, 3: 8 };
-  private static readonly PIECE_SETS: Record<ChildLevel, string> = { 1: 'simple', 2: 'classic', 3: 'classic' };
+  private static readonly PIECE_SETS: Record<ChildLevel, string> = { 1: 'level1', 2: 'level2', 3: 'level3' };
   private static readonly TICK_MS = 1000;
 
   private _level = signal<ChildLevel | null>(null);
