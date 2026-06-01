@@ -9,7 +9,8 @@
       "Edit(*)",
       "Skill(*)",
       "Bash([ -s \"$f1\" ])",
-      "PowerShell(cmd /c \"C:\\\\Users\\\\eard1\\\\Desktop\\\\MS Technology\\\\Block MS\\\\build-android.bat\" 2>&1)"
+      "PowerShell(cmd /c \"C:\\\\Users\\\\eard1\\\\Desktop\\\\MS Technology\\\\Block MS\\\\build-android.bat\" 2>&1)",
+      "PowerShell(tail *)"
     ]
   }
 }

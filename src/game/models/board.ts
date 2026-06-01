@@ -66,14 +66,30 @@ export class Board {
   }
 
   private clearCompleteLines(): number {
-    let cleared = 0;
+    // Step 1: Detect all complete rows and columns WITHOUT modifying the grid
+    const completedRows = new Set<number>();
     for (let r = 0; r < this.dimension; r++) {
-      if (this.grid[r]?.every(c => c.filled)) { this.clearRow(r); cleared++; }
+      if (this.grid[r]?.every(c => c.filled)) {
+        completedRows.add(r);
+      }
     }
+
+    const completedCols = new Set<number>();
     for (let c = 0; c < this.dimension; c++) {
-      if (this.grid.every(row => row[c]?.filled)) { this.clearCol(c); cleared++; }
+      if (this.grid.every(row => row[c]?.filled)) {
+        completedCols.add(c);
+      }
     }
-    return cleared;
+
+    // Step 2: Clear all detected rows and columns atomically
+    for (const r of completedRows) {
+      this.clearRow(r);
+    }
+    for (const c of completedCols) {
+      this.clearCol(c);
+    }
+
+    return completedRows.size + completedCols.size;
   }
 
   private clearRow(r: number) {
