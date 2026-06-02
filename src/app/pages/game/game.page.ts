@@ -94,6 +94,15 @@ export class GamePageComponent implements AfterViewInit, OnDestroy {
       this.save.clearGameState();
     }
 
+    let gameDifficulty: 'easy' | 'medium' | 'hard' = s.difficulty;
+    if (mode === 'child-1') {
+      gameDifficulty = s.difficultyChild1;
+    } else if (mode === 'child-2') {
+      gameDifficulty = s.difficultyChild2;
+    } else if (mode === 'child-3') {
+      gameDifficulty = s.difficultyChild3;
+    }
+
     const config = {
       ...(this.childMode.isChildMode()
         ? { boardDimension: this.childMode.boardDimension(), pieceSet: this.childMode.pieceSet() }
@@ -103,7 +112,7 @@ export class GamePageComponent implements AfterViewInit, OnDestroy {
       smilingFacesEnabled: s.smilingFacesEnabled,
       musicVolume: s.musicVolume,
       sfxVolume: s.sfxVolume,
-      difficulty: s.difficulty,
+      difficulty: gameDifficulty,
       savedState,
     };
     this.phaserGame = createPhaserGame(this.phaserContainer.nativeElement, this.gameState, config);

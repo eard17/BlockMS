@@ -52,6 +52,9 @@ export class SettingsPageComponent {
   onSfxVolumeChange(e: CustomEvent)     { this.settings.setSfxVolume(e.detail.value); }
   onToggleSmilingFaces()                { this.settings.toggleSmilingFaces(); }
   onDifficultyChange(e: CustomEvent)    { this.settings.setDifficulty(e.detail.value); }
+  onDifficultyChild1Change(e: CustomEvent) { this.settings.setDifficultyChild1(e.detail.value); }
+  onDifficultyChild2Change(e: CustomEvent) { this.settings.setDifficultyChild2(e.detail.value); }
+  onDifficultyChild3Change(e: CustomEvent) { this.settings.setDifficultyChild3(e.detail.value); }
 
   onShowPinForm()  { this.pinInput.set(''); this.pinError.set(null); this.showPinForm.set(true); }
   onCancelPin()    { this.showPinForm.set(false); this.pinInput.set(''); this.pinError.set(null); }

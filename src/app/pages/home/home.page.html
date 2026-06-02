@@ -4,7 +4,7 @@
     <!-- Auth bar -->
     <div class="home__auth-bar">
       @if (auth.isAuthenticated()) {
-        <div class="home__auth-user">
+        <div class="home__auth-user" (click)="goToAuth()">
           @if (auth.avatarUrl()) {
             <img class="home__auth-avatar" [src]="auth.avatarUrl()!" [alt]="auth.displayName()" />
           } @else {

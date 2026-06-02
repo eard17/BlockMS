@@ -6,6 +6,9 @@ export interface AppSettings {
   smilingFacesEnabled: boolean;
   childLockPin: string | null;
   difficulty: 'easy' | 'medium' | 'hard';
+  difficultyChild1: 'easy' | 'medium' | 'hard';
+  difficultyChild2: 'easy' | 'medium' | 'hard';
+  difficultyChild3: 'easy' | 'medium' | 'hard';
 }
 
 const STORAGE_KEY = 'bms_settings_v1';
@@ -15,6 +18,9 @@ const DEFAULTS: AppSettings = {
   smilingFacesEnabled: true,
   childLockPin: null,
   difficulty: 'medium',
+  difficultyChild1: 'medium',
+  difficultyChild2: 'medium',
+  difficultyChild3: 'medium',
 };
 
 @Injectable({ providedIn: 'root' })
@@ -28,6 +34,9 @@ export class SettingsService {
   setPin(pin: string) { this.patch({ childLockPin: pin }); }
   clearPin() { this.patch({ childLockPin: null }); }
   setDifficulty(d: AppSettings['difficulty']) { this.patch({ difficulty: d }); }
+  setDifficultyChild1(d: AppSettings['difficulty']) { this.patch({ difficultyChild1: d }); }
+  setDifficultyChild2(d: AppSettings['difficulty']) { this.patch({ difficultyChild2: d }); }
+  setDifficultyChild3(d: AppSettings['difficulty']) { this.patch({ difficultyChild3: d }); }
 
   private patch(partial: Partial<AppSettings>) {
     const next = { ...this._settings(), ...partial };

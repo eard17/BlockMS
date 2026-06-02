@@ -50,8 +50,32 @@
         (ionChange)="onToggleSmilingFaces()"></ion-toggle>
     </ion-item>
     <ion-item>
-      <ion-label>Dificultad (Clásico)</ion-label>
+      <ion-label>Dificultad Clásico</ion-label>
       <ion-select slot="end" [value]="settings.settings().difficulty" (ionChange)="onDifficultyChange($event)">
+        <ion-select-option value="easy">Fácil</ion-select-option>
+        <ion-select-option value="medium">Media</ion-select-option>
+        <ion-select-option value="hard">Difícil</ion-select-option>
+      </ion-select>
+    </ion-item>
+    <ion-item>
+      <ion-label>Dificultad Exploradores (Nivel 1)</ion-label>
+      <ion-select slot="end" [value]="settings.settings().difficultyChild1" (ionChange)="onDifficultyChild1Change($event)">
+        <ion-select-option value="easy">Fácil</ion-select-option>
+        <ion-select-option value="medium">Media</ion-select-option>
+        <ion-select-option value="hard">Difícil</ion-select-option>
+      </ion-select>
+    </ion-item>
+    <ion-item>
+      <ion-label>Dificultad Constructores (Nivel 2)</ion-label>
+      <ion-select slot="end" [value]="settings.settings().difficultyChild2" (ionChange)="onDifficultyChild2Change($event)">
+        <ion-select-option value="easy">Fácil</ion-select-option>
+        <ion-select-option value="medium">Media</ion-select-option>
+        <ion-select-option value="hard">Difícil</ion-select-option>
+      </ion-select>
+    </ion-item>
+    <ion-item>
+      <ion-label>Dificultad Familiar (Nivel 3)</ion-label>
+      <ion-select slot="end" [value]="settings.settings().difficultyChild3" (ionChange)="onDifficultyChild3Change($event)">
         <ion-select-option value="easy">Fácil</ion-select-option>
         <ion-select-option value="medium">Media</ion-select-option>
         <ion-select-option value="hard">Difícil</ion-select-option>

@@ -25,3 +25,37 @@
 .timer-fill.high { background:var(--color-success); }
 .timer-fill.mid  { background:var(--color-warning); }
 .timer-fill.low  { background:var(--color-danger); }
+
+.back-btn-placeholder, .lock-btn-placeholder { width: 36px; height: 36px; flex-shrink: 0; }
+
+.lock-btn { display:flex; align-items:center; justify-content:center; width:36px; height:36px;
+  background:transparent; border:none; border-radius:50%; color:var(--color-text-secondary);
+  font-size:1.25rem; cursor:pointer; flex-shrink:0; transition: color .2s, background-color .2s; }
+.lock-btn:active { transform:scale(.88); background:var(--color-surface-2); }
+.lock-btn--locked { color: #f6ce55; }
+
+.unlock-toast {
+  position: absolute;
+  top: 60px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(13, 17, 23, 0.95);
+  color: #fff;
+  padding: 0.6rem 1.2rem;
+  border-radius: 2rem;
+  border: 1px solid var(--color-border);
+  font-size: 0.8rem;
+  font-weight: 600;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+  z-index: 999;
+  white-space: nowrap;
+  animation: fadeInOut 3s forwards;
+}
+
+@keyframes fadeInOut {
+  0% { opacity: 0; transform: translate(-50%, -10px); }
+  10% { opacity: 1; transform: translate(-50%, 0); }
+  90% { opacity: 1; transform: translate(-50%, 0); }
+  100% { opacity: 0; transform: translate(-50%, -10px); }
+}
+

@@ -1,15 +1,30 @@
 <div class="score-bar">
-  <button class="back-btn" (click)="backClicked.emit()" aria-label="Salir">
-    <ion-icon name="arrow-back-outline"></ion-icon>
-  </button>
+  @if (!isScreenLocked()) {
+    <button class="back-btn" (click)="backClicked.emit()" aria-label="Salir">
+      <ion-icon name="arrow-back-outline"></ion-icon>
+    </button>
+  } @else {
+    <div class="back-btn-placeholder"></div>
+  }
+
   <div class="score-section">
     <span class="score-label">SCORE</span>
     <span class="score-value">{{ gameState.score() }}</span>
   </div>
+
   @if (gameState.comboCount() > 0) {
     <span class="combo">×{{ gameState.comboCount() }} COMBO</span>
   }
+
+  @if (childMode.isChildMode()) {
+    <button class="lock-btn" [class.lock-btn--locked]="isScreenLocked()" (click)="toggleLock()" aria-label="Bloquear controles">
+      <ion-icon [name]="isScreenLocked() ? 'lock-closed' : 'lock-open-outline'"></ion-icon>
+    </button>
+  } @else {
+    <div class="lock-btn-placeholder"></div>
+  }
 </div>
+
 @if (childMode.isChildMode()) {
   <div class="timer-bar">
     <span class="timer-display">{{ childMode.timeDisplay() }}</span>
@@ -18,3 +33,10 @@
     </div>
   </div>
 }
+
+@if (showUnlockConfirm()) {
+  <div class="unlock-toast" aria-live="polite">
+    🔒 Toca de nuevo el candado para desbloquear
+  </div>
+}
+

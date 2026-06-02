@@ -60,5 +60,11 @@ export class HomePageComponent {
   goToSettings()    { this.router.navigate(['/settings']); }
   goToChallenge()   { this.router.navigate(['/challenge']); }
   goToLeaderboard() { this.router.navigate(['/leaderboard']); }
-  goToAuth()        { this.router.navigate(['/auth']); }
+  async goToAuth() {
+    if (this.auth.isAuthenticated()) {
+      this.router.navigate(['/auth']);
+    } else {
+      await this.auth.signInWithGoogle();
+    }
+  }
 }
