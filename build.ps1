@@ -8,6 +8,12 @@ Write-Host "Building Block MS APK..." -ForegroundColor Cyan
 Write-Host "Android Directory: $androidDir" -ForegroundColor Gray
 Write-Host ""
 
+Write-Host "Compiling web assets (npm run build)..." -ForegroundColor Yellow
+npm run build
+
+Write-Host "Syncing with Capacitor (npx cap sync)..." -ForegroundColor Yellow
+& npx cap sync android
+
 Set-Location $androidDir
 
 # Run gradle
@@ -15,7 +21,7 @@ $gradlewPath = Join-Path $androidDir "gradlew.bat"
 Write-Host "Executing: $gradlewPath clean assembleDebug" -ForegroundColor Yellow
 Write-Host ""
 
-& cmd /c "$gradlewPath clean assembleDebug"
+& $gradlewPath clean assembleDebug
 
 if ($LASTEXITCODE -eq 0) {
     Write-Host ""

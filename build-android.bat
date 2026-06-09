@@ -6,6 +6,12 @@ echo.
 echo Building Block MS - Android APK
 echo.
 
+echo Compiling web assets (npm run build)...
+call npm run build
+
+echo Syncing with Capacitor (npx cap sync)...
+call npx cap sync android
+
 set ANDROID_DIR=%CD%\android
 cd /d "%ANDROID_DIR%"
 
