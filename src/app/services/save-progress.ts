@@ -28,6 +28,7 @@ export interface SaveData {
   blocksPlacedCount: number;
   duelsCompletedCount: number;
   maxComboAchieved: number;
+  adsRemoved: boolean;
 }
 
 const STORAGE_KEY = 'bms_save_v1';
@@ -50,6 +51,7 @@ const DEFAULT_SAVE: SaveData = {
   blocksPlacedCount: 0,
   duelsCompletedCount: 0,
   maxComboAchieved: 0,
+  adsRemoved: false,
 };
 
 @Injectable({ providedIn: 'root' })
@@ -244,6 +246,16 @@ export class SaveProgressService {
     return this._progress().savedGame?.mode === mode;
   }
 
+  removeAds() {
+    const current = this._progress();
+    if (current.adsRemoved) return;
+    this.save({
+      ...current,
+      adsRemoved: true,
+      completedStarsCount: (current.completedStarsCount ?? 0) + 1000
+    });
+  }
+
   save(data: SaveData) {
     this._progress.set(data);
     try { localStorage.setItem(STORAGE_KEY, JSON.stringify(data)); } catch { /* ignore */ }
@@ -265,7 +277,8 @@ export class SaveProgressService {
         selectedTitle: parsed.selectedTitle ?? 'Novato',
         blocksPlacedCount: parsed.blocksPlacedCount ?? 0,
         duelsCompletedCount: parsed.duelsCompletedCount ?? 0,
-        maxComboAchieved: parsed.maxComboAchieved ?? 0
+        maxComboAchieved: parsed.maxComboAchieved ?? 0,
+        adsRemoved: parsed.adsRemoved ?? false
       };
     } catch {
       return { ...DEFAULT_SAVE, highScores: { ...DEFAULT_HIGH_SCORES } };

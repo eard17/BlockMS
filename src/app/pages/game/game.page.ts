@@ -9,6 +9,7 @@ import { SaveProgressService } from '../../services/save-progress';
 import { SettingsService } from '../../services/settings';
 import { SyncService } from '../../services/sync';
 import { QuestService } from '../../services/quest.service';
+import { AdMobService } from '../../services/admob.service';
 import { ScoreBarComponent } from '../../components/score-bar/score-bar.component';
 import { SleepOverlayComponent } from '../../components/sleep-overlay/sleep-overlay.component';
 import { ParentalGateComponent } from '../../components/parental-gate/parental-gate.component';
@@ -31,6 +32,7 @@ export class GamePageComponent implements AfterViewInit, OnDestroy {
   readonly router = inject(Router);
   private readonly alertCtrl = inject(AlertController);
   private readonly sync = inject(SyncService);
+  private readonly admob = inject(AdMobService);
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   private phaserGame: any = null;
@@ -207,10 +209,16 @@ export class GamePageComponent implements AfterViewInit, OnDestroy {
         blocksPlacedCount: updatedProgress.blocksPlacedCount,
         duelsCompletedCount: updatedProgress.duelsCompletedCount,
         maxComboAchieved: updatedProgress.maxComboAchieved,
+        stars: updatedProgress.completedStarsCount,
+        unlockedSkins: updatedProgress.unlockedSkins,
+        adsRemoved: updatedProgress.adsRemoved,
       });
 
       this.isGameOver.set(true);
       this.sync.submitScore(score, mode, elapsed);
+      if (mode === 'classic') {
+        this.admob.recordClassicGamePlayed();
+      }
       if (this.isDailyChallenge) {
         const seed = this.sync.getDailySeed();
         this.sync.submitDailyChallengeScore(score, seed);

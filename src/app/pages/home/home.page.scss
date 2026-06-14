@@ -70,13 +70,42 @@ ion-content { --padding-top:0; --padding-bottom:0; --padding-start:0; --padding-
 .home__mode-desc { font-size:.8rem; color:#6a81af; }
 .home__mode-arrow { font-size:1.5rem; color:#475c85; line-height:1; }
 
-.home__footer { display:flex; align-items:center; gap:.75rem; margin-top:auto; }
-.home__settings-btn, .home__ranking-btn { display:flex; align-items:center; gap:.4rem; padding:.6rem 1.2rem;
+.home__stars-display {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  background: rgba(251, 191, 36, 0.12);
+  border: 1px solid rgba(251, 191, 36, 0.25);
+  padding: 4px 10px;
+  border-radius: 20px;
+  cursor: pointer;
+  
+  .home__star-icon {
+    color: #fbbf24;
+    font-size: 1rem;
+  }
+  
+  .home__stars-value {
+    color: #fef08a;
+    font-size: 0.8rem;
+    font-weight: 800;
+  }
+  
+  &:hover {
+    background: rgba(251, 191, 36, 0.2);
+    border-color: rgba(251, 191, 36, 0.4);
+  }
+}
+
+.home__footer { display:flex; align-items:center; gap:.5rem; margin-top:auto; }
+.home__settings-btn, .home__ranking-btn, .home__store-btn { display:flex; align-items:center; gap:.3rem; padding:.5rem .9rem;
   background:transparent; border:1px solid hsla(210,40%,40%,.2); border-radius:2rem;
-  font-family:inherit; font-size:.85rem; color:#5973a6; cursor:pointer; appearance:none; }
+  font-family:inherit; font-size:.8rem; color:#5973a6; cursor:pointer; appearance:none; }
 .home__settings-btn:hover { color:#85a3e0; border-color:#5c99d659; }
 .home__ranking-btn { color:#ddb43c; border-color:#d9ac2633; }
 .home__ranking-btn:hover { color:#f6ce55; border-color:#ebc24766; }
+.home__store-btn { color: #ec4899; border-color: rgba(236, 72, 153, 0.25); }
+.home__store-btn:hover { color: #f472b6; border-color: rgba(236, 72, 153, 0.6); }
 
 .home__section--quests {
   max-width: 420px;

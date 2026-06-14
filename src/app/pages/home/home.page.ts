@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 import { AlertController, IonContent, IonIcon } from '@ionic/angular/standalone';
 import { addIcons } from 'ionicons';
-import { settingsOutline, trophyOutline, personCircleOutline, checkmarkCircleOutline } from 'ionicons/icons';
+import { settingsOutline, trophyOutline, personCircleOutline, checkmarkCircleOutline, star, cartOutline } from 'ionicons/icons';
 import { GameStateService } from '../../services/game-state';
 import { ChildModeService } from '../../services/child-mode';
 import { SaveProgressService } from '../../services/save-progress';
@@ -30,7 +30,7 @@ export class HomePageComponent {
   private readonly alertCtrl = inject(AlertController);
 
   constructor() {
-    addIcons({ settingsOutline, trophyOutline, personCircleOutline, checkmarkCircleOutline });
+    addIcons({ settingsOutline, trophyOutline, personCircleOutline, checkmarkCircleOutline, star, cartOutline });
   }
 
   playClassic() {
@@ -65,6 +65,7 @@ export class HomePageComponent {
   goToChallenge()   { this.router.navigate(['/challenge']); }
   goToLeaderboard() { this.router.navigate(['/leaderboard']); }
   goToProfile()     { this.router.navigate(['/profile']); }
+  goToStore()       { this.router.navigate(['/store']); }
   async goToAuth() {
     if (this.auth.isAuthenticated()) {
       this.router.navigate(['/profile']);

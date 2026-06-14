@@ -22,7 +22,7 @@ export const SKINS_CATALOG: Skin[] = [
   {
     id: 'sunset',
     name: 'Atardecer',
-    starCost: 0,
+    starCost: 500,
     colors: [
       { hsl: 'hsl(20, 90%, 65%)',  hex: 0xF58A42 },
       { hsl: 'hsl(0, 80%, 65%)',   hex: 0xEF5252 },
@@ -34,7 +34,7 @@ export const SKINS_CATALOG: Skin[] = [
   {
     id: 'ocean',
     name: 'Océano',
-    starCost: 0,
+    starCost: 1000,
     colors: [
       { hsl: 'hsl(200, 85%, 60%)', hex: 0x29AAEB },
       { hsl: 'hsl(180, 80%, 55%)', hex: 0x24D9D9 },
@@ -46,7 +46,7 @@ export const SKINS_CATALOG: Skin[] = [
   {
     id: 'forest',
     name: 'Bosque',
-    starCost: 0,
+    starCost: 1500,
     colors: [
       { hsl: 'hsl(130, 65%, 50%)', hex: 0x39C255 },
       { hsl: 'hsl(90, 60%, 55%)',  hex: 0x82C235 },
@@ -58,7 +58,7 @@ export const SKINS_CATALOG: Skin[] = [
   {
     id: 'candy',
     name: 'Candy',
-    starCost: 0,
+    starCost: 2000,
     colors: [
       { hsl: 'hsl(340, 90%, 75%)', hex: 0xF070A8 },
       { hsl: 'hsl(280, 85%, 80%)', hex: 0xC880F0 },

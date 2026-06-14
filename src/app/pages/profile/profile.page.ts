@@ -112,6 +112,9 @@ export class ProfilePageComponent implements OnInit {
           blocksPlacedCount: Math.max(current.blocksPlacedCount ?? 0, cloudProfile.blocks_placed ?? 0),
           duelsCompletedCount: Math.max(current.duelsCompletedCount ?? 0, cloudProfile.duels_completed ?? 0),
           maxComboAchieved: Math.max(current.maxComboAchieved ?? 0, cloudProfile.max_combo ?? 0),
+          completedStarsCount: Math.max(current.completedStarsCount ?? 0, cloudProfile.stars ?? 0),
+          unlockedSkins: Array.from(new Set([...(current.unlockedSkins ?? ['default']), ...(cloudProfile.unlocked_skins ?? [])])),
+          adsRemoved: current.adsRemoved || (cloudProfile.ads_removed ?? false),
         });
       }
     }
@@ -134,6 +137,9 @@ export class ProfilePageComponent implements OnInit {
         blocksPlacedCount: progress.blocksPlacedCount,
         duelsCompletedCount: progress.duelsCompletedCount,
         maxComboAchieved: progress.maxComboAchieved,
+        stars: progress.completedStarsCount,
+        unlockedSkins: progress.unlockedSkins,
+        adsRemoved: progress.adsRemoved,
       });
     }
   }

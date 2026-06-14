@@ -1,0 +1,104 @@
+<ion-content [fullscreen]="true">
+  <div class="store-page">
+
+    <!-- Header -->
+    <header class="store-header">
+      <button class="back-btn" (click)="goBack()" aria-label="Volver">
+        <ion-icon name="arrow-back-outline"></ion-icon>
+      </button>
+      <h1 class="store-title">Tienda</h1>
+      
+      <!-- Stars Counter -->
+      <div class="stars-counter">
+        <ion-icon name="star" class="star-icon"></ion-icon>
+        <span class="stars-value">{{ (save.progress().completedStarsCount || 0).toLocaleString() }}</span>
+      </div>
+    </header>
+
+    <!-- Error Alert Toast -->
+    @if (errorMsg()) {
+      <div class="error-toast" role="alert">
+        <ion-icon name="alert-circle-outline" class="error-toast__icon"></ion-icon>
+        <span>{{ errorMsg() }}</span>
+      </div>
+    }
+
+    <!-- Premium IAP Section -->
+    <section class="store-section premium-section">
+      <h2 class="section-title">💎 Ofertas Premium</h2>
+      <div class="store-iap-card">
+        <div class="iap-info">
+          <h3 class="iap-title">Quitar Publicidad</h3>
+          <p class="iap-desc">Remueve todos los anuncios del juego para siempre y recibe <strong>1,000 Estrellas</strong> de regalo.</p>
+        </div>
+        <div class="iap-action">
+          @if (save.progress().adsRemoved) {
+            <span class="iap-owned-badge">✓ Adquirido</span>
+          } @else {
+            <button class="iap-buy-btn" [disabled]="purchaseLoading()" (click)="purchaseRemoveAds()">
+              @if (purchaseLoading()) { Cargando... }
+              @else { $2.99 USD }
+            </button>
+          }
+        </div>
+      </div>
+    </section>
+
+    <!-- Ad Rewards Section -->
+    <section class="store-section rewarded-section">
+      <h2 class="section-title">📺 Estrellas Gratis</h2>
+      <div class="store-iap-card rewarded-card">
+        <div class="iap-info">
+          <h3 class="iap-title">Ver Anuncio Premiado</h3>
+          <p class="iap-desc">Mira un video patrocinado corto y obtén <strong>+150 Estrellas</strong> gratis al instante.</p>
+        </div>
+        <div class="iap-action">
+          <button class="iap-claim-btn" [disabled]="adLoading()" (click)="watchRewardedAd()">
+            @if (adLoading()) { Cargando... }
+            @else { Ver Video }
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Skins Catalog Section -->
+    <section class="store-section skins-section">
+      <h2 class="section-title">🎨 Aspectos del Tablero (Skins)</h2>
+      <div class="skins-grid">
+        @for (skin of skins; track skin.id) {
+          <div class="skin-card" [class.skin-card--active]="isActiveSkin(skin.id)" [class.skin-card--unlocked]="isSkinUnlocked(skin.id)">
+            <!-- Mini Board Preview -->
+            <div class="skin-preview-grid">
+              @for (cell of previewCells; track cell.row + '-' + cell.col) {
+                <div 
+                  class="preview-cell" 
+                  [style.background-color]="skin.colors[cell.colorIdx]?.hsl || '#1e2535'"
+                ></div>
+              }
+            </div>
+
+            <div class="skin-info">
+              <h3 class="skin-name">{{ skin.name }}</h3>
+              <p class="skin-status">
+                @if (isActiveSkin(skin.id)) { <span class="status-badge status-badge--active">Equipado</span> }
+                @else if (isSkinUnlocked(skin.id)) { <span class="status-badge status-badge--unlocked">Desbloqueado</span> }
+                @else { <span class="status-badge status-badge--cost">⭐{{ skin.starCost }}</span> }
+              </p>
+            </div>
+
+            <div class="skin-actions">
+              @if (isActiveSkin(skin.id)) {
+                <button class="skin-btn skin-btn--active" disabled>Activo</button>
+              } @else if (isSkinUnlocked(skin.id)) {
+                <button class="skin-btn skin-btn--select" (click)="selectSkin(skin.id)">Equipar</button>
+              } @else {
+                <button class="skin-btn skin-btn--buy" (click)="buySkin(skin)">Comprar</button>
+              }
+            </div>
+          </div>
+        }
+      </div>
+    </section>
+
+  </div>
+</ion-content>

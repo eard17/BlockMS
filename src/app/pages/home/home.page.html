@@ -3,6 +3,12 @@
 
     <!-- Auth bar -->
     <div class="home__auth-bar">
+      <!-- Stars Counter -->
+      <div class="home__stars-display" (click)="goToStore()">
+        <ion-icon name="star" class="home__star-icon"></ion-icon>
+        <span class="home__stars-value">{{ (save.progress().completedStarsCount || 0).toLocaleString() }}</span>
+      </div>
+
       @if (auth.isAuthenticated()) {
         <div class="home__auth-user" (click)="goToProfile()">
           @if (auth.avatarUrl()) {
@@ -159,6 +165,9 @@
     <footer class="home__footer">
       <button class="home__settings-btn" (click)="goToSettings()" aria-label="Ajustes">
         <ion-icon name="settings-outline"></ion-icon> Ajustes
+      </button>
+      <button class="home__store-btn" (click)="goToStore()" aria-label="Tienda">
+        <ion-icon name="cart-outline"></ion-icon> Tienda
       </button>
       <button class="home__ranking-btn" (click)="goToLeaderboard()" aria-label="Ver ranking global">
         <ion-icon name="trophy-outline"></ion-icon> Ranking

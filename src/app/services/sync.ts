@@ -270,6 +270,9 @@ export class SyncService {
     blocksPlacedCount: number;
     duelsCompletedCount: number;
     maxComboAchieved: number;
+    stars: number;
+    unlockedSkins: string[];
+    adsRemoved: boolean;
   }): Promise<boolean> {
     const db = this.auth.getClient();
     const userId = this.auth.user()?.id;
@@ -288,6 +291,9 @@ export class SyncService {
         blocks_placed: profileData.blocksPlacedCount,
         duels_completed: profileData.duelsCompletedCount,
         max_combo: profileData.maxComboAchieved,
+        stars: profileData.stars,
+        unlocked_skins: profileData.unlockedSkins,
+        ads_removed: profileData.adsRemoved,
         updated_at: new Date().toISOString()
       };
 
