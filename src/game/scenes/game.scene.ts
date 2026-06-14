@@ -401,6 +401,11 @@ export class GameScene extends Phaser.Scene {
       this.gameState.addScore(pts);
       cleared > 0 ? this.gameState.incrementCombo() : this.gameState.resetCombo();
 
+      this.game.events.emit('bms:blocks-placed', blocks);
+      if (cleared > 0) {
+        this.game.events.emit('bms:combo', combo);
+      }
+
       this.tray[slotIdx] = null;
       this.drawBoard();
 
@@ -421,6 +426,10 @@ export class GameScene extends Phaser.Scene {
           }
         }
       });
+
+      if (clearedCells.length > 0) {
+        this.game.events.emit('bms:cleared-cells', clearedCells.length);
+      }
 
       clearedCells.forEach(cellCoords => {
         const cx = this.boardX + cellCoords.c * step + this.cellSize / 2;

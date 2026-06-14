@@ -1,0 +1,309 @@
+.profile-page {
+  padding: 16px;
+  background: radial-gradient(circle at top, #1e2640 0%, #0d111a 100%);
+  min-height: 100%;
+  color: #ffffff;
+  font-family: 'Outfit', 'Inter', system-ui, sans-serif;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.profile-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 10px;
+
+  .back-btn {
+    background: rgba(255, 255, 255, 0.08);
+    border: none;
+    border-radius: 50%;
+    width: 42px;
+    height: 42px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #ffffff;
+    font-size: 1.4rem;
+    cursor: pointer;
+    transition: background 0.2s, transform 0.2s;
+
+    &:active {
+      transform: scale(0.9);
+      background: rgba(255, 255, 255, 0.15);
+    }
+  }
+
+  .profile-title {
+    font-size: 1.4rem;
+    font-weight: 800;
+    margin: 0;
+    letter-spacing: 0.5px;
+    background: linear-gradient(135deg, #ffffff 0%, #a5b4fc 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  .placeholder-spacer {
+    width: 42px;
+  }
+}
+
+.player-card {
+  background: rgba(30, 41, 59, 0.6);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 20px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+
+  .player-info {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+
+    .avatar-container {
+      width: 64px;
+      height: 64px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #4f46e5 0%, #06b6d4 100%);
+      padding: 3px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 4px 14px rgba(79, 70, 229, 0.4);
+
+      .profile-avatar {
+        width: 100%;
+        height: 100%;
+        border-radius: 50%;
+        object-fit: cover;
+      }
+
+      .profile-avatar-icon {
+        font-size: 3.5rem;
+        color: #ffffff;
+      }
+    }
+
+    .player-details {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+
+      .player-name {
+        font-size: 1.3rem;
+        font-weight: 700;
+        margin: 0;
+      }
+
+      .player-title-badge {
+        font-size: 0.75rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        background: linear-gradient(135deg, #ff9700 0%, #ff5722 100%);
+        padding: 4px 10px;
+        border-radius: 20px;
+        align-self: flex-start;
+        box-shadow: 0 2px 8px rgba(255, 87, 34, 0.3);
+      }
+    }
+  }
+
+  .level-progress-section {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+
+    .level-labels {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      font-size: 0.9rem;
+
+      .level-text {
+        font-weight: 800;
+        color: #38bdf8;
+      }
+
+      .xp-text {
+        color: #94a3b8;
+        font-size: 0.8rem;
+      }
+    }
+
+    .progress-bar-container {
+      height: 10px;
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 10px;
+      overflow: hidden;
+      border: 1px solid rgba(255, 255, 255, 0.05);
+
+      .progress-bar-fill {
+        height: 100%;
+        background: linear-gradient(90deg, #06b6d4 0%, #10b981 100%);
+        border-radius: 10px;
+        transition: width 0.4s ease-out;
+      }
+    }
+  }
+}
+
+.profile-section {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+
+  .section-title {
+    font-size: 1.05rem;
+    font-weight: 800;
+    margin: 0 0 4px 0;
+    color: #94a3b8;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+}
+
+.titles-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+
+  .title-chip {
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 30px;
+    padding: 8px 16px;
+    color: #cbd5e1;
+    font-size: 0.9rem;
+    font-weight: 600;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    transition: all 0.2s ease;
+
+    &:active {
+      transform: scale(0.95);
+    }
+
+    &--active {
+      background: rgba(79, 70, 229, 0.2);
+      border-color: #6366f1;
+      color: #ffffff;
+      box-shadow: 0 0 12px rgba(99, 102, 241, 0.3);
+
+      .active-check {
+        color: #818cf8;
+        font-weight: bold;
+      }
+    }
+  }
+}
+
+.achievements-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.achievement-card {
+  background: rgba(15, 23, 42, 0.4);
+  border: 1px solid rgba(255, 255, 255, 0.04);
+  border-radius: 16px;
+  padding: 14px;
+  display: flex;
+  gap: 16px;
+  align-items: center;
+  transition: all 0.3s ease;
+  opacity: 0.65;
+
+  &--unlocked {
+    background: rgba(30, 41, 59, 0.45);
+    border-color: rgba(99, 102, 241, 0.15);
+    opacity: 1;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+  }
+
+  .medal-icon {
+    font-size: 2rem;
+    width: 48px;
+    height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.03);
+
+    &--gold {
+      background: rgba(251, 191, 36, 0.1);
+      box-shadow: inset 0 0 12px rgba(251, 191, 36, 0.2);
+    }
+    &--silver {
+      background: rgba(148, 163, 184, 0.1);
+      box-shadow: inset 0 0 12px rgba(148, 163, 184, 0.2);
+    }
+    &--bronze {
+      background: rgba(180, 83, 9, 0.15);
+      box-shadow: inset 0 0 12px rgba(180, 83, 9, 0.2);
+    }
+  }
+
+  .achievement-details {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+
+    .achievement-name {
+      font-size: 0.95rem;
+      font-weight: 700;
+      margin: 0;
+      color: #f1f5f9;
+    }
+
+    .achievement-desc {
+      font-size: 0.8rem;
+      color: #94a3b8;
+      margin: 0;
+    }
+
+    .achievement-progress {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-top: 6px;
+
+      .ach-bar-container {
+        flex: 1;
+        height: 6px;
+        background: rgba(255, 255, 255, 0.05);
+        border-radius: 6px;
+        overflow: hidden;
+
+        .ach-bar-fill {
+          height: 100%;
+          border-radius: 6px;
+          transition: width 0.3s ease;
+
+          &--gold { background: #fbbf24; }
+          &--silver { background: #94a3b8; }
+          &--bronze { background: #b45309; }
+        }
+      }
+
+      .ach-progress-text {
+        font-size: 0.75rem;
+        font-weight: 600;
+        color: #94a3b8;
+        min-width: 45px;
+        text-align: right;
+      }
+    }
+  }
+}

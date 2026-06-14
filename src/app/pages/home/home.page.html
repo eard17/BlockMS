@@ -4,18 +4,28 @@
     <!-- Auth bar -->
     <div class="home__auth-bar">
       @if (auth.isAuthenticated()) {
-        <div class="home__auth-user" (click)="goToAuth()">
+        <div class="home__auth-user" (click)="goToProfile()">
           @if (auth.avatarUrl()) {
             <img class="home__auth-avatar" [src]="auth.avatarUrl()!" [alt]="auth.displayName()" />
           } @else {
             <ion-icon name="person-circle-outline" class="home__auth-avatar-icon"></ion-icon>
           }
-          <span class="home__auth-name">{{ auth.displayName() }}</span>
+          <div class="home__profile-brief">
+            <span class="home__auth-name">{{ auth.displayName() }}</span>
+            <span class="home__auth-meta">Nvl {{ save.progress().level }} · {{ save.progress().selectedTitle }}</span>
+          </div>
         </div>
       } @else {
+        <div class="home__auth-guest" (click)="goToProfile()">
+          <ion-icon name="person-circle-outline" class="home__auth-avatar-icon"></ion-icon>
+          <div class="home__profile-brief">
+            <span class="home__auth-name">Invitado</span>
+            <span class="home__auth-meta">Nvl {{ save.progress().level }} · {{ save.progress().selectedTitle }}</span>
+          </div>
+        </div>
         <button class="home__auth-login-btn" (click)="goToAuth()">
           <ion-icon name="person-circle-outline"></ion-icon>
-          Iniciar sesión
+          Entrar
         </button>
       }
     </div>
@@ -116,6 +126,33 @@
         </div>
         <span class="home__mode-arrow" aria-hidden="true">›</span>
       </button>
+    </section>
+
+    <!-- Daily Quests Section -->
+    <section class="home__section home__section--quests">
+      <h2 class="home__section-title">📅 Misiones Diarias</h2>
+      <div class="home__quests-list">
+        @for (q of quests.state().quests; track q.id) {
+          <div class="home__quest-card" [class.home__quest-card--completed]="q.completed" [class.home__quest-card--claimed]="q.claimed">
+            <div class="home__quest-details">
+              <span class="home__quest-label">{{ quests.getQuestDefinition(q.id)?.label }}</span>
+              <div class="home__quest-progress-bar">
+                <div class="home__quest-progress-fill" [style.width.%]="q.completed ? 100 : ((q.progress / (quests.getQuestDefinition(q.id)?.target || 1)) * 100)"></div>
+              </div>
+              <span class="home__quest-ratio">{{ q.completed ? quests.getQuestDefinition(q.id)?.target : q.progress }} / {{ quests.getQuestDefinition(q.id)?.target }}</span>
+            </div>
+            <div class="home__quest-action">
+              @if (q.claimed) {
+                <span class="home__quest-claimed-badge">Reclamado</span>
+              } @else if (q.completed) {
+                <button class="home__quest-claim-btn" (click)="quests.claimReward(q.id)">Reclamar</button>
+              } @else {
+                <span class="home__quest-reward-preview">⭐{{ quests.getQuestDefinition(q.id)?.rewardStars }}</span>
+              }
+            </div>
+          </div>
+        }
+      </div>
     </section>
 
     <!-- Footer -->

@@ -99,7 +99,7 @@ export class ChallengePageComponent implements OnInit {
     });
   }
 
-  goBack() { this.nav.back(); }
+  goBack() { this.nav.navigateRoot('/home'); }
 
   onCodeInput(v: string) { this.codeInput.set(v); this.decoded.set(null); this.validationErr.set(null); }
 
@@ -201,8 +201,8 @@ export class ChallengePageComponent implements OnInit {
     setTimeout(() => this.copied.set(false), 2000);
   }
 
-  goToLogin() {
-    this.nav.navigateForward('/auth');
+  async goToLogin() {
+    await this.auth.signInWithGoogle();
   }
 
   async playDuelFromList(duel: any) {

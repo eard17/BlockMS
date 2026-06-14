@@ -3,11 +3,12 @@ import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 import { AlertController, IonContent, IonIcon } from '@ionic/angular/standalone';
 import { addIcons } from 'ionicons';
-import { settingsOutline, trophyOutline, personCircleOutline } from 'ionicons/icons';
+import { settingsOutline, trophyOutline, personCircleOutline, checkmarkCircleOutline } from 'ionicons/icons';
 import { GameStateService } from '../../services/game-state';
 import { ChildModeService } from '../../services/child-mode';
 import { SaveProgressService } from '../../services/save-progress';
 import { AuthService } from '../../services/auth';
+import { QuestService } from '../../services/quest.service';
 
 const DEFAULT_MINUTES: Record<number, number> = { 1: 5, 2: 10, 3: 15 };
 const DURATION_OPTIONS = [5,10,15,20,25,30,35,40,45,50,55,60];
@@ -24,10 +25,13 @@ export class HomePageComponent {
   readonly auth = inject(AuthService);
   readonly childMode = inject(ChildModeService);
   readonly gameState = inject(GameStateService);
+  readonly quests = inject(QuestService);
   private readonly router = inject(Router);
   private readonly alertCtrl = inject(AlertController);
 
-  constructor() { addIcons({ settingsOutline, trophyOutline, personCircleOutline }); }
+  constructor() {
+    addIcons({ settingsOutline, trophyOutline, personCircleOutline, checkmarkCircleOutline });
+  }
 
   playClassic() {
     this.childMode.stopSession();
@@ -60,9 +64,10 @@ export class HomePageComponent {
   goToSettings()    { this.router.navigate(['/settings']); }
   goToChallenge()   { this.router.navigate(['/challenge']); }
   goToLeaderboard() { this.router.navigate(['/leaderboard']); }
+  goToProfile()     { this.router.navigate(['/profile']); }
   async goToAuth() {
     if (this.auth.isAuthenticated()) {
-      this.router.navigate(['/auth']);
+      this.router.navigate(['/profile']);
     } else {
       await this.auth.signInWithGoogle();
     }

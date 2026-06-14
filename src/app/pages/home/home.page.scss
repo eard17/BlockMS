@@ -5,13 +5,22 @@ ion-content { --padding-top:0; --padding-bottom:0; --padding-start:0; --padding-
           calc(2rem + var(--ion-safe-area-bottom, env(safe-area-inset-bottom,0px)));
   background:var(--color-background); gap:1.5rem; }
 
-.home__auth-bar { position:absolute; top:calc(.75rem + var(--ion-safe-area-top,env(safe-area-inset-top,0px)));
-  right:1rem; z-index:10; }
-.home__auth-user { display:flex; align-items:center; gap:.4rem; cursor:pointer; }
-.home__auth-user:hover .home__auth-name { color:#7dd6e8; }
+.home__auth-bar {
+  width: 100%;
+  max-width: 420px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  z-index: 10;
+  margin-bottom: 0.5rem;
+}
+.home__auth-user, .home__auth-guest { display:flex; align-items:center; gap:.5rem; cursor:pointer; }
+.home__auth-user:hover .home__auth-name, .home__auth-guest:hover .home__auth-name { color:#7dd6e8; }
 .home__auth-avatar { width:32px; height:32px; border-radius:50%; object-fit:cover; border:1px solid hsla(190,70%,65%,.4); }
-.home__auth-avatar-icon { font-size:1.9rem; color:var(--color-text-secondary); }
-.home__auth-name { font-size:.78rem; font-weight:600; color:var(--color-text-secondary); max-width:90px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+.home__auth-avatar-icon { font-size:2.1rem; color:var(--color-text-secondary); }
+.home__profile-brief { display:flex; flex-direction:column; gap:1px; line-height:1.1; }
+.home__auth-name { font-size:.78rem; font-weight:700; color:var(--color-text-primary); max-width:150px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+.home__auth-meta { font-size:.65rem; color:var(--color-text-muted); font-weight:600; text-transform:uppercase; letter-spacing:0.5px; }
 .home__auth-login-btn { display:flex; align-items:center; gap:.3rem; padding:.4rem .8rem;
   background:var(--color-surface); border:1px solid var(--color-border); border-radius:2rem;
   font-family:inherit; font-size:.75rem; color:var(--color-text-secondary); cursor:pointer; appearance:none; }
@@ -68,3 +77,102 @@ ion-content { --padding-top:0; --padding-bottom:0; --padding-start:0; --padding-
 .home__settings-btn:hover { color:#85a3e0; border-color:#5c99d659; }
 .home__ranking-btn { color:#ddb43c; border-color:#d9ac2633; }
 .home__ranking-btn:hover { color:#f6ce55; border-color:#ebc24766; }
+
+.home__section--quests {
+  max-width: 420px;
+  width: 100%;
+}
+.home__quests-list {
+  display: flex;
+  flex-direction: column;
+  gap: .5rem;
+}
+.home__quest-card {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: .75rem 1rem;
+  background: rgba(30, 41, 59, 0.45);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: .75rem;
+  gap: 12px;
+  transition: border-color .15s, background .15s;
+
+  &--completed {
+    border-color: rgba(76, 217, 100, 0.25);
+    background: rgba(76, 217, 100, 0.05);
+  }
+  &--claimed {
+    border-color: rgba(255, 255, 255, 0.02);
+    background: rgba(255, 255, 255, 0.02);
+    opacity: 0.5;
+  }
+}
+.home__quest-details {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.home__quest-label {
+  font-size: .8rem;
+  font-weight: 700;
+  color: var(--color-text-primary);
+}
+.home__quest-progress-bar {
+  height: 6px;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 6px;
+  overflow: hidden;
+}
+.home__quest-progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #38bdf8 0%, #06b6d4 100%);
+  border-radius: 6px;
+  transition: width 0.3s ease;
+  
+  .home__quest-card--completed & {
+    background: linear-gradient(90deg, #4cd964 0%, #10b981 100%);
+  }
+}
+.home__quest-ratio {
+  font-size: .68rem;
+  font-weight: 600;
+  color: var(--color-text-muted);
+}
+.home__quest-action {
+  min-width: 70px;
+  display: flex;
+  justify-content: flex-end;
+}
+.home__quest-claim-btn {
+  background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+  border: none;
+  border-radius: 20px;
+  color: #ffffff;
+  font-family: inherit;
+  font-size: .72rem;
+  font-weight: 800;
+  padding: .35rem .8rem;
+  cursor: pointer;
+  box-shadow: 0 4px 10px rgba(16, 185, 129, 0.3);
+  transition: transform 0.15s;
+
+  &:active {
+    transform: scale(0.92);
+  }
+}
+.home__quest-claimed-badge {
+  font-size: .7rem;
+  font-weight: 700;
+  color: var(--color-text-muted);
+  text-transform: uppercase;
+}
+.home__quest-reward-preview {
+  font-size: .75rem;
+  font-weight: 800;
+  color: #fbbf24;
+  background: rgba(251, 191, 36, 0.1);
+  padding: 3px 8px;
+  border-radius: 12px;
+}

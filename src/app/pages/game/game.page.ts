@@ -8,6 +8,7 @@ import { ChildModeService } from '../../services/child-mode';
 import { SaveProgressService } from '../../services/save-progress';
 import { SettingsService } from '../../services/settings';
 import { SyncService } from '../../services/sync';
+import { QuestService } from '../../services/quest.service';
 import { ScoreBarComponent } from '../../components/score-bar/score-bar.component';
 import { SleepOverlayComponent } from '../../components/sleep-overlay/sleep-overlay.component';
 import { ParentalGateComponent } from '../../components/parental-gate/parental-gate.component';
@@ -26,6 +27,7 @@ export class GamePageComponent implements AfterViewInit, OnDestroy {
   readonly childMode = inject(ChildModeService);
   readonly save = inject(SaveProgressService);
   readonly settings = inject(SettingsService);
+  readonly quests = inject(QuestService);
   readonly router = inject(Router);
   private readonly alertCtrl = inject(AlertController);
   private readonly sync = inject(SyncService);
@@ -41,6 +43,10 @@ export class GamePageComponent implements AfterViewInit, OnDestroy {
   readonly isGameOver = signal(false);
   readonly isNewRecord = signal(false);
   readonly isReadOnly = signal(false);
+
+  readonly xpEarned = signal(0);
+  readonly leveledUp = signal(false);
+  readonly newLevel = signal(1);
 
   readonly currentRecord = computed(() =>
     this.save.progress().highScores[this.gameState.mode()] ?? 0);
@@ -129,6 +135,29 @@ export class GamePageComponent implements AfterViewInit, OnDestroy {
     };
     this.phaserGame = createPhaserGame(this.phaserContainer.nativeElement, this.gameState, config);
 
+    let blocksPlacedInGame = 0;
+    let maxComboInGame = 0;
+    let cellsClearedInGame = 0;
+
+    this.phaserGame.events.on('bms:blocks-placed', (count: number) => {
+      blocksPlacedInGame += count;
+      this.save.recordBlocksPlaced(count);
+      this.quests.updateProgress('place', count);
+    });
+
+    this.phaserGame.events.on('bms:combo', (combo: number) => {
+      if (combo > maxComboInGame) {
+        maxComboInGame = combo;
+      }
+      this.save.recordCombo(combo);
+      this.quests.updateProgress('combo', combo);
+    });
+
+    this.phaserGame.events.on('bms:cleared-cells', (count: number) => {
+      cellsClearedInGame += count;
+      this.quests.updateProgress('break', cellsClearedInGame);
+    });
+
     this.phaserGame.events.on('bms:tray-empty', () => this.childMode.onTrayEmptyWhilePending());
     this.phaserGame.events.on('bms:game-over', () => {
       const score = this.gameState.score();
@@ -138,6 +167,48 @@ export class GamePageComponent implements AfterViewInit, OnDestroy {
       this.save.updateHighScore(mode, score);
       this.save.recordGameEnd(elapsed);
       this.isNewRecord.set(isNew);
+
+      // Calculate XP
+      let earned = 25; // base
+      if (maxComboInGame >= 2 && maxComboInGame <= 3) {
+        earned += 10;
+      } else if (maxComboInGame >= 4 && maxComboInGame <= 5) {
+        earned += 25;
+      } else if (maxComboInGame >= 6) {
+        earned += 50;
+      }
+
+      if (isNew) {
+        earned += 100;
+      }
+
+      const isDuelWon = this.duelId && (score > this.gameState.targetScore());
+      if (isDuelWon) {
+        earned += 50;
+      }
+
+      if (this.duelId) {
+        this.save.recordDuelCompleted();
+      }
+
+      const { levelUp, newLevel } = this.save.addXp(earned);
+      this.xpEarned.set(earned);
+      this.leveledUp.set(levelUp);
+      this.newLevel.set(newLevel);
+
+      // Sync updated profile to cloud
+      const updatedProgress = this.save.progress();
+      this.sync.syncUserProfile({
+        xp: updatedProgress.xp,
+        level: updatedProgress.level,
+        selectedTitle: updatedProgress.selectedTitle,
+        unlockedTitles: updatedProgress.unlockedTitles,
+        unlockedAchievements: updatedProgress.unlockedAchievements,
+        blocksPlacedCount: updatedProgress.blocksPlacedCount,
+        duelsCompletedCount: updatedProgress.duelsCompletedCount,
+        maxComboAchieved: updatedProgress.maxComboAchieved,
+      });
+
       this.isGameOver.set(true);
       this.sync.submitScore(score, mode, elapsed);
       if (this.isDailyChallenge) {

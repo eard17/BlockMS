@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { addIcons } from 'ionicons';
 import { arrowBackOutline, trophyOutline, shieldHalfOutline } from 'ionicons/icons';
 import { NavController, IonContent, IonHeader, IonToolbar, IonTitle,
-  IonButtons, IonIcon, IonButton, IonList, IonItem, IonLabel, IonNote, IonBadge, IonSpinner } from '@ionic/angular/standalone';
+  IonButtons, IonIcon, IonButton } from '@ionic/angular/standalone';
 import { SyncService, RankingEntry } from '../../services/sync';
 import { AuthService } from '../../services/auth';
 
@@ -13,7 +13,7 @@ import { AuthService } from '../../services/auth';
   styleUrls: ['./leaderboard.page.scss'],
   standalone: true,
   imports: [CommonModule, IonContent, IonHeader, IonToolbar, IonTitle,
-    IonButtons, IonIcon, IonButton, IonList, IonItem, IonLabel, IonNote, IonBadge, IonSpinner],
+    IonButtons, IonIcon, IonButton],
 })
 export class LeaderboardPageComponent implements OnInit {
   private readonly sync = inject(SyncService);
@@ -38,7 +38,7 @@ export class LeaderboardPageComponent implements OnInit {
 
   ngOnInit() { this.load(); }
 
-  goBack() { this.nav.back(); }
+  goBack() { this.nav.navigateRoot('/home'); }
 
   async load() {
     this.loading.set(true);

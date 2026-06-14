@@ -243,4 +243,68 @@ export class SyncService {
       return false;
     }
   }
+
+  async fetchUserProfile(): Promise<any | null> {
+    const db = this.auth.getClient();
+    const userId = this.auth.user()?.id;
+    if (!db || !userId) return null;
+    try {
+      const { data, error } = await db
+        .from('user_profiles')
+        .select('*')
+        .eq('user_id', userId)
+        .maybeSingle();
+      if (error) return null;
+      return data;
+    } catch {
+      return null;
+    }
+  }
+
+  async syncUserProfile(profileData: {
+    xp: number;
+    level: number;
+    selectedTitle: string;
+    unlockedTitles: string[];
+    unlockedAchievements: string[];
+    blocksPlacedCount: number;
+    duelsCompletedCount: number;
+    maxComboAchieved: number;
+  }): Promise<boolean> {
+    const db = this.auth.getClient();
+    const userId = this.auth.user()?.id;
+    if (!db || !userId) return false;
+    const username = this.auth.displayName() || 'Anón';
+    try {
+      const existing = await this.fetchUserProfile();
+      const payload = {
+        user_id: userId,
+        username,
+        xp: profileData.xp,
+        level: profileData.level,
+        selected_title: profileData.selectedTitle,
+        unlocked_titles: profileData.unlockedTitles,
+        unlocked_achievements: profileData.unlockedAchievements,
+        blocks_placed: profileData.blocksPlacedCount,
+        duels_completed: profileData.duelsCompletedCount,
+        max_combo: profileData.maxComboAchieved,
+        updated_at: new Date().toISOString()
+      };
+
+      if (existing) {
+        const { error } = await db
+          .from('user_profiles')
+          .update(payload)
+          .eq('user_id', userId);
+        return !error;
+      } else {
+        const { error } = await db
+          .from('user_profiles')
+          .insert(payload);
+        return !error;
+      }
+    } catch {
+      return false;
+    }
+  }
 }

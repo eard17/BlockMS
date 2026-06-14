@@ -45,6 +45,14 @@
           <span class="score-label">Récord personal</span>
           <span class="hiscore-value">{{ currentRecord().toLocaleString() }}</span>
         </div>
+        <div class="xp-section" style="margin-top: 12px; margin-bottom: 12px; font-weight: bold; text-align: center;">
+          <div style="color: #4cd964; font-size: 1.15rem;">+{{ xpEarned() }} XP obtenido</div>
+          @if (leveledUp()) {
+            <div style="color: #ffcc00; font-size: 1.25rem; margin-top: 4px; font-weight: 800;">
+              🎉 ¡SUBISTE AL NIVEL {{ newLevel() }}! 🎉
+            </div>
+          }
+        </div>
         <ion-button expand="block" color="primary" (click)="onViewFinalBoard()">👁 Ver tablero final</ion-button>
         <ion-button expand="block" color="primary" (click)="onRestartGame()">Jugar de Nuevo</ion-button>
         <ion-button expand="block" fill="outline" color="medium" (click)="onReturnToMenu()">Volver al Menú</ion-button>

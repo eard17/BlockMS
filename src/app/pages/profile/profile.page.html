@@ -1,0 +1,96 @@
+<ion-content [fullscreen]="true">
+  <div class="profile-page">
+    
+    <!-- Header -->
+    <header class="profile-header">
+      <button class="back-btn" (click)="goBack()" aria-label="Volver">
+        <ion-icon name="arrow-back-outline"></ion-icon>
+      </button>
+      <h1 class="profile-title">Mi Perfil</h1>
+      <div class="placeholder-spacer"></div>
+    </header>
+
+    <!-- Player Card -->
+    <div class="player-card">
+      <div class="player-info">
+        <div class="avatar-container">
+          @if (auth.avatarUrl()) {
+            <img class="profile-avatar" [src]="auth.avatarUrl()!" [alt]="auth.displayName()" />
+          } @else {
+            <ion-icon name="person-circle-outline" class="profile-avatar-icon"></ion-icon>
+          }
+        </div>
+        <div class="player-details">
+          <h2 class="player-name">{{ auth.displayName() || 'Invitado' }}</h2>
+          <span class="player-title-badge">{{ save.progress().selectedTitle }}</span>
+        </div>
+      </div>
+
+      <!-- Level Progress -->
+      <div class="level-progress-section">
+        <div class="level-labels">
+          <span class="level-text">Nivel {{ lvlInfo.level }}</span>
+          <span class="xp-text">{{ lvlInfo.xpInLevel }} / {{ lvlInfo.nextLevelCost }} XP</span>
+        </div>
+        <div class="progress-bar-container">
+          <div class="progress-bar-fill" [style.width.%]="lvlInfo.percent"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Titles Section -->
+    <section class="profile-section">
+      <h3 class="section-title">🏆 Títulos Desbloqueados</h3>
+      <div class="titles-list">
+        @for (title of save.progress().unlockedTitles; track title) {
+          <button 
+            class="title-chip" 
+            [class.title-chip--active]="save.progress().selectedTitle === title"
+            (click)="equipTitle(title)"
+          >
+            {{ title }}
+            @if (save.progress().selectedTitle === title) {
+              <span class="active-check">✓</span>
+            }
+          </button>
+        }
+      </div>
+    </section>
+
+    <!-- Achievements Section -->
+    <section class="profile-section">
+      <h3 class="section-title">🏅 Logros y Medallas</h3>
+      <div class="achievements-grid">
+        @for (ach of achievements; track ach.id) {
+          @let isUnlocked = save.progress().unlockedAchievements.includes(ach.id);
+          <div class="achievement-card" [class.achievement-card--unlocked]="isUnlocked">
+            <div class="medal-icon" [class]="'medal-icon--' + ach.tier">
+              @if (ach.tier === 'gold') { 🥇 }
+              @else if (ach.tier === 'silver') { 🥈 }
+              @else { 🥉 }
+            </div>
+            <div class="achievement-details">
+              <h4 class="achievement-name">{{ ach.title }}</h4>
+              <p class="achievement-desc">{{ ach.desc }}</p>
+              
+              <!-- Progress indicator -->
+              <div class="achievement-progress">
+                <div class="ach-bar-container">
+                  <div 
+                    class="ach-bar-fill" 
+                    [class]="'ach-bar-fill--' + ach.tier"
+                    [style.width.%]="isUnlocked ? 100 : Math.min(100, (ach.getCurrent() / ach.target) * 100)"
+                  ></div>
+                </div>
+                <span class="ach-progress-text">
+                  {{ isUnlocked ? ach.target : ach.getCurrent() }} / {{ ach.target }}
+                </span>
+              </div>
+            </div>
+          </div>
+        }
+      </div>
+    </section>
+
+  </div>
+</ion-content>
