@@ -1,22 +1,86 @@
 <ion-header>
-  <ion-toolbar>
+  <ion-toolbar color="primary">
     <ion-buttons slot="start">
       <ion-button (click)="goBack()"><ion-icon slot="icon-only" name="arrow-back-outline"></ion-icon></ion-button>
     </ion-buttons>
-    <ion-title>Modo Duelo</ion-title>
+    <ion-title>⚔️ Modo Duelo</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content class="challenge-content">
+<ion-content class="challenge-content ion-padding">
 
-  <section class="challenge-section">
-    <h2 class="challenge-section__title">⚔️ Jugar un Reto</h2>
-    <p class="challenge-section__desc">Ingresa el código BMS que recibiste.</p>
+  <!-- 1. LOGIN OPCIONAL FLOW -->
+  @if (!auth.isAuthenticated()) {
+    <ion-card class="login-prompt-card">
+      <ion-card-header>
+        <ion-card-title>🔑 Activar Duelos Online</ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        <p>Inicia sesión con tu cuenta para desbloquear el Modo Duelo en línea, rankings globales, misiones y ligas semanales.</p>
+        <ion-button expand="block" color="secondary" class="ion-margin-top" (click)="goToLogin()">
+          Iniciar Sesión
+        </ion-button>
+      </ion-card-content>
+    </ion-card>
+  } @else {
+    <!-- 2. DUELOS RECIBIDOS / ACTIVOS LIST -->
+    <ion-card class="duels-list-card">
+      <ion-card-header>
+        <ion-card-title>🛡️ Tus Duelos Activos</ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        @if (myDuels().length === 0) {
+          <p class="ion-text-center ion-padding">No tienes duelos activos en este momento. ¡Crea uno abajo y reta a tus amigos!</p>
+        } @else {
+          <ion-list lines="full" class="duels-list">
+            @for (duel of myDuels(); track duel.id) {
+              <ion-item class="duel-item">
+                <ion-label>
+                  <h2><strong>{{ duel.creator_username }}</strong> vs <strong>{{ duel.opponent_username || '???' }}</strong></h2>
+                  <p>Reto: {{ duel.creator_score.toLocaleString() }} pts</p>
+                  @if (duel.status === 'completed') {
+                    <p>Resultado: {{ duel.opponent_score.toLocaleString() }} pts</p>
+                  }
+                </ion-label>
+                <ion-note slot="end" class="ion-text-right">
+                  @if (duel.status === 'pending') {
+                    <ion-badge color="warning">Pendiente</ion-badge>
+                    @if (duel.creator_id !== auth.user()?.id) {
+                      <ion-button size="small" color="success" fill="solid" (click)="playDuelFromList(duel)">
+                        <ion-icon name="play-outline" slot="start"></ion-icon> Jugar
+                      </ion-button>
+                    }
+                  } @else {
+                    @if (duel.creator_score > (duel.opponent_score ?? 0)) {
+                      <ion-badge color="success">Ganó {{ duel.creator_username }}</ion-badge>
+                    } @else {
+                      <ion-badge color="success">Ganó {{ duel.opponent_username }}</ion-badge>
+                    }
+                  }
+                </ion-note>
+              </ion-item>
+            }
+          </ion-list>
+        }
+      </ion-card-content>
+    </ion-card>
+  }
+
+  <!-- 3. VERIFICAR CÓDIGO / ID DUELO -->
+  <section class="challenge-section ion-margin-top">
+    <h2 class="challenge-section__title">⚔️ Recibir Reto / Duelo</h2>
+    <p class="challenge-section__desc">Ingresa el ID de Duelo (UUID) o código BMS que te enviaron.</p>
     <div class="challenge-input-group">
-      <ion-input placeholder="BMS-abc123-7ps-SohnSm9z" autocomplete="off" autocapitalize="off"
+      <ion-input placeholder="Pega el ID del Duelo o código BMS aquí" autocomplete="off" autocapitalize="off"
         class="challenge-input" [value]="codeInput()"
         (ionInput)="onCodeInput($any($event).target.value)"></ion-input>
-      <ion-button expand="block" (click)="onValidateCode()">Verificar Código</ion-button>
+      <ion-button expand="block" (click)="onValidateCode()">
+        @if (rankingLoading()) {
+          <ion-spinner name="crescent" size="small"></ion-spinner> Verificando...
+        } @else {
+          Verificar Duelo
+        }
+      </ion-button>
     </div>
     @if (validationErr()) {
       <p class="challenge-error">{{ validationErr() }}</p>
@@ -24,75 +88,62 @@
     @if (decoded(); as d) {
       <div class="challenge-decoded-card" role="status">
         <div class="challenge-decoded-card__row">
-          <span class="challenge-decoded-card__label">Creador</span>
+          <span class="challenge-decoded-card__label">Retador</span>
           <span class="challenge-decoded-card__value">{{ d.creatorName || '—' }}</span>
         </div>
         <div class="challenge-decoded-card__row">
-          <span class="challenge-decoded-card__label">Puntuación objetivo</span>
+          <span class="challenge-decoded-card__label">Record a Vencer</span>
           <span class="challenge-decoded-card__value challenge-decoded-card__value--score">
-            {{ d.targetScore.toLocaleString() }}
+            {{ d.targetScore.toLocaleString() }} pts
           </span>
         </div>
-        <ion-button expand="block" color="primary" class="challenge-decoded-card__play-btn"
-          (click)="onPlayChallenge()">▶ Jugar este Reto</ion-button>
+        <ion-button expand="block" color="success" class="challenge-decoded-card__play-btn"
+          (click)="onPlayChallenge()">▶ Jugar y Competir</ion-button>
       </div>
     }
   </section>
 
-  @if (decoded()) {
-    <div class="challenge-divider"></div>
-    <section class="challenge-section">
-      <h2 class="challenge-section__title">🌐 Ranking Online</h2>
-      <p class="challenge-section__desc">Participantes que jugaron este reto.</p>
-      <ion-button expand="block" fill="outline" size="small" (click)="onLoadRanking()">
-        {{ rankingLoading() ? 'Cargando…' : 'Ver ranking' }}
-      </ion-button>
-      @if (ranking().length > 0) {
-        <ol class="challenge-ranking">
-          @for (entry of ranking(); track entry.username; let i = $index) {
-            <li class="challenge-ranking__row">
-              <span class="challenge-ranking__pos">{{ i + 1 }}</span>
-              <span class="challenge-ranking__name">{{ entry.username }}</span>
-              <span class="challenge-ranking__score">{{ entry.score.toLocaleString() }}</span>
-            </li>
-          }
-        </ol>
-      }
-    </section>
-  }
-
+  <!-- 4. GENERAR RETO / DUELO -->
   <div class="challenge-divider"></div>
 
-  <section class="challenge-section">
-    <h2 class="challenge-section__title">🏆 Generar Tu Reto</h2>
+  <section class="challenge-section ion-margin-top">
+    <h2 class="challenge-section__title">🏆 Reta a un Amigo</h2>
     @if (canGenerate()) {
       <div class="challenge-generate">
-        <p class="challenge-section__desc">Comparte tu récord y reta a otros jugadores.</p>
+        <p class="challenge-section__desc">Comparte tu puntuación clásica actual y reta a quien quieras.</p>
         <div class="challenge-generate__meta">
-          <span class="challenge-generate__label">Semilla de sesión</span>
-          <span class="challenge-generate__value challenge-generate__value--seed">
-            {{ gameState.sessionSeed() || '—' }}
-          </span>
-        </div>
-        <div class="challenge-generate__meta">
-          <span class="challenge-generate__label">Tu récord</span>
+          <span class="challenge-generate__label">Tu Puntuación</span>
           <span class="challenge-generate__value">{{ save.progress().highScores['classic'].toLocaleString() }} pts</span>
         </div>
-        <ion-input placeholder="Tu nombre (máx. 8 caracteres)" maxlength="8" autocomplete="off"
-          class="challenge-input" [value]="creatorName()"
-          (ionInput)="onCreatorNameInput($any($event).target.value)"></ion-input>
-        <ion-button expand="block" fill="outline" (click)="onGenerateCode()">Generar Código BMS</ion-button>
+
+        @if (auth.isAuthenticated()) {
+          <ion-button expand="block" color="secondary" (click)="onGenerateDuel()">
+            @if (duelGenerationLoading()) {
+              <ion-spinner name="crescent" size="small"></ion-spinner> Generando Duelo...
+            } @else {
+              <ion-icon name="share-social-outline" slot="start"></ion-icon> Generar Link Duelo Online
+            }
+          </ion-button>
+        } @else {
+          <div class="offline-generation-group">
+            <ion-input placeholder="Tu Apodo (máx. 8 letras)" maxlength="8" autocomplete="off"
+              class="challenge-input" [value]="creatorName()"
+              (ionInput)="onCreatorNameInput($any($event).target.value)"></ion-input>
+            <ion-button expand="block" fill="outline" (click)="onGenerateCode()">Generar Código Offline</ion-button>
+          </div>
+        }
+
         @if (generatedCode()) {
           <div class="challenge-code-card">
             <code class="challenge-code-card__code">{{ generatedCode() }}</code>
             <ion-button size="small" [fill]="copied() ? 'solid' : 'outline'" [color]="copied() ? 'success' : 'primary'"
-              (click)="onCopy()">{{ copied() ? '✓ Copiado' : '📋 Copiar' }}</ion-button>
+              (click)="onCopy()">{{ copied() ? '✓ Copiado' : '📋 Copiar Link/Código' }}</ion-button>
           </div>
         }
       </div>
     } @else {
       <p class="challenge-section__desc challenge-section__desc--muted">
-        Juega una partida en Modo Clásico para generar tu primer reto.
+        Primero juega una partida en el Modo Clásico para registrar un récord que poder compartir.
       </p>
     }
   </section>

@@ -32,4 +32,90 @@ export class SyncService {
       return [];
     }
   }
+
+  async createDuel(
+    seed: string,
+    boardDimension: number,
+    pieceSet: string,
+    difficulty: string,
+    score: number
+  ): Promise<string | null> {
+    const db = this.auth.getClient();
+    const userId = this.auth.user()?.id;
+    if (!db || !userId) return null;
+    const username = this.auth.displayName() || 'Anón';
+    try {
+      const { data, error } = await db
+        .from('duels')
+        .insert({
+          creator_id: userId,
+          creator_username: username,
+          seed,
+          board_dimension: boardDimension,
+          piece_set: pieceSet,
+          difficulty,
+          creator_score: score,
+          status: 'pending'
+        })
+        .select('id')
+        .single();
+      if (error) throw error;
+      return data?.id || null;
+    } catch {
+      return null;
+    }
+  }
+
+  async submitDuelResult(duelId: string, score: number): Promise<boolean> {
+    const db = this.auth.getClient();
+    const userId = this.auth.user()?.id;
+    if (!db || !userId) return false;
+    const username = this.auth.displayName() || 'Anón';
+    try {
+      const { error } = await db
+        .from('duels')
+        .update({
+          opponent_id: userId,
+          opponent_username: username,
+          opponent_score: score,
+          status: 'completed'
+        })
+        .eq('id', duelId);
+      return !error;
+    } catch {
+      return false;
+    }
+  }
+
+  async fetchDuelDetails(duelId: string): Promise<any | null> {
+    const db = this.auth.getClient();
+    if (!db) return null;
+    try {
+      const { data, error } = await db
+        .from('duels')
+        .select('*')
+        .eq('id', duelId)
+        .single();
+      if (error) return null;
+      return data;
+    } catch {
+      return null;
+    }
+  }
+
+  async fetchMyActiveDuels(): Promise<any[]> {
+    const db = this.auth.getClient();
+    const userId = this.auth.user()?.id;
+    if (!db || !userId) return [];
+    try {
+      const { data } = await db
+        .from('duels')
+        .select('*')
+        .or(`creator_id.eq.${userId},opponent_id.eq.${userId}`)
+        .order('created_at', { ascending: false });
+      return data ?? [];
+    } catch {
+      return [];
+    }
+  }
 }

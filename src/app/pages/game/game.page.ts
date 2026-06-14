@@ -33,6 +33,7 @@ export class GamePageComponent implements AfterViewInit, OnDestroy {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   private phaserGame: any = null;
   private challengeSeed: string | null = null;
+  private duelId: string | null = null;
 
   readonly showGate = signal(false);
   readonly showUnlockChoice = signal(false);
@@ -59,10 +60,12 @@ export class GamePageComponent implements AfterViewInit, OnDestroy {
     const state = history.state;
     if (state?.challengeSeed) {
       this.challengeSeed = state.challengeSeed;
+      this.duelId = state.duelId ?? null;
       this.gameState.setMode('challenge');
       this.gameState.setTargetScore(state.targetScore ?? 0);
     } else {
       this.gameState.resetSession();
+      this.duelId = null;
     }
     await this.initPhaserGame();
   }
@@ -128,6 +131,9 @@ export class GamePageComponent implements AfterViewInit, OnDestroy {
       this.isNewRecord.set(isNew);
       this.isGameOver.set(true);
       this.sync.submitScore(score, mode, elapsed);
+      if (this.duelId) {
+        this.sync.submitDuelResult(this.duelId, score);
+      }
     });
   }
 
