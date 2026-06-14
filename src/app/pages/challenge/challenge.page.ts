@@ -45,6 +45,7 @@ export class ChallengePageComponent implements OnInit {
   readonly activeDuel = signal<any | null>(null);
   readonly myDuels = signal<any[]>([]);
   readonly duelGenerationLoading = signal(false);
+  readonly hasPlayedDaily = signal(false);
 
   readonly canGenerate = computed(() => this.save.progress().highScores['classic'] > 0);
 
@@ -72,6 +73,7 @@ export class ChallengePageComponent implements OnInit {
     });
 
     this.loadMyDuels();
+    this.checkDailyChallengeStatus();
   }
 
   async loadMyDuels() {
@@ -79,6 +81,22 @@ export class ChallengePageComponent implements OnInit {
       const duels = await this.sync.fetchMyActiveDuels();
       this.myDuels.set(duels);
     }
+  }
+
+  async checkDailyChallengeStatus() {
+    if (this.auth.isAuthenticated()) {
+      const seed = this.sync.getDailySeed();
+      const played = await this.sync.hasPlayedDailyChallenge(seed);
+      this.hasPlayedDaily.set(played);
+    }
+  }
+
+  playDailyChallenge() {
+    this.nav.navigateForward('/game', {
+      state: {
+        isDailyChallenge: true
+      }
+    });
   }
 
   goBack() { this.nav.back(); }

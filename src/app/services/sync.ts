@@ -118,4 +118,129 @@ export class SyncService {
       return [];
     }
   }
+
+  getDailySeed(): string {
+    const d = new Date();
+    const y = d.getFullYear();
+    const m = String(d.getMonth() + 1).padStart(2, '0');
+    const day = String(d.getDate()).padStart(2, '0');
+    return `BMS-DAILY-${y}-${m}-${day}`;
+  }
+
+  async hasPlayedDailyChallenge(seed: string): Promise<boolean> {
+    const db = this.auth.getClient();
+    const userId = this.auth.user()?.id;
+    if (!db || !userId) return false;
+    try {
+      const { data } = await db
+        .from('daily_challenge_scores')
+        .select('id')
+        .eq('user_id', userId)
+        .eq('seed', seed);
+      return !!(data && data.length > 0);
+    } catch {
+      return false;
+    }
+  }
+
+  async submitDailyChallengeScore(score: number, seed: string): Promise<boolean> {
+    const db = this.auth.getClient();
+    const userId = this.auth.user()?.id;
+    if (!db || !userId) return false;
+    const username = this.auth.displayName() || 'Anón';
+    try {
+      const { error } = await db
+        .from('daily_challenge_scores')
+        .insert({
+          user_id: userId,
+          username,
+          score,
+          seed
+        });
+      return !error;
+    } catch {
+      return false;
+    }
+  }
+
+  async fetchDailyLeaderboard(seed: string): Promise<RankingEntry[]> {
+    const db = this.auth.getClient();
+    if (!db) return [];
+    try {
+      const { data } = await db
+        .from('daily_challenge_scores')
+        .select('username, score')
+        .eq('seed', seed)
+        .order('score', { ascending: false })
+        .limit(50);
+      return (data ?? []) as RankingEntry[];
+    } catch {
+      return [];
+    }
+  }
+
+  async fetchWeeklyLeagueLeaderboard(): Promise<any[]> {
+    const db = this.auth.getClient();
+    if (!db) return [];
+    try {
+      const { data } = await db
+        .from('weekly_leagues')
+        .select('*')
+        .order('league_points', { ascending: false })
+        .limit(50);
+      return data ?? [];
+    } catch {
+      return [];
+    }
+  }
+
+  async fetchMyLeagueProfile(): Promise<any | null> {
+    const db = this.auth.getClient();
+    const userId = this.auth.user()?.id;
+    if (!db || !userId) return null;
+    try {
+      const { data, error } = await db
+        .from('weekly_leagues')
+        .select('*')
+        .eq('user_id', userId)
+        .maybeSingle();
+      if (error) return null;
+      return data;
+    } catch {
+      return null;
+    }
+  }
+
+  async addLeaguePoints(points: number): Promise<boolean> {
+    const db = this.auth.getClient();
+    const userId = this.auth.user()?.id;
+    if (!db || !userId) return false;
+    const username = this.auth.displayName() || 'Anón';
+    try {
+      const profile = await this.fetchMyLeagueProfile();
+      if (profile) {
+        const nextPoints = Math.max(0, profile.league_points + points);
+        const { error } = await db
+          .from('weekly_leagues')
+          .update({
+            league_points: nextPoints,
+            updated_at: new Date().toISOString()
+          })
+          .eq('user_id', userId);
+        return !error;
+      } else {
+        const { error } = await db
+          .from('weekly_leagues')
+          .insert({
+            user_id: userId,
+            username,
+            league_points: Math.max(0, points),
+            league_tier: 'bronze'
+          });
+        return !error;
+      }
+    } catch {
+      return false;
+    }
+  }
 }

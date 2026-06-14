@@ -21,8 +21,26 @@
           Iniciar Sesión
         </ion-button>
       </ion-card-content>
-    </ion-card>
   } @else {
+    <!-- DAILY CHALLENGE SECTION -->
+    <ion-card class="daily-challenge-card">
+      <ion-card-header>
+        <ion-card-title>📅 Desafío Diario Global</ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        <p>Juega la semilla única de hoy. Todos los jugadores del mundo tienen las mismas piezas en el mismo orden. ¡Solo tienes un intento al día para sumar +50 LP a tu liga semanal!</p>
+        @if (hasPlayedDaily()) {
+          <ion-button expand="block" disabled="true" color="medium" class="ion-margin-top">
+            ✓ Reto Diario Completado Hoy
+          </ion-button>
+        } @else {
+          <ion-button expand="block" color="secondary" class="ion-margin-top" (click)="playDailyChallenge()">
+            ▶ Jugar Reto Diario
+          </ion-button>
+        }
+      </ion-card-content>
+    </ion-card>
+
     <!-- 2. DUELOS RECIBIDOS / ACTIVOS LIST -->
     <ion-card class="duels-list-card">
       <ion-card-header>

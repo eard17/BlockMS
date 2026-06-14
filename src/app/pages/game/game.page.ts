@@ -34,6 +34,7 @@ export class GamePageComponent implements AfterViewInit, OnDestroy {
   private phaserGame: any = null;
   private challengeSeed: string | null = null;
   private duelId: string | null = null;
+  private isDailyChallenge = false;
 
   readonly showGate = signal(false);
   readonly showUnlockChoice = signal(false);
@@ -58,14 +59,22 @@ export class GamePageComponent implements AfterViewInit, OnDestroy {
 
   async ngAfterViewInit() {
     const state = history.state;
-    if (state?.challengeSeed) {
+    if (state?.isDailyChallenge) {
+      this.isDailyChallenge = true;
+      this.challengeSeed = this.sync.getDailySeed();
+      this.gameState.setMode('challenge');
+      this.gameState.setTargetScore(0);
+      this.duelId = null;
+    } else if (state?.challengeSeed) {
       this.challengeSeed = state.challengeSeed;
       this.duelId = state.duelId ?? null;
+      this.isDailyChallenge = false;
       this.gameState.setMode('challenge');
       this.gameState.setTargetScore(state.targetScore ?? 0);
     } else {
       this.gameState.resetSession();
       this.duelId = null;
+      this.isDailyChallenge = false;
     }
     await this.initPhaserGame();
   }
@@ -131,8 +140,14 @@ export class GamePageComponent implements AfterViewInit, OnDestroy {
       this.isNewRecord.set(isNew);
       this.isGameOver.set(true);
       this.sync.submitScore(score, mode, elapsed);
+      if (this.isDailyChallenge) {
+        const seed = this.sync.getDailySeed();
+        this.sync.submitDailyChallengeScore(score, seed);
+        this.sync.addLeaguePoints(50);
+      }
       if (this.duelId) {
         this.sync.submitDuelResult(this.duelId, score);
+        this.sync.addLeaguePoints(30);
       }
     });
   }

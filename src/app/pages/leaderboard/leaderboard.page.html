@@ -16,6 +16,29 @@
   </div>
   @if (loading()) {
     <p class="lb-empty">Cargando…</p>
+  } @else if (selectedMode() === 'weekly') {
+    @if (weeklyEntries().length === 0) {
+      <p class="lb-empty">Sin datos en esta liga aún.</p>
+    } @else {
+      <ol class="lb-list">
+        @for (e of weeklyEntries(); track e.id; let i = $index) {
+          <li class="lb-row" [class.lb-row--top]="i < 3">
+            <span class="lb-pos">{{ i + 1 }}</span>
+            <span class="lb-name">
+              {{ e.username }} 
+              <span class="league-badge" [ngClass]="'league-' + e.league_tier">
+                @if (e.league_tier === 'bronze') { 🥉 }
+                @else if (e.league_tier === 'silver') { 🥈 }
+                @else if (e.league_tier === 'gold') { 🥇 }
+                @else if (e.league_tier === 'diamond') { 💎 }
+                {{ e.league_tier | titlecase }}
+              </span>
+            </span>
+            <span class="lb-score">{{ e.league_points.toLocaleString() }} LP</span>
+          </li>
+        }
+      </ol>
+    }
   } @else if (entries().length === 0) {
     <p class="lb-empty">Sin datos aún.</p>
   } @else {
