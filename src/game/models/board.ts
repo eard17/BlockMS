@@ -29,7 +29,7 @@ export class Board {
     return true;
   }
 
-  place(shape: PieceShape, row: number, col: number, color: string, id: string): number {
+  place(shape: PieceShape, row: number, col: number, color: string, id: string): { clearedCount: number; clearedRows: number[]; clearedCols: number[] } {
     for (let r = 0; r < shape.length; r++) {
       const shapeRow = shape[r];
       if (!shapeRow) continue;
@@ -39,7 +39,7 @@ export class Board {
         if (cell) { cell.filled = true; cell.color = color; cell.id = id; }
       }
     }
-    return this.clearCompleteLines();
+    return this.clearCompleteLinesDetail();
   }
 
   hasAnyValidPlacement(shape: PieceShape): boolean {
@@ -66,6 +66,10 @@ export class Board {
   }
 
   private clearCompleteLines(): number {
+    return this.clearCompleteLinesDetail().clearedCount;
+  }
+
+  private clearCompleteLinesDetail(): { clearedCount: number; clearedRows: number[]; clearedCols: number[] } {
     // Step 1: Detect all complete rows and columns WITHOUT modifying the grid
     const completedRows = new Set<number>();
     for (let r = 0; r < this.dimension; r++) {
@@ -89,7 +93,11 @@ export class Board {
       this.clearCol(c);
     }
 
-    return completedRows.size + completedCols.size;
+    return {
+      clearedCount: completedRows.size + completedCols.size,
+      clearedRows: Array.from(completedRows),
+      clearedCols: Array.from(completedCols),
+    };
   }
 
   private clearRow(r: number) {

@@ -8,3 +8,5 @@ Thumbs.db
 .idea/
 www/
 android/
+upload_certificate.pem
+sprints/

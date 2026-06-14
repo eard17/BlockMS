@@ -1,4 +1,5 @@
 import Phaser from 'phaser';
+import { Haptics, ImpactStyle, NotificationType } from '@capacitor/haptics';
 import { Board } from '../models/board';
 import { getPieceSet, PieceShape } from '../models/piece-definitions';
 import { Prng } from '../systems/prng';
@@ -13,8 +14,98 @@ const CELL_GAP   = 2;
 const TRAY_SCALE = 0.55;
 const DRAG_SCALE = 1.15;
 const CORNER_R   = 6;
+const DRAG_OFFSET_Y = 55;
 
 interface TrayHit { x: number; y: number; halfW: number; halfH: number; }
+
+class AudioSynth {
+  private static ctx: AudioContext | null = null;
+
+  private static getContext(): AudioContext | null {
+    if (!this.ctx) {
+      const AudioContextClass = (window.AudioContext || (window as any).webkitAudioContext);
+      if (AudioContextClass) {
+        this.ctx = new AudioContextClass();
+      }
+    }
+    if (this.ctx && this.ctx.state === 'suspended') {
+      this.ctx.resume();
+    }
+    return this.ctx;
+  }
+
+  static playPlace() {
+    const ctx = this.getContext();
+    if (!ctx) return;
+    const osc = ctx.createOscillator();
+    const gain = ctx.createGain();
+    osc.type = 'triangle';
+    osc.frequency.setValueAtTime(150, ctx.currentTime);
+    osc.frequency.exponentialRampToValueAtTime(80, ctx.currentTime + 0.1);
+    gain.gain.setValueAtTime(0.3, ctx.currentTime);
+    gain.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 0.1);
+    osc.connect(gain);
+    gain.connect(ctx.destination);
+    osc.start();
+    osc.stop(ctx.currentTime + 0.1);
+  }
+
+  static playClear(combo: number) {
+    const ctx = this.getContext();
+    if (!ctx) return;
+    const semitones = [0, 2, 4, 7, 9, 12];
+    const semitoneOffset = semitones[Math.min(combo, semitones.length - 1)] ?? 0;
+    const baseFreq = 330;
+    const freq = baseFreq * Math.pow(2, semitoneOffset / 12);
+    const now = ctx.currentTime;
+    const playNote = (f: number, delay: number, dur: number) => {
+      const osc = ctx.createOscillator();
+      const gain = ctx.createGain();
+      osc.type = 'sine';
+      osc.frequency.setValueAtTime(f, now + delay);
+      gain.gain.setValueAtTime(0, now + delay);
+      gain.gain.linearRampToValueAtTime(0.25, now + delay + 0.02);
+      gain.gain.exponentialRampToValueAtTime(0.01, now + delay + dur);
+      osc.connect(gain);
+      gain.connect(ctx.destination);
+      osc.start(now + delay);
+      osc.stop(now + delay + dur);
+    };
+    if (combo >= 5) {
+      playNote(freq, 0, 0.3);
+      playNote(freq * 1.25, 0.05, 0.3);
+      playNote(freq * 1.5, 0.10, 0.4);
+      playNote(freq * 2.0, 0.15, 0.5);
+    } else {
+      playNote(freq, 0, 0.25);
+      playNote(freq * 1.5, 0.06, 0.3);
+    }
+  }
+
+  static playGameOver() {
+    const ctx = this.getContext();
+    if (!ctx) return;
+    const now = ctx.currentTime;
+    const osc1 = ctx.createOscillator();
+    const osc2 = ctx.createOscillator();
+    const gain = ctx.createGain();
+    osc1.type = 'sawtooth';
+    osc2.type = 'triangle';
+    osc1.frequency.setValueAtTime(220, now);
+    osc1.frequency.linearRampToValueAtTime(110, now + 0.6);
+    osc2.frequency.setValueAtTime(225, now);
+    osc2.frequency.linearRampToValueAtTime(112, now + 0.6);
+    gain.gain.setValueAtTime(0.2, now);
+    gain.gain.linearRampToValueAtTime(0.01, now + 0.6);
+    osc1.connect(gain);
+    osc2.connect(gain);
+    gain.connect(ctx.destination);
+    osc1.start(now);
+    osc1.stop(now + 0.6);
+    osc2.start(now);
+    osc2.stop(now + 0.6);
+  }
+}
 
 export class GameScene extends Phaser.Scene {
   private board!: Board;
@@ -36,6 +127,7 @@ export class GameScene extends Phaser.Scene {
   private trayGfx!: Phaser.GameObjects.Graphics;
   private ghostGfx!: Phaser.GameObjects.Graphics;
   private trayContainers: (Phaser.GameObjects.Container | null)[] = [null, null, null];
+  private particleEmitter!: Phaser.GameObjects.Particles.ParticleEmitter;
 
   private dragging: { slotIdx: number; shape: PieceShape; gfx: Phaser.GameObjects.Container } | null = null;
   private colors: string[] = [];
@@ -43,6 +135,22 @@ export class GameScene extends Phaser.Scene {
   private elapsed = 0;
 
   constructor() { super({ key: 'GameScene' }); }
+
+  private triggerHaptic(style: 'light' | 'medium' | 'success' | 'warning') {
+    try {
+      if (style === 'light') {
+        Haptics.impact({ style: ImpactStyle.Light });
+      } else if (style === 'medium') {
+        Haptics.impact({ style: ImpactStyle.Medium });
+      } else if (style === 'success') {
+        Haptics.notification({ type: NotificationType.Success });
+      } else if (style === 'warning') {
+        Haptics.notification({ type: NotificationType.Warning });
+      }
+    } catch (e) {
+      // safe ignore
+    }
+  }
 
   create() {
     // Read data from module context (no timing issue)
@@ -71,6 +179,29 @@ export class GameScene extends Phaser.Scene {
     this.drawTray();
     this.setupInput();
     this.setupEvents();
+
+    // Setup custom dynamic particle texture in memory
+    if (!this.textures.exists('particle_dot')) {
+      let pDot = this.textures.createCanvas('particle_dot', 8, 8);
+      if (pDot) {
+        let ctx = pDot.getContext();
+        ctx.fillStyle = '#ffffff';
+        ctx.beginPath();
+        ctx.arc(4, 4, 4, 0, Math.PI * 2);
+        ctx.fill();
+        pDot.refresh();
+      }
+    }
+
+    this.particleEmitter = this.add.particles(0, 0, 'particle_dot', {
+      speed: { min: 60, max: 200 },
+      angle: { min: 0, max: 360 },
+      scale: { start: 0.8, end: 0.1 },
+      lifespan: 500,
+      gravityY: 150,
+      blendMode: 'ADD',
+      frequency: -1
+    }).setDepth(6);
 
     // Disable browser touch-action on the canvas so it doesn't scroll
     const canvas = this.game.canvas;
@@ -192,6 +323,8 @@ export class GameScene extends Phaser.Scene {
     const diff    = this.config.difficulty ?? 'medium';
     const indices = this.pieceGen.selectTrio(this.board, this.rng, this.pieces, diff);
     if (indices === null) {
+      this.triggerHaptic('warning');
+      AudioSynth.playGameOver();
       this.game.events.emit('bms:game-over');
       return;
     }
@@ -199,8 +332,13 @@ export class GameScene extends Phaser.Scene {
       const idx  = indices[i];
       this.tray[i] = (idx !== -1 && idx < this.pieces.length) ? this.pieces[idx]! : null;
     }
-    if (!this.tray.some(p => p && this.board.hasAnyValidPlacement(p)))
-      this.time.delayedCall(200, () => this.game.events.emit('bms:game-over'));
+    if (!this.tray.some(p => p && this.board.hasAnyValidPlacement(p))) {
+      this.time.delayedCall(200, () => {
+        this.triggerHaptic('warning');
+        AudioSynth.playGameOver();
+        this.game.events.emit('bms:game-over');
+      });
+    }
   }
 
   // ── Input ─────────────────────────────────────────────────────────────────
@@ -227,7 +365,7 @@ export class GameScene extends Phaser.Scene {
 
   private onMove(ptr: Phaser.Input.Pointer) {
     if (!this.dragging) return;
-    this.dragging.gfx.setPosition(ptr.x, ptr.y);
+    this.dragging.gfx.setPosition(ptr.x, ptr.y - DRAG_OFFSET_Y);
     this.drawGhost(ptr.x, ptr.y);
   }
 
@@ -238,8 +376,9 @@ export class GameScene extends Phaser.Scene {
 
   private startDrag(slotIdx: number, shape: PieceShape, x: number, y: number) {
     this.trayContainers[slotIdx]?.setVisible(false);
-    const gfx = this.buildPieceGfx(shape, x, y, DRAG_SCALE, slotIdx, 10);
+    const gfx = this.buildPieceGfx(shape, x, y - DRAG_OFFSET_Y, DRAG_SCALE, slotIdx, 10);
     this.dragging = { slotIdx, shape, gfx };
+    this.triggerHaptic('light');
   }
 
   private tryDrop(x: number, y: number) {
@@ -253,7 +392,8 @@ export class GameScene extends Phaser.Scene {
     if (cell && this.board.canPlace(shape, cell.row, cell.col)) {
       const colorStr  = this.colors[slotIdx % this.colors.length] ?? this.colors[0]!;
       const id        = `p-${Date.now()}-${slotIdx}`;
-      const cleared   = this.board.place(shape, cell.row, cell.col, colorStr, id);
+      const clearedInfo = this.board.place(shape, cell.row, cell.col, colorStr, id);
+      const cleared = clearedInfo.clearedCount;
       const blocks    = this.scoreCalc.countBlocks(shape);
       const combo     = cleared > 0 ? this.gameState.comboCount() + 1 : 0;
       const pts       = this.scoreCalc.calculateTurnScore(blocks, cleared, combo);
@@ -264,18 +404,68 @@ export class GameScene extends Phaser.Scene {
       this.tray[slotIdx] = null;
       this.drawBoard();
 
+      // Trigger dynamic particles for all cleared cells
+      const dim = this.board.dimension;
+      const step = this.cellSize + CELL_GAP;
+      const clearedCells: { r: number; c: number }[] = [];
+
+      clearedInfo.clearedRows.forEach(r => {
+        for (let c = 0; c < dim; c++) {
+          clearedCells.push({ r, c });
+        }
+      });
+      clearedInfo.clearedCols.forEach(c => {
+        for (let r = 0; r < dim; r++) {
+          if (!clearedInfo.clearedRows.includes(r)) {
+            clearedCells.push({ r, c });
+          }
+        }
+      });
+
+      clearedCells.forEach(cellCoords => {
+        const cx = this.boardX + cellCoords.c * step + this.cellSize / 2;
+        const cy = this.boardY + cellCoords.r * step + this.cellSize / 2;
+        this.particleEmitter.explode(12, cx, cy);
+      });
+
+      // Juice: Screen Shake, Haptics and Synthesized Sounds
+      if (cleared > 0) {
+        let shakeDuration = 100;
+        let shakeIntensity = 0.005;
+        if (cleared === 2) {
+          shakeDuration = 150;
+          shakeIntensity = 0.010;
+        } else if (cleared === 3) {
+          shakeDuration = 200;
+          shakeIntensity = 0.015;
+        } else if (cleared >= 4) {
+          shakeDuration = 250;
+          shakeIntensity = 0.022;
+        }
+        this.cameras.main.shake(shakeDuration, shakeIntensity);
+        this.triggerHaptic('success');
+        AudioSynth.playClear(combo);
+        if (combo > 1) {
+          this.showComboPopup(cell.row, cell.col, combo);
+        }
+      } else {
+        this.triggerHaptic('medium');
+        AudioSynth.playPlace();
+      }
+
       if (this.tray.every(p => p === null)) {
         this.game.events.emit('bms:tray-empty');
         this.fillTray();
       }
-      // Re-draw tray (shows remaining pieces or new tray)
       this.drawTray();
 
       const hasMove = this.tray.some(p => p && this.board.hasAnyValidPlacement(p));
-      if (!hasMove && this.tray.some(p => p !== null))
+      if (!hasMove && this.tray.some(p => p !== null)) {
+        this.triggerHaptic('warning');
+        AudioSynth.playGameOver();
         this.time.delayedCall(300, () => this.game.events.emit('bms:game-over'));
+      }
     } else {
-      // Snap back
       this.trayContainers[slotIdx]?.setVisible(true);
     }
   }
@@ -300,11 +490,11 @@ export class GameScene extends Phaser.Scene {
         const x = this.boardX + gc * step;
         const y = this.boardY + gr * step;
         if (canPlace) {
-          this.ghostGfx.fillStyle(0xffffff, 0.22);
-          this.ghostGfx.lineStyle(2, 0xffffff, 0.55);
+          this.ghostGfx.fillStyle(0x2ecc71, 0.25);
+          this.ghostGfx.lineStyle(2, 0x2ecc71, 0.60);
         } else {
-          this.ghostGfx.fillStyle(0xff4444, 0.18);
-          this.ghostGfx.lineStyle(2, 0xff4444, 0.45);
+          this.ghostGfx.fillStyle(0xe74c3c, 0.20);
+          this.ghostGfx.lineStyle(2, 0xe74c3c, 0.50);
         }
         this.ghostGfx.fillRoundedRect(x, y, this.cellSize, this.cellSize, CORNER_R);
         this.ghostGfx.strokeRoundedRect(x, y, this.cellSize, this.cellSize, CORNER_R);
@@ -319,7 +509,7 @@ export class GameScene extends Phaser.Scene {
     const rows  = shape.length;
     // Offset so piece center aligns with finger
     const topX  = wx - (cols * step - CELL_GAP) / 2;
-    const topY  = wy - (rows * step - CELL_GAP) / 2;
+    const topY  = (wy - DRAG_OFFSET_Y) - (rows * step - CELL_GAP) / 2;
     const col   = Math.round((topX - this.boardX) / step);
     const row   = Math.round((topY - this.boardY) / step);
     return { row, col };
@@ -405,5 +595,33 @@ export class GameScene extends Phaser.Scene {
     if (t < 1/2) return q;
     if (t < 2/3) return p + (q-p)*(2/3-t)*6;
     return p;
+  }
+
+  private showComboPopup(row: number, col: number, comboCount: number) {
+    if (comboCount <= 1) return;
+    const step = this.cellSize + CELL_GAP;
+    const x = this.boardX + col * step + (this.cellSize * this.board.dimension) / 2;
+    const y = this.boardY + row * step;
+
+    const textStr = `COMBO x${comboCount}!`;
+    const txt = this.add.text(x, y, textStr, {
+      fontFamily: 'Fredoka One, Arial, sans-serif',
+      fontSize: '28px',
+      color: '#ffcc00',
+      stroke: '#000000',
+      strokeThickness: 6,
+      align: 'center'
+    }).setOrigin(0.5).setDepth(15);
+
+    this.tweens.add({
+      targets: txt,
+      y: y - 80,
+      scaleX: 1.3,
+      scaleY: 1.3,
+      angle: { from: -10, to: 10 },
+      alpha: 0,
+      duration: 800,
+      onComplete: () => txt.destroy()
+    });
   }
 }
